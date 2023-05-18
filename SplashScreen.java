@@ -9,8 +9,11 @@ import javax.imageio.ImageIO;
 
 public class SplashScreen{
     Drawing draw = new Drawing();
+    JFrame frame = new JFrame("Habitat Hero");
+    private int rect1 = 0;
+    private int rect2 = 0;
+
     public SplashScreen(){
-        JFrame frame = new JFrame("Habitat Hero");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(1200,800);
         frame.add(draw);
@@ -53,10 +56,6 @@ public class SplashScreen{
             int[] yTri2 = {125, 60, 125};
             g.fillPolygon(xTri2,yTri2,3);
 
-            g.setColor(new Color(241, 194, 50));
-            g.fillRect(300, 250, 600, 30);
-            g.fillRect(400, 300, 400, 30);
-
             try{
                 Font font = Font.createFont(Font.TRUETYPE_FONT, SplashScreen.class.getResourceAsStream("Assets/ZenDots-Regular.ttf"));
                 g.setFont(font.deriveFont(Font.BOLD, 70f));
@@ -66,6 +65,15 @@ public class SplashScreen{
             g.setColor(new Color(0, 0,0));
             g.drawString("A",50,630);
             g.drawString("PRODUCTION",490,630);
+
+            try{
+                Font font = Font.createFont(Font.TRUETYPE_FONT, SplashScreen.class.getResourceAsStream("Assets/ZenDots-Regular.ttf"));
+                g.setFont(font.deriveFont(Font.BOLD, 50f));
+            }
+            catch(Exception e){}
+
+            g.setColor(new Color(0, 0,0));
+            //g.drawString("A");
 
             // Load the image file from the file directory
             try {
@@ -84,6 +92,15 @@ public class SplashScreen{
                 g.drawImage(resizedImage, 90, 450, null);
             } catch (IOException e) {
                 e.printStackTrace();
+            }
+
+            g.setColor(new Color(241, 194, 50));
+            g.fillRect(300, 250, rect1, 30);
+            g.fillRect(400, 300, rect2, 30);
+            if(rect1 < 600){
+                rect1+=6;
+                rect2+=4;
+                repaint();
             }
         }
     }

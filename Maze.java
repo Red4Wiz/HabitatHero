@@ -4,9 +4,10 @@ import java.awt.event.*;
 
 public class Maze {
     MazeDrawing draw = new MazeDrawing();
+    JFrame frame = new JFrame("Habitat Hero");
+
 
     public Maze() {
-        JFrame frame = new JFrame("Habitat Hero");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(1200, 800);
         frame.add(draw);

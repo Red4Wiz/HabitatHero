@@ -14,8 +14,6 @@ public class MainMenu{
         drawing.addMouseListener(mouseListener);
         drawing.addMouseMotionListener(mouseListener);
         Game.frame.add(drawing);
-        frame.setResizable(false);
-
     }
     class MouseHandler extends MouseAdapter {
         public void mousePressed(MouseEvent e){
