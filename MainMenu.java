@@ -10,6 +10,7 @@ public class MainMenu{
     MouseHandler mouseListener = new MouseHandler();
     Color label1 = Color.white, label2 = Color.white, label3 = Color.white;
     public MainMenu(){
+        Game.frame.getContentPane().removeAll();
         drawing.addMouseListener(mouseListener);
         drawing.addMouseMotionListener(mouseListener);
         Game.frame.add(drawing);
