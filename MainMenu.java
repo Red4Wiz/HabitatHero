@@ -10,10 +10,13 @@ public class MainMenu{
     MouseHandler mouseListener = new MouseHandler();
     Color label1 = Color.white, label2 = Color.white, label3 = Color.white;
     public MainMenu(){
-        Game.frame.getContentPane().removeAll();
+        frame.setSize(1200, 800);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
+        frame.setResizable(false);
         drawing.addMouseListener(mouseListener);
         drawing.addMouseMotionListener(mouseListener);
-        Game.frame.add(drawing);
+        frame.add(drawing);
     }
     class MouseHandler extends MouseAdapter {
         public void mousePressed(MouseEvent e){

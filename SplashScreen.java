@@ -27,6 +27,7 @@ public class SplashScreen{
             int x = e.getX();
             int y = e.getY();
             System.out.println(x + ", " + y);
+
         }
     }
 
@@ -101,6 +102,9 @@ public class SplashScreen{
                 rect1+=6;
                 rect2+=4;
                 repaint();
+            }else{
+                new MainMenu();
+                frame.dispose();
             }
         }
     }
