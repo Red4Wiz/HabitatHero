@@ -1,10 +1,16 @@
+import java.util.ArrayList;
+
 class Player {
     private int x; // x-coordinate of player position
     private int y; // y-coordinate of player position
+    private int speed;
+    private ArrayList<Material> bag;
 
     public Player(int x, int y) {
         this.x = x;
         this.y = y;
+        speed = 7;
+        bag = new ArrayList<>();
     }
 
     public int getX() {
@@ -16,18 +22,26 @@ class Player {
     }
 
     public void moveUp() {
-        y-=3;
+        y-=speed;
     }
 
     public void moveDown() {
-        y+=3;
+        y+=speed;
     }
 
     public void moveLeft() {
-        x-=3;
+        x-=speed;
     }
 
     public void moveRight() {
-        x+=3;
+        x+=speed;
+    }
+    public boolean pick(Material m){
+        if(Math.abs(x - m.getX()) <= 20 && Math.abs(y - m.getY()) <= 20){
+            bag.add(m);
+            System.out.println(bag);
+            return true;
+        }
+        return false;
     }
 }
