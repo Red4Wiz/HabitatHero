@@ -10,6 +10,13 @@ public class Maze {
     Drawing draw = new Drawing();
     JFrame frame = new JFrame("Habitat Hero");
     private int screen = 0;
+    private Player player;
+
+    private char[][] maze; // Maze structure
+    private int mazeWidth;
+    private int mazeHeight;
+    private int cellSize;
+
 
 
     public Maze() {
@@ -20,6 +27,33 @@ public class Maze {
         frame.addKeyListener(new KeyHandler());
         frame.setResizable(false);
         frame.setVisible(true);
+
+        mazeWidth = 24; // Adjust the width as needed
+        mazeHeight = 16; // Adjust the height as needed
+
+        maze = new char[][]{
+                {'#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#'},
+                {'#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#'},
+                {'#', ' ', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', ' ', '#'},
+                {'#', ' ', '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', ' ', '#'},
+                {'#', ' ', '#', ' ', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', ' ', '#', ' ', '#'},
+                {'#', ' ', '#', ' ', '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', ' ', '#', ' ', '#'},
+                {'#', ' ', '#', ' ', '#', ' ', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', ' ', ' ', ' ', '#', ' ', ' ', '#'},
+                {'#', ' ', '#', ' ', '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', '#', '#', '#', '#', '#', ' ', '#'},
+                {'#', ' ', ' ', ' ', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', ' ', ' ', ' ', ' ', ' ', '#', ' ', '#'},
+                {'#', '#', '#', '#', '#', '#', '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', '#', '#', '#', '#', ' ', '#'},
+                {'#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', ' ', ' ', ' ', ' ', ' ', '#'},
+                {'#', ' ', '#', '#', '#', ' ', '#', ' ', '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', '#', '#', ' ', '#', ' ', '#'},
+                {'#', ' ', '#', ' ', '#', ' ', '#', ' ', '#', ' ', '#', '#', '#', '#', '#', '#', ' ', ' ', ' ', ' ', ' ', '#', ' ', '#'},
+                {'#', ' ', '#', ' ', '#', ' ', '#', ' ', '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', '#', '#', ' ', '#', ' ', '#'},
+                {'#', ' ', '#', ' ', '#', ' ', '#', ' ', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', ' ', '#', ' ', '#'},
+                {'#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#'},
+                {'#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#'}
+        };
+
+        cellSize = Math.min(1200 / mazeWidth, 800 / mazeHeight); // Calculate the cell size based on screen dimensions
+        System.out.println(cellSize);
+
     }
 
     class MouseHandler extends MouseAdapter {
@@ -35,9 +69,46 @@ public class Maze {
             if(e.getKeyChar() == '\n' && screen == 0) {
                 screen = 1;
                 draw.repaint();
+                player = new Player(60, 350);
             }
             System.out.println(e);
         }
+
+        public void keyPressed(KeyEvent e) {
+            if (screen == 1) {
+                int keyCode = e.getKeyCode();
+                int playerX = player.getX();
+                int playerY = player.getY();
+
+                switch (keyCode) {
+                    case KeyEvent.VK_UP:
+                        if (playerY > 50 && maze[(playerY - 3) / cellSize][(playerX / cellSize)] != '#') {
+                            player.moveUp();
+                        }
+                        break;
+                    case KeyEvent.VK_DOWN:
+                        if (playerY < 750 && maze[(playerY + 23) / cellSize][(playerX / cellSize)] != '#') {
+                            player.moveDown();
+                        }
+                        break;
+                    case KeyEvent.VK_LEFT:
+                        if (playerX > 50 && maze[playerY / cellSize][(playerX-3) / cellSize] != '#') {
+                            player.moveLeft();
+                        }
+                        break;
+                    case KeyEvent.VK_RIGHT:
+                        if (playerX < 1150 && maze[(playerY / cellSize)][(playerX+23) / cellSize] != '#') {
+                            player.moveRight();
+                        }
+                        break;
+                }
+
+                System.out.println("Player y: " + playerY + " Cell y: " + (playerY / cellSize) + "\nPlayer x: " + playerX + " Cell x: " + (playerX / cellSize));
+                draw.repaint();
+            }
+
+        }
+
     }
 
     public static void main(String[] args) {
@@ -63,7 +134,31 @@ public class Maze {
 
             }
             else if(screen == 1){
+                g.setColor(Color.LIGHT_GRAY);
+                g.fillRect(0, 0, 1200, 800);
 
+                // Draw the maze
+                for (int i = 0; i < mazeHeight; i++) {
+                    for (int j = 0; j < mazeWidth; j++) {
+                        int x = j * cellSize;
+                        int y = i * cellSize;
+
+                        if (maze[i][j] == '#') {
+                            g.setColor(Color.BLACK);
+                            g.fillRect(x, y, cellSize, cellSize);
+                        } else {
+                            g.setColor(Color.WHITE);
+                            g.fillRect(x, y, cellSize, cellSize);
+                        }
+                    }
+                }
+
+                int playerSize = 20;
+                int playerX = player.getX();
+                int playerY = player.getY();
+
+                g.setColor(Color.BLUE);
+                g.fillRect(playerX, playerY, playerSize, playerSize);
             }
         }
 
