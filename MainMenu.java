@@ -5,15 +5,17 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 
 public class MainMenu{
-    private Drawing drawing = new Drawing();
     JFrame frame = new JFrame("Main Menu");
+    Drawing drawing = new Drawing();
     MouseHandler mouseListener = new MouseHandler();
     Color label1 = Color.white, label2 = Color.white, label3 = Color.white;
     public MainMenu(){
-        Game.frame.getContentPane().removeAll();
+        frame.setSize(1200, 800);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         drawing.addMouseListener(mouseListener);
         drawing.addMouseMotionListener(mouseListener);
-        Game.frame.add(drawing);
+        frame.add(drawing);
+        frame.setVisible(true);
 
     }
     class MouseHandler extends MouseAdapter {
@@ -24,7 +26,8 @@ public class MainMenu{
 
             }
             else if(x>=300 && x<=900 && y>=360 && y<=510){ //click on play
-
+                new Lesson();
+                frame.dispose();
             }
             else if(x>=300 && x<=900 && y>=560 && y<=710){ //click on exit
 
@@ -74,5 +77,8 @@ public class MainMenu{
             g.drawString("Exit", 470, 670);
 
         }
+    }
+    public static void main(String[] args) {
+        new MainMenu();
     }
 }
