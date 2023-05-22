@@ -16,7 +16,6 @@ public class MainMenu{
         drawing.addMouseMotionListener(mouseListener);
         frame.add(drawing);
         frame.setVisible(true);
-
     }
     class MouseHandler extends MouseAdapter {
         public void mousePressed(MouseEvent e){
@@ -30,7 +29,7 @@ public class MainMenu{
                 frame.dispose();
             }
             else if(x>=300 && x<=900 && y>=560 && y<=710){ //click on exit
-
+                frame.dispose();
             }
             System.out.println(x+ ", " + y);
         }
@@ -77,8 +76,5 @@ public class MainMenu{
             g.drawString("Exit", 470, 670);
 
         }
-    }
-    public static void main(String[] args) {
-        new MainMenu();
     }
 }
