@@ -14,6 +14,8 @@ public class SplashScreen {
     private int rect1 = 0;
     private int rect2 = 0;
     private double rotationAngle = 0.0;
+    private boolean run = true;
+    private long start = 0;
 
     public SplashScreen() {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -96,10 +98,16 @@ public class SplashScreen {
             g.setColor(new Color(241, 194, 50));
             g.fillRect(300, 250, rect1, 30);
             g.fillRect(400, 300, rect2, 30);
-            if (rect1 < 600) {
-                rect1 += 6;
-                rect2 += 4;
-                rotationAngle += 3.6; // Increase the rotation angle
+            if (run) {
+                if(rect1 < 600){
+                    rect1 += 6;
+                    rect2 += 4;
+                    rotationAngle += 3.6; // Increase the rotation angle
+                    start = System.currentTimeMillis();
+                }
+                else if(System.currentTimeMillis() - start >= 1000){
+                    run = false;
+                }
                 repaint();
             } else {
                 new MainMenu();

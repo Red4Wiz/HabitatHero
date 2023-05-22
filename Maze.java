@@ -5,18 +5,19 @@ import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class Maze {
     Drawing draw = new Drawing();
     JFrame frame = new JFrame("Habitat Hero");
     private int screen = 0;
     private Player player;
+    private ArrayList<Material> materials = new ArrayList<>();
 
     private char[][] maze; // Maze structure
     private int mazeWidth;
     private int mazeHeight;
     private int cellSize;
-
 
 
     public Maze() {
@@ -25,11 +26,11 @@ public class Maze {
         frame.add(draw);
         draw.addMouseListener(new MouseHandler());
         frame.addKeyListener(new KeyHandler());
-        frame.setResizable(false);
+        frame.setResizable(true);
         frame.setVisible(true);
 
         mazeWidth = 24; // Adjust the width as needed
-        mazeHeight = 16; // Adjust the height as needed
+        mazeHeight = 14; // Adjust the height as needed
 
         maze = new char[][]{
                 {'#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#'},
@@ -38,20 +39,17 @@ public class Maze {
                 {'#', ' ', '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', ' ', '#'},
                 {'#', ' ', '#', ' ', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', ' ', '#', ' ', '#'},
                 {'#', ' ', '#', ' ', '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', ' ', '#', ' ', '#'},
-                {'#', ' ', '#', ' ', '#', ' ', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', ' ', ' ', ' ', '#', ' ', ' ', '#'},
+                {'#', ' ', '#', ' ', '#', ' ', '#', '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', '#', ' ', ' ', ' ', ' ', ' ', ' ', '#'},
                 {'#', ' ', '#', ' ', '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', '#', '#', '#', '#', '#', ' ', '#'},
-                {'#', ' ', ' ', ' ', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', ' ', ' ', ' ', ' ', ' ', '#', ' ', '#'},
+                {'#', ' ', ' ', ' ', '#', '#', '#', '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', ' ', ' ', ' ', ' ', ' ', '#', ' ', '#'},
                 {'#', '#', '#', '#', '#', '#', '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', '#', '#', '#', '#', ' ', '#'},
                 {'#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', ' ', ' ', ' ', ' ', ' ', '#'},
                 {'#', ' ', '#', '#', '#', ' ', '#', ' ', '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', '#', '#', ' ', '#', ' ', '#'},
                 {'#', ' ', '#', ' ', '#', ' ', '#', ' ', '#', ' ', '#', '#', '#', '#', '#', '#', ' ', ' ', ' ', ' ', ' ', '#', ' ', '#'},
-                {'#', ' ', '#', ' ', '#', ' ', '#', ' ', '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', '#', '#', ' ', '#', ' ', '#'},
-                {'#', ' ', '#', ' ', '#', ' ', '#', ' ', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', ' ', '#', ' ', '#'},
-                {'#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#'},
                 {'#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#'}
         };
 
-        cellSize = Math.min(1200 / mazeWidth, 800 / mazeHeight); // Calculate the cell size based on screen dimensions
+        cellSize = 50;
         System.out.println(cellSize);
 
     }
@@ -70,34 +68,46 @@ public class Maze {
                 screen = 1;
                 draw.repaint();
                 player = new Player(60, 350);
+                materials.add(new Material(1060,415));
             }
-            System.out.println(e);
+            if((e.getKeyChar() == 'p' || e.getKeyChar() == 'P') && screen == 1){
+                for(int i = 0; i < materials.size(); i++){
+                    if(player.pick(materials.get(i))){
+                        materials.remove(i);
+                        break;
+                    }
+                }
+                draw.repaint();
+
+            }
+            System.out.println(e.getKeyChar());
         }
 
         public void keyPressed(KeyEvent e) {
             if (screen == 1) {
-                int keyCode = e.getKeyCode();
+                String keyCode = (e.getKeyChar()+"").toLowerCase();
                 int playerX = player.getX();
                 int playerY = player.getY();
 
                 switch (keyCode) {
-                    case KeyEvent.VK_UP:
-                        if (playerY > 50 && maze[(playerY - 3) / cellSize][(playerX / cellSize)] != '#') {
+                    case "w":
+                        if (playerY > 50 && maze[(playerY-100 - 7) / cellSize][(playerX / cellSize)] != '#') {
                             player.moveUp();
                         }
                         break;
-                    case KeyEvent.VK_DOWN:
-                        if (playerY < 750 && maze[(playerY + 23) / cellSize][(playerX / cellSize)] != '#') {
+                    case "s":
+                        if (playerY < 750 && maze[(playerY-100 + 27) / cellSize][(playerX / cellSize)] != '#') {
                             player.moveDown();
                         }
                         break;
-                    case KeyEvent.VK_LEFT:
-                        if (playerX > 50 && maze[playerY / cellSize][(playerX-3) / cellSize] != '#') {
+                    case "a":
+                        if (playerX > 50 && maze[(playerY-100) / cellSize][(playerX-7) / cellSize] != '#') {
                             player.moveLeft();
                         }
                         break;
-                    case KeyEvent.VK_RIGHT:
-                        if (playerX < 1150 && maze[(playerY / cellSize)][(playerX+23) / cellSize] != '#') {
+
+                    case "d":
+                        if (playerX < 1150 && maze[((playerY-100) / cellSize)][(playerX+27) / cellSize] != '#') {
                             player.moveRight();
                         }
                         break;
@@ -124,21 +134,30 @@ public class Maze {
                 g.fillRect(0, 0, getWidth(), getHeight());
 
                 g.setColor(new Color(255, 229, 153));
-                g.drawString("Test", 430, 200);
-                g.fillRoundRect(150, 300, 900, 400, 50, 50);
-                g.setColor(new Color(227, 100, 100));
-                g.drawString("Click Enter!", (getWidth() - g.getFontMetrics().stringWidth("Click Enter!")) / 2, 520);
+                g.drawString("Test", (getWidth() - g.getFontMetrics().stringWidth("Test")) / 2, 200);
+                g.fillRoundRect(100, 300, 1000, 400, 50, 50);
 
+                try {
+                    Font font = Font.createFont(Font.TRUETYPE_FONT, SplashScreen.class.getResourceAsStream("Assets/ZenDots-Regular.ttf"));
+                    g.setFont(font.deriveFont(Font.BOLD, 30f));
+                } catch (Exception e) {
+                }
+
+                g.setColor(new Color(255, 229, 153));
+                g.setColor(new Color(0,0,0));
+                g.drawString("Hello! Now that you have learned all the", (getWidth() - g.getFontMetrics().stringWidth("Hello! Now that you have learned all the")) / 2, 370);
+                g.drawString("controls, let's put them to the test. You will", (getWidth() - g.getFontMetrics().stringWidth("controls, let's put them to the test. You will")) / 2, 410);
+                g.drawString("have to complete the maze’s challenges using", (getWidth() - g.getFontMetrics().stringWidth("have to complete the maze’s challenges using")) / 2, 450);
+                g.drawString("your knowledge to move on to the game!", (getWidth() - g.getFontMetrics().stringWidth("your knowledge to move on to the game!")) / 2, 490);
+                g.drawString("Press <enter> to move on", (getWidth() - g.getFontMetrics().stringWidth("Press <enter> to move on")) / 2, 620);
             }
             else if(screen == 1){
-                g.setColor(Color.LIGHT_GRAY);
-                g.fillRect(0, 0, 1200, 800);
 
                 // Draw the maze
                 for (int i = 0; i < mazeHeight; i++) {
                     for (int j = 0; j < mazeWidth; j++) {
                         int x = j * cellSize;
-                        int y = i * cellSize;
+                        int y = (i * cellSize)+100;
 
                         if (maze[i][j] == '#') {
                             g.setColor(Color.BLACK);
@@ -156,9 +175,30 @@ public class Maze {
 
                 g.setColor(Color.BLUE);
                 g.fillRect(playerX, playerY, playerSize, playerSize);
+
+
+                for(Material m : materials){
+                    g.setColor(Color.RED);
+                    g.fillRect(m.getX(), m.getY(), playerSize, playerSize);
+                }
+
+                g.setColor(new Color(163, 235, 240));
+                g.fillRect(0, 0, 1200, 100);
+
+                try {
+                    Font font = Font.createFont(Font.TRUETYPE_FONT, SplashScreen.class.getResourceAsStream("Assets/ZenDots-Regular.ttf"));
+                    g.setFont(font.deriveFont(Font.BOLD, 20f));
+                } catch (Exception e) {
+                }
+
+                g.setColor(new Color(255, 229, 153));
+                g.setColor(new Color(0,0,0));
+                g.drawString("In order to leave the maze, you must first build a", (getWidth() - g.getFontMetrics().stringWidth("In order to leave the maze, you must first build a")) / 2, 50);
+                g.drawString("house in the middle square block. Find and pick up", (getWidth() - g.getFontMetrics().stringWidth("house in the middle square block. Find and pick up")) / 2, 80);
+            }
+            else if(screen == 2){
+
             }
         }
-
-
     }
 }
