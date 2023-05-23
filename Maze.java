@@ -69,6 +69,8 @@ public class Maze {
                 draw.repaint();
                 player = new Player(60, 350);
                 materials.add(new Material(1060,415));
+                materials.add(new Material(65,620));
+                materials.add(new Material(740,160));
             }
             if((e.getKeyChar() == 'p' || e.getKeyChar() == 'P') && screen == 1){
                 for(int i = 0; i < materials.size(); i++){
@@ -91,12 +93,12 @@ public class Maze {
 
                 switch (keyCode) {
                     case "w":
-                        if (playerY > 50 && maze[(playerY-100 - 7) / cellSize][(playerX / cellSize)] != '#') {
+                        if (playerY > 50 && maze[(playerY-107) / cellSize][(playerX / cellSize)] != '#') {
                             player.moveUp();
                         }
                         break;
                     case "s":
-                        if (playerY < 750 && maze[(playerY-100 + 27) / cellSize][(playerX / cellSize)] != '#') {
+                        if (playerY < 750 && maze[(playerY-127) / cellSize][(playerX / cellSize)] != '#') {
                             player.moveDown();
                         }
                         break;
@@ -193,8 +195,9 @@ public class Maze {
 
                 g.setColor(new Color(255, 229, 153));
                 g.setColor(new Color(0,0,0));
-                g.drawString("In order to leave the maze, you must first build a", (getWidth() - g.getFontMetrics().stringWidth("In order to leave the maze, you must first build a")) / 2, 50);
-                g.drawString("house in the middle square block. Find and pick up", (getWidth() - g.getFontMetrics().stringWidth("house in the middle square block. Find and pick up")) / 2, 80);
+                g.drawString("In order to leave the maze, you must first build a house in the middle square block.", (getWidth() - g.getFontMetrics().stringWidth("In order to leave the maze, you must first build a house in the middle square block.")) / 2, 25);
+                g.drawString(" Find and pick up materials and return to the middle square to build.", (getWidth() - g.getFontMetrics().stringWidth("Find and pick up materials and return to the middle square to build.")) / 2, 55);
+                g.drawString(" After you have built, the exit will open and you may leave!", (getWidth() - g.getFontMetrics().stringWidth("After you have built, the exit will open and you may leave!")) / 2, 85);
             }
             else if(screen == 2){
 
