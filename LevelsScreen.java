@@ -39,7 +39,7 @@ public class LevelsScreen {
                 frame.dispose();
             }
             else if(x>=300 && x<=900 && y>=560 && y<=710){ //click on exit
-                new Lesson();
+                new FinalLevel();
                 frame.dispose();
             }
             if(e.getX() >= 10 && e.getX() <= 70 && e.getY()>=20 && e.getY() <= 80){
@@ -52,13 +52,13 @@ public class LevelsScreen {
             int x = e.getX();
             int y = e.getY();
             if(x>=300 && x<=900 && y>=160 && y<=310){ //hover on levels
-                label1 = Color.blue;
+                label1 = Color.lightGray;
             }
             else if(x>=300 && x<=900 && y>=360 && y<=510){ //hover on play
-                label2 = Color.blue;
+                label2 = Color.lightGray;
             }
             else if(x>=300 && x<=900 && y>=560 && y<=710){ //hover on exit
-                label3 = Color.blue;
+                label3 = Color.lightGray;
             }
             else {
                 label1 = Color.black;
