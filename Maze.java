@@ -19,13 +19,18 @@ public class Maze {
     private int mazeWidth;
     private int mazeHeight;
     private int cellSize;
-
-
+    MouseHandler mouseListener = new MouseHandler();
+    Image homeBtn = null;
+    File whiteBtn = new File("Assets/homeButtonW.png"), blackBtn = new File("Assets/homeButton.png");;
     public Maze() {
+        try {
+            homeBtn = ImageIO.read(blackBtn);
+        } catch (IOException d){}
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(1215, 839);
         frame.add(draw);
-        draw.addMouseListener(new MouseHandler());
+        draw.addMouseListener(mouseListener);
+        draw.addMouseMotionListener(mouseListener);
         frame.addKeyListener(new KeyHandler());
         frame.setResizable(false);
         frame.setVisible(true);
@@ -57,9 +62,28 @@ public class Maze {
 
     class MouseHandler extends MouseAdapter {
         public void mouseClicked(MouseEvent e) {
+            if(screen == 1){
+                if(e.getX() >= 10 && e.getX() <= 70 && e.getY()>=20 && e.getY() <= 80){
+                    new MainMenu();
+                    frame.dispose();
+                }
+            }
             int x = e.getX();
             int y = e.getY();
             System.out.println(x + ", " + y);
+        }
+        public void mouseMoved(MouseEvent e){
+            if(screen == 1){
+                try {
+                    if(e.getX() >= 10 && e.getX() <= 70 && e.getY()>=20 && e.getY() <= 80){
+                        homeBtn = ImageIO.read(whiteBtn);
+                    }
+                    else{
+                        homeBtn = ImageIO.read(blackBtn);
+                    }
+                } catch (IOException d){}
+            }
+            draw.repaint();
         }
     }
 
@@ -230,6 +254,7 @@ public class Maze {
                     g.drawString("EXIT",1120,785);
 
                 }
+                g.drawImage(homeBtn, 10,20,60,60,null);
             }
             else if(screen == 2){
                 try {

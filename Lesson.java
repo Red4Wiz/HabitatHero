@@ -1,23 +1,28 @@
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
+import java.io.IOException;
 
 public class Lesson {
     JFrame frame = new JFrame("Lessons");
     Drawing drawing = new Drawing();
     int choice = 0;
+    MouseHandler mouseListener = new MouseHandler();
+    Image homeBtn = null;
+    File whiteBtn = new File("Assets/homeButtonW.png"), blackBtn = new File("Assets/homeButton.png");;
     public Lesson(){
+        try {
+            homeBtn = ImageIO.read(blackBtn);
+        } catch (IOException d){}
         frame.setSize(1200, 800);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.addKeyListener(new KeyHandler());
-        drawing.addMouseListener(new ClickHandler());
+        drawing.addMouseListener(mouseListener);
+        drawing.addMouseMotionListener(mouseListener);
         frame.add(drawing);
         frame.setVisible(true);
-    }
-    class ClickHandler extends MouseAdapter{
-        public void mousePressed(MouseEvent e){
-            System.out.println(e.getX() + ", " + e.getY());
-        }
     }
     class KeyHandler extends KeyAdapter {
         public void keyPressed(KeyEvent e){
@@ -31,6 +36,26 @@ public class Lesson {
             if(e.getKeyCode() == 37){
                 if(choice != 0) choice--;
             }
+            drawing.repaint();
+        }
+    }
+    class MouseHandler extends MouseAdapter{
+        public void mouseClicked(MouseEvent e){
+            if(e.getX() >= 10 && e.getX() <= 70 && e.getY()>=20 && e.getY() <= 80 && choice != 5){
+                new MainMenu();
+                frame.dispose();
+            }
+        }
+        public void mouseMoved(MouseEvent e){
+            try {
+                if(e.getX() >= 10 && e.getX() <= 70 && e.getY()>=20 && e.getY() <= 80 && choice != 5){
+                    System.out.println("here");
+                    homeBtn = ImageIO.read(whiteBtn);
+                }
+                else{
+                    homeBtn = ImageIO.read(blackBtn);
+                }
+            } catch (IOException d){}
             drawing.repaint();
         }
     }
@@ -166,6 +191,39 @@ public class Lesson {
                 g.drawString("S - Down", 3*getWidth()/4 - 50 - (g.getFontMetrics().stringWidth("S - Down:"))/2, 440);
                 g.drawString("A - Left", 3*getWidth()/4 - 50 - (g.getFontMetrics().stringWidth("A - Left:"))/2, 490);
                 g.drawString("D - Right", 3*getWidth()/4 - 50 - (g.getFontMetrics().stringWidth("D - Right:"))/2, 540);
+                try{
+                    Font font = Font.createFont(Font.TRUETYPE_FONT, SplashScreen.class.getResourceAsStream("Assets/Roboto-Bold.ttf"));
+                    g.setFont(font.deriveFont(Font.BOLD, 40f));
+                }
+                catch(Exception e){}
+                //W Key
+                g.setColor(new Color(68,90,100));
+                g.fillRoundRect(200,320,100,100, 20,20);
+                g.setColor(new Color(85,109,122));
+                g.fillRoundRect(210,330,80,80, 10, 10);
+                g.setColor(Color.white);
+                g.drawString("W", 215,365);
+                //S Key
+                g.setColor(new Color(68,90,100));
+                g.fillRoundRect(200,425,100,100, 20,20);
+                g.setColor(new Color(85,109,122));
+                g.fillRoundRect(210,435,80,80, 10, 10);
+                g.setColor(Color.white);
+                g.drawString("S", 215,470);
+                //A Key
+                g.setColor(new Color(68,90,100));
+                g.fillRoundRect(95,425,100,100, 20,20);
+                g.setColor(new Color(85,109,122));
+                g.fillRoundRect(105,435,80,80, 10, 10);
+                g.setColor(Color.white);
+                g.drawString("A", 110,470);
+                //D Key
+                g.setColor(new Color(68,90,100));
+                g.fillRoundRect(305,425,100,100, 20,20);
+                g.setColor(new Color(85,109,122));
+                g.fillRoundRect(315,435,80,80, 10, 10);
+                g.setColor(Color.white);
+                g.drawString("D", 320,470);
             }
             else if(choice == 2){
                 try{
@@ -209,6 +267,25 @@ public class Lesson {
                 g.drawString("options based", 3*getWidth()/4 + 100 - (g.getFontMetrics().stringWidth("options based"))/2, 540);
                 g.drawString("on the materials", 3*getWidth()/4 + 100 - (g.getFontMetrics().stringWidth("on the materials"))/2, 590);
                 g.drawString("in your bag.", 3*getWidth()/4 + 100 - (g.getFontMetrics().stringWidth("in your bag."))/2, 640);
+                try{
+                    Font font = Font.createFont(Font.TRUETYPE_FONT, SplashScreen.class.getResourceAsStream("Assets/Roboto-Bold.ttf"));
+                    g.setFont(font.deriveFont(Font.BOLD, 40f));
+                }
+                catch(Exception e){}
+                //P Key
+                g.setColor(new Color(68,90,100));
+                g.fillRoundRect(60,340,100,100, 20,20);
+                g.setColor(new Color(85,109,122));
+                g.fillRoundRect(70,350,80,80, 10, 10);
+                g.setColor(Color.white);
+                g.drawString("P", 75,385);
+                //B Key
+                g.setColor(new Color(68,90,100));
+                g.fillRoundRect(670,340,100,100, 20,20);
+                g.setColor(new Color(85,109,122));
+                g.fillRoundRect(680,350,80,80, 10, 10);
+                g.setColor(Color.white);
+                g.drawString("B", 685,385);
             }
             else if(choice == 3){
                 try{
@@ -285,6 +362,9 @@ public class Lesson {
                 g.drawString("If you are still unsure about parts", (getWidth() - g.getFontMetrics().stringWidth("If you are still unsure about parts")) / 2, 475);
                 g.drawString("of the game, click the left arrow", (getWidth() - g.getFontMetrics().stringWidth("of the game, click the left arrow")) / 2, 525);
                 g.drawString("keys to move backwards.", (getWidth() - g.getFontMetrics().stringWidth("keys to move backwards.")) / 2, 575);
+            }
+            if(choice != 5){
+                g.drawImage(homeBtn, 10,20,60,60,null);
             }
         }
     }
