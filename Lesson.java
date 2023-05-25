@@ -11,7 +11,7 @@ public class Lesson {
     int choice = 0;
     MouseHandler mouseListener = new MouseHandler();
     Image homeBtn = null;
-    File whiteBtn = new File("Assets/homeButtonW.png"), blackBtn = new File("Assets/homeButton.png");;
+    File whiteBtn = new File("Assets/homeButtonW.png"), blackBtn = new File("Assets/homeButton.png");
     public Lesson(){
         try {
             homeBtn = ImageIO.read(blackBtn);
@@ -49,7 +49,6 @@ public class Lesson {
         public void mouseMoved(MouseEvent e){
             try {
                 if(e.getX() >= 10 && e.getX() <= 70 && e.getY()>=20 && e.getY() <= 80 && choice != 5){
-                    System.out.println("here");
                     homeBtn = ImageIO.read(whiteBtn);
                 }
                 else{
