@@ -26,6 +26,10 @@ public class Building {
         return height;
     }
 
+    public void draw(){
+
+    }
+
 
 
 }

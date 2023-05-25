@@ -37,7 +37,7 @@ class Player {
         x+=speed;
     }
     public boolean pick(Material m){
-        if(Math.abs(x - m.getX()) <= 20 && Math.abs(y - m.getY()) <= 20){
+        if(Math.abs(x - m.getX()) <= 30 && Math.abs(y - m.getY()) <= 30){
             bag.add(m);
             System.out.println(bag);
             return true;
