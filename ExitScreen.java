@@ -22,12 +22,23 @@ public class ExitScreen {
             g.setColor(new Color(224, 102, 102));
             g.fillRect(0,0,getWidth(), getHeight());
             g.setColor(new Color(255, 229, 153));
-            if(System.currentTimeMillis() - start >= 10000){
-                frame.dispose();
+            g.drawString("Thanks For", getWidth()/2 - g.getFontMetrics().stringWidth("Thanks For")/2, 150);
+            g.drawString("Playing", getWidth()/2 - g.getFontMetrics().stringWidth("Playing")/2, 250);
+            try{
+                Font font = Font.createFont(Font.TRUETYPE_FONT, SplashScreen.class.getResourceAsStream("Assets/ZenDots-Regular.ttf"));
+                g.setFont(font.deriveFont(Font.BOLD, 50f));
             }
-            else {
-                repaint();
-            }
+            catch(Exception e){}
+            g.setColor(Color.white);
+            g.drawString("Game Made By:", getWidth()/2, 450);
+            g.drawString("Pouya Karimi &", getWidth()/2, 520);
+            g.drawString("Sailesh V. Badri", getWidth()/2, 590);
+//            if(System.currentTimeMillis() - start >= 7000){
+//                frame.dispose();
+//            }
+//            else {
+//                repaint();
+//            }
         }
     }
 }

@@ -6,6 +6,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class FinalLevel {
     JFrame frame = new JFrame("Final Level");
@@ -14,7 +15,11 @@ public class FinalLevel {
     Image homeBtn = null;
     MouseHandler mouseHandler = new MouseHandler();
     File whiteBtn = new File("Assets/homeButtonW.png"), blackBtn = new File("Assets/homeButton.png");
-    boolean dayTime = true;
+    boolean dayTime = true, justTurnedDay = true;
+    private Player player;
+    private ArrayList<Material> materials = new ArrayList<>();
+    private ArrayList<Building> buildings = new ArrayList<>();
+    long startTime;
     public FinalLevel(){
         try {
             homeBtn = ImageIO.read(blackBtn);
@@ -26,6 +31,7 @@ public class FinalLevel {
         drawing.addKeyListener(new KeyHandler());
         frame.add(drawing);
         frame.setVisible(true);
+
     }
     class KeyHandler extends KeyAdapter{
 
@@ -52,11 +58,28 @@ public class FinalLevel {
     }
     class Drawing extends JComponent{
         public void paint(Graphics g){
+            if(justTurnedDay){
+                startTime = System.currentTimeMillis();
+                justTurnedDay = false;
+            }
             g.setColor(new Color(105,168,79));
             g.fillRect(0,0,getWidth(), getHeight());
             g.setColor(new Color(241, 194, 51));
             g.fillRect(1040, 110, 150, 200);
             g.fillRect(1040, 320, 150, 100);
+
+            long curTime = System.currentTimeMillis();
+            if(dayTime){
+                if(curTime - startTime >= 5000){
+                    dayTime = false;
+                    justTurnedDay = true;
+                }
+                repaint();
+            }
+            else{
+                screen = 1;
+            }
+
             if(screen == 0){
                 g.setColor(new Color(163, 235, 240));
                 g.fillRect(0, 0, 1200, 100);
@@ -71,7 +94,13 @@ public class FinalLevel {
                 g.drawString("ever night. Look around for materials and pick them up to build your", (getWidth() - g.getFontMetrics().stringWidth("ever night. Look around for materials and pick them up to build your")) / 2, 55);
                 g.drawString("house. Quick! Before night time comes!", (getWidth() - g.getFontMetrics().stringWidth("house. Quick! Before night time comes!")) / 2, 85);
             }
+            else if(screen == 1){
+                g.setColor(new Color(0,0,0, 100));
+                g.fillRect(0,0,getWidth(), getHeight());
+            }
             g.drawImage(homeBtn, 10,20,60,60,null);
+
+
         }
     }
 }

@@ -93,9 +93,9 @@ public class Maze {
                 screen = 1;
                 draw.repaint();
                 player = new Player(60, 350);
-                materials.add(new Material(1060,415));
-                materials.add(new Material(65,620));
-                materials.add(new Material(740,160));
+                materials.add(new Material(1060,415, "wood"));
+                materials.add(new Material(65,620, "wood"));
+                materials.add(new Material(740,160,"metal"));
             }
             if((e.getKeyChar()+"").toLowerCase().equals("p")  && screen == 1){
                 for(int i = 0; i < materials.size(); i++){
@@ -224,7 +224,12 @@ public class Maze {
 
                 for(Material m : materials){
                     g.setColor(Color.RED);
-                    g.fillRect(m.getX(), m.getY(), playerSize, playerSize);
+                    //g.fillRect(m.getX(), m.getY(), playerSize, playerSize);
+                    try {
+                        m.draw(g);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
                 }
                 for(Building b : buildings){
                     g.setColor(Color.YELLOW);
