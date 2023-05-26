@@ -57,7 +57,7 @@ public class FinalLevel {
         }
 
         public void keyPressed(KeyEvent e) {
-            if (screen == 0) {
+            if (screen != 6) {
                 String keyCode = (e.getKeyChar()+"").toLowerCase();
                 int playerX = player.getX();
                 int playerY = player.getY();
@@ -157,7 +157,6 @@ public class FinalLevel {
                 screen = 1;
                 repaint();
             }
-
             if(screen == 0){
                 g.setColor(new Color(163, 235, 240));
                 g.fillRect(0, 0, 1200, 100);
@@ -181,16 +180,26 @@ public class FinalLevel {
                     }
                 }
             }
-            else if(screen == 1){
+            else if(screen == 1){ //nighttime
+                g.setColor(new Color(163, 235, 240));
+                g.fillRect(0, 0, 1200, 100);
+
+                try {
+                    Font font = Font.createFont(Font.TRUETYPE_FONT, SplashScreen.class.getResourceAsStream("Assets/ZenDots-Regular.ttf"));
+                    g.setFont(font.deriveFont(Font.BOLD, 20f));
+                } catch (Exception e) {
+                }
+                g.setColor(new Color(0,0,0));
+                g.drawString("We're heading into the night, time to return to your shelter that you", (getWidth() - g.getFontMetrics().stringWidth("We're heading into the night, time to return to your shelter that you")) / 2, 25);
+                g.drawString("(hopefully) built! Let's see if your habitat can survive the storm", (getWidth() - g.getFontMetrics().stringWidth("(hopefully) built! Let's see if your habitat can survive the storm")) / 2, 55);
+                g.drawString("that has been brewing. Good Luck!", (getWidth() - g.getFontMetrics().stringWidth("that has been brewing. Good Luck!")) / 2, 85);
+
                 g.setColor(new Color(0,0,0, 100));
                 g.fillRect(0,0,getWidth(), getHeight());
             }
             g.drawImage(homeBtn, 10,20,60,60,null);
-
-
         }
     }
-
     public String randomMaterial(){
         int x = (int)(Math.random()*10)+1;
         if(x<=4)return "wood";

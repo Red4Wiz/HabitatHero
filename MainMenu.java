@@ -30,6 +30,7 @@ public class MainMenu{
                 frame.dispose();
             }
             else if(x>=300 && x<=900 && y>=560 && y<=710){ //click on exit
+                new ExitScreen();
                 frame.dispose();
             }
             System.out.println(x+ ", " + y);
