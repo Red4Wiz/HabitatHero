@@ -226,7 +226,7 @@ public class Maze {
                     g.setColor(Color.RED);
                     //g.fillRect(m.getX(), m.getY(), playerSize, playerSize);
                     try {
-                        m.draw(g);
+                        m.draw(g, 0);
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
