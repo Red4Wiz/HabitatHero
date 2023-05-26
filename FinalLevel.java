@@ -94,7 +94,7 @@ public class FinalLevel {
                 g.drawString("ever night. Look around for materials and pick them up to build your", (getWidth() - g.getFontMetrics().stringWidth("ever night. Look around for materials and pick them up to build your")) / 2, 55);
                 g.drawString("house. Quick! Before night time comes!", (getWidth() - g.getFontMetrics().stringWidth("house. Quick! Before night time comes!")) / 2, 85);
             }
-            else if(screen == 1){
+            else if(screen == 1){ //nighttime
                 g.setColor(new Color(0,0,0, 100));
                 g.fillRect(0,0,getWidth(), getHeight());
             }

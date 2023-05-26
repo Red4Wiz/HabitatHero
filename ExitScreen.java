@@ -1,5 +1,8 @@
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 
 public class ExitScreen {
     JFrame frame = new JFrame("Exit Screen");
@@ -30,15 +33,22 @@ public class ExitScreen {
             }
             catch(Exception e){}
             g.setColor(Color.white);
-            g.drawString("Game Made By:", getWidth()/2, 450);
-            g.drawString("Pouya Karimi &", getWidth()/2, 520);
-            g.drawString("Sailesh V. Badri", getWidth()/2, 590);
-//            if(System.currentTimeMillis() - start >= 7000){
-//                frame.dispose();
-//            }
-//            else {
-//                repaint();
-//            }
+            g.drawString("Game Made By:", getWidth()/2, 400);
+            g.drawString("Pouya Karimi &", getWidth()/2, 470);
+            g.drawString("Sailesh V. Badri", getWidth()/2, 540);
+            try{
+                Image logo = ImageIO.read(new File("Assets/logo.png"));
+                g.drawImage(logo, 800, 530, 450, 300, null);
+                Image house = ImageIO.read(new File("Assets/exitHome.png"));
+                g.drawImage(house, 100, 300, null);
+            }
+            catch (IOException e){}
+            if(System.currentTimeMillis() - start >= 5000){
+                frame.dispose();
+            }
+            else {
+                repaint();
+            }
         }
     }
 }
