@@ -125,6 +125,10 @@ public class FinalLevel {
                 startTime = System.currentTimeMillis();
                 justTurnedDay = false;
                 materialGeneration();
+                materials.add(new Material(50,415, "cement"));
+                materials.add(new Material(200,415,"wood"));
+                materials.add(new Material(350,415, "metal"));
+                materials.add(new Material(500,415, "brick"));
             }
             g.setColor(new Color(105,168,79));
             g.fillRect(0,0,getWidth(), getHeight());
@@ -132,10 +136,11 @@ public class FinalLevel {
             g.fillRect(1040, 110, 150, 200);
             g.fillRect(1040, 320, 150, 100);
 
+            g.drawString("Backpack", (getWidth() - g.getFontMetrics().stringWidth("Backpack")) / 2, 85);
+
             //player
             int playerX = player.getX();
             int playerY = player.getY();
-
             g.setColor(Color.BLUE);
             g.fillRect(playerX, playerY, 20, 20);
 
@@ -195,7 +200,7 @@ public class FinalLevel {
     }
 
     public void materialGeneration(){
-        int x = (int)(Math.random()*5)+1;
+        int x = (int)(Math.random()*4)+1;
         for(int i = 0; i < x; i++){
             materials.add(new Material((int)(Math.random()*1001),(int)(Math.random()*701)+100,randomMaterial()));
         }
