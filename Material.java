@@ -6,6 +6,8 @@ import java.io.IOException;
 public class Material {
     private int x; // x-coordinate of material position
     private int y; // y-coordinate of material position
+    private int width;
+    private int height;
     private String type;
     private int strength;
 
@@ -16,11 +18,14 @@ public class Material {
         switch(s){
             case "wood":
                 this.strength = 10;
+                break;
             case "brick":
                 this.strength = 15;
-            case "cement":
-                this.strength = 20;
+                break;
             case "metal":
+                this.strength = 20;
+                break;
+            case "cement":
                 this.strength = 25;
         }
     }
@@ -40,23 +45,49 @@ public class Material {
         return strength;
     }
 
-    public void draw(Graphics g) throws IOException {
-        if(type.equals("wood")){
-            Image wood = ImageIO.read(new File("Assets/wood.png"));
-            g.drawImage(wood, this.x, this.y, 30,30, null);
-        }
-        else if(type.equals("brick")){
-            Image brick = ImageIO.read(new File("Assets/brick.png"));
-            g.drawImage(brick, this.x, this.y, 30,30, null);
-        }
-        else if(type.equals("cement")){
-            Image cement = ImageIO.read(new File("Assets/cement.png"));
-            g.drawImage(cement, this.x, this.y, 30,30, null);
+    public void draw(Graphics g,int x) throws IOException {
+        if(x==0) {
+            if (type.equals("wood")) {
+                Image wood = ImageIO.read(new File("Assets/wood.png"));
+                g.drawImage(wood, this.x, this.y, 30, 30, null);
+            } else if (type.equals("brick")) {
+                Image brick = ImageIO.read(new File("Assets/brick.png"));
+                g.drawImage(brick, this.x, this.y, 50, 30, null);
+            } else if (type.equals("cement")) {
+                Image cement = ImageIO.read(new File("Assets/cement.png"));
+                g.drawImage(cement, this.x, this.y, 60, 30, null);
+            } else {
+                Image metal = ImageIO.read(new File("Assets/metal.png"));
+                g.drawImage(metal, this.x, this.y, 60, 40, null);
+            }
         }
         else{
-            Image metal = ImageIO.read(new File("Assets/metal.png"));
-            g.drawImage(metal, this.x, this.y, 60,40, null);
+            if (type.equals("wood")) {
+                Image wood = ImageIO.read(new File("Assets/wood.png"));
+                width = 70;
+                height = 50;
+                g.drawImage(wood, this.x, this.y, width, height, null);
+            } else if (type.equals("brick")) {
+                Image brick = ImageIO.read(new File("Assets/brick.png"));
+                width = 80;
+                height = 50;
+                g.drawImage(brick, this.x, this.y, width, height, null);
+            } else if (type.equals("cement")) {
+                Image cement = ImageIO.read(new File("Assets/cement.png"));
+                width = 80;
+                height = 50;
+                g.drawImage(cement, this.x, this.y, width, height, null);
+            } else {
+                Image metal = ImageIO.read(new File("Assets/metal.png"));
+                width = 100;
+                height = 60;
+                g.drawImage(metal, this.x, this.y, width, height, null);
+            }
         }
     }
+
+    public int getWidth(){return width;}
+    public int getHeight() {return height;}
+
 
 }
