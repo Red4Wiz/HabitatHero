@@ -125,18 +125,34 @@ public class FinalLevel {
                 startTime = System.currentTimeMillis();
                 justTurnedDay = false;
                 materialGeneration();
-                materials.add(new Material(50,415, "cement"));
+                materials.add(new Material(50,415, "concrete"));
                 materials.add(new Material(200,415,"wood"));
                 materials.add(new Material(350,415, "metal"));
                 materials.add(new Material(500,415, "brick"));
             }
             g.setColor(new Color(105,168,79));
             g.fillRect(0,0,getWidth(), getHeight());
+            //boxes stats
             g.setColor(new Color(241, 194, 51));
             g.fillRect(1040, 110, 150, 200);
-            g.fillRect(1040, 320, 150, 100);
+            g.fillRect(1040, 320, 150, 150);
 
-            g.drawString("Backpack", (getWidth() - g.getFontMetrics().stringWidth("Backpack")) / 2, 85);
+            // Add code
+            g.setFont(new Font("Arial", Font.BOLD, 16)); // Set font to Arial bold with size 24
+            g.setColor(new Color(0, 0, 0));
+            g.drawString("Backpack", 1085, 354);
+
+            // Additional lines
+            g.drawString("Wood:", 1053, 385);
+            g.drawString(getCntItem("wood")+"", 1111, 385);
+            g.drawString("Brick:", 1053, 405);
+            g.drawString(getCntItem("brick")+"", 1105, 405);
+            g.drawString("Metal:", 1053, 425);
+            g.drawString(getCntItem("metal")+"", 1103, 425);
+            g.drawString("Concrete:", 1053, 445);
+            g.drawString(getCntItem("concrete")+"", 1136, 445);
+
+
 
             //player
             int playerX = player.getX();
@@ -205,7 +221,7 @@ public class FinalLevel {
         if(x<=4)return "wood";
         else if(x<=7) return "brick";
         else if(x<=9) return "metal";
-        else return "cement";
+        else return "concrete";
     }
 
     public void materialGeneration(){
@@ -213,5 +229,13 @@ public class FinalLevel {
         for(int i = 0; i < x; i++){
             materials.add(new Material((int)(Math.random()*1001),(int)(Math.random()*701)+100,randomMaterial()));
         }
+    }
+
+    public int getCntItem(String s){
+        int x = 0;
+        for(Material m : player.getBag()){
+            if(m.getType().equals(s))x++;
+        }
+        return x;
     }
 }

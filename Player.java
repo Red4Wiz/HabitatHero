@@ -36,6 +36,9 @@ class Player {
     public void moveRight() {
         x+=speed;
     }
+    public ArrayList<Material> getBag(){
+        return bag;
+    }
     public boolean pick(Material m){
         if(Math.abs(x - (m.getX()+(m.getWidth()/2))) <= 50 && Math.abs(y - (m.getY()+(m.getHeight()/2))) <= 50){
             bag.add(m);

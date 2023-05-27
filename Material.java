@@ -25,7 +25,7 @@ public class Material {
             case "metal":
                 this.strength = 20;
                 break;
-            case "cement":
+            case "concrete":
                 this.strength = 25;
         }
     }
@@ -53,9 +53,9 @@ public class Material {
             } else if (type.equals("brick")) {
                 Image brick = ImageIO.read(new File("Assets/brick.png"));
                 g.drawImage(brick, this.x, this.y, 50, 30, null);
-            } else if (type.equals("cement")) {
-                Image cement = ImageIO.read(new File("Assets/cement.png"));
-                g.drawImage(cement, this.x, this.y, 60, 30, null);
+            } else if (type.equals("concrete")) {
+                Image concrete = ImageIO.read(new File("Assets/cement.png"));
+                g.drawImage(concrete, this.x, this.y, 60, 30, null);
             } else {
                 Image metal = ImageIO.read(new File("Assets/metal.png"));
                 g.drawImage(metal, this.x, this.y, 60, 40, null);
@@ -72,11 +72,11 @@ public class Material {
                 width = 80;
                 height = 50;
                 g.drawImage(brick, this.x, this.y, width, height, null);
-            } else if (type.equals("cement")) {
-                Image cement = ImageIO.read(new File("Assets/cement.png"));
+            } else if (type.equals("concrete")) {
+                Image concrete = ImageIO.read(new File("Assets/cement.png"));
                 width = 80;
                 height = 50;
-                g.drawImage(cement, this.x, this.y, width, height, null);
+                g.drawImage(concrete, this.x, this.y, width, height, null);
             } else {
                 Image metal = ImageIO.read(new File("Assets/metal.png"));
                 width = 100;
