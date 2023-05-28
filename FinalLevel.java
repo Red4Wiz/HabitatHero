@@ -125,10 +125,10 @@ public class FinalLevel {
                 startTime = System.currentTimeMillis();
                 justTurnedDay = false;
                 materialGeneration();
-                materials.add(new Material(50,415, "concrete"));
-                materials.add(new Material(200,415,"wood"));
-                materials.add(new Material(350,415, "metal"));
-                materials.add(new Material(500,415, "brick"));
+//                materials.add(new Material(50,415, "concrete"));
+//                materials.add(new Material(200,415,"wood"));
+//                materials.add(new Material(350,415, "metal"));
+//                materials.add(new Material(500,415, "brick"));
             }
             g.setColor(new Color(105,168,79));
             g.fillRect(0,0,getWidth(), getHeight());

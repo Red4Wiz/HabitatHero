@@ -10,6 +10,7 @@ public class Material {
     private int height;
     private String type;
     private int strength;
+    private int weight;
 
     public Material(int x, int y, String s) {
         this.x = x;
@@ -18,15 +19,19 @@ public class Material {
         switch(s){
             case "wood":
                 this.strength = 10;
+                this.weight = 1;
                 break;
             case "brick":
                 this.strength = 15;
+                this.weight = 3;
                 break;
             case "metal":
                 this.strength = 20;
+                this.weight = 5;
                 break;
             case "concrete":
                 this.strength = 25;
+                this.weight = 7;
         }
     }
 

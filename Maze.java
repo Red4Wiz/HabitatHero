@@ -116,6 +116,10 @@ public class Maze {
                 }
                 draw.repaint();
             }
+            if(e.getKeyChar() == '\n' && screen == 2) {
+                new FinalLevel();
+                frame.dispose();
+            }
             System.out.println(e.getKeyChar());
         }
 
