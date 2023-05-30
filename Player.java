@@ -5,6 +5,8 @@ class Player {
     private int y; // y-coordinate of player position
     private int speed;
     private ArrayList<Material> bag;
+    final int MAX_WEIGHT = 25;
+    private int bagWeight = 0;
 
     public Player(int x, int y) {
         this.x = x;
@@ -20,6 +22,7 @@ class Player {
     public int getY() {
         return y;
     }
+    public int getBagWeight(){return bagWeight;}
 
     public void moveUp() {
         y-=speed;
@@ -41,10 +44,21 @@ class Player {
     }
     public boolean pick(Material m){
         if(Math.abs(x - (m.getX()+(m.getWidth()/2))) <= 50 && Math.abs(y - (m.getY()+(m.getHeight()/2))) <= 50){
-            bag.add(m);
-            System.out.println(bag);
-            return true;
+            if(!isFull(m.getWeight())) {
+                bag.add(m);
+                System.out.println(bag);
+                bagWeight += m.getWeight();
+                return true;
+            }
+            else{
+                System.out.println("too much weight the bag can't carry!");
+                return false;
+            }
         }
+        return false;
+    }
+    public boolean isFull(int x){
+        if(bagWeight+x > MAX_WEIGHT) return true;
         return false;
     }
 }
