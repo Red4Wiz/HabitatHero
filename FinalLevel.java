@@ -51,6 +51,10 @@ public class FinalLevel {
                             screen = 3;
                             break;
                         }
+                        else if(player.withinRange(materials.get(i)) && player.isFull(materials.get(i).getWeight())){
+                            screen = 4;
+                            break;
+                        }
                     }
                 }
                 drawing.repaint();

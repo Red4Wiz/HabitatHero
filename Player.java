@@ -43,17 +43,17 @@ class Player {
         return bag;
     }
     public boolean pick(Material m){
+        if(withinRange(m) && !isFull(m.getWeight())){
+            bag.add(m);
+            System.out.println(bag);
+            bagWeight += m.getWeight();
+            return true;
+        }
+        return false;
+    }
+    public boolean withinRange(Material m){
         if(Math.abs(x - (m.getX()+(m.getWidth()/2))) <= 50 && Math.abs(y - (m.getY()+(m.getHeight()/2))) <= 50){
-            if(!isFull(m.getWeight())) {
-                bag.add(m);
-                System.out.println(bag);
-                bagWeight += m.getWeight();
-                return true;
-            }
-            else{
-                System.out.println("too much weight the bag can't carry!");
-                return false;
-            }
+            return true;
         }
         return false;
     }
