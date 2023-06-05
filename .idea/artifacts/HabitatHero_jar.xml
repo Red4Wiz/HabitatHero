@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="HabitatHero:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/HabitatHero_jar</output-path>
+    <root id="archive" name="HabitatHero.jar">
+      <element id="module-output" name="HabitatHero" />
+    </root>
+  </artifact>
+</component>

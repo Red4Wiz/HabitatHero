@@ -119,9 +119,20 @@ public class FinalLevel {
     class MouseHandler extends MouseAdapter{
         public void mouseClicked(MouseEvent e){
             System.out.println(e.getX() + ", " + e.getY());
-            if(e.getX() >= 10 && e.getX() <= 70 && e.getY()>=20 && e.getY() <= 80){
+            if(e.getX() >= 10 && e.getX() <= 70 && e.getY()>=20 && e.getY() <= 80 && screen != 6){
                 new MainMenu();
                 frame.dispose();
+            }
+            if(screen == 6){
+                if(e.getX() >= 300 && e.getX() <= 900 && e.getY() >= 350 && e.getY() <= 450){ //Click on restart level
+                    System.out.println("here");
+                    new FinalLevel();
+                    frame.dispose();
+                }
+                else if(e.getX() >= 300 && e.getX() <= 900 && e.getY() >= 470 && e.getY() <= 570){ //Click on restart level
+                    new MainMenu();
+                    frame.dispose();
+                }
             }
         }
         public void mouseMoved(MouseEvent e){
@@ -181,29 +192,28 @@ public class FinalLevel {
             g.setColor(Color.BLUE);
             g.fillRect(playerX, playerY, 20, 20);
 
-            //timing logic
-            long curTime = System.currentTimeMillis();
+            if(screen !=6){
+                //timing logic
+                long curTime = System.currentTimeMillis();
 
-            if(justTurnedDay){
-                screen = 2;
-                materialGeneration();
-                justTurnedDay = false;
-            }
-
-            if(dayTime){
-                if(curTime - startTime >= MAX_DAYTIME){
-                    startTime = System.currentTimeMillis();
-                    dayTime = false;
+                if(justTurnedDay){
+                    screen = 2;
+                    materialGeneration();
+                    justTurnedDay = false;
                 }
-                repaint();
-            }
-            else{
-                screen = 1;
-                repaint();
-            }
 
-            //System.out.println(curTime-startTime);
-
+                if(dayTime){
+                    if(curTime - startTime >= MAX_DAYTIME){
+                        startTime = System.currentTimeMillis();
+                        dayTime = false;
+                    }
+                    repaint();
+                }
+                else{
+                    screen = 1;
+                    repaint();
+                }
+            }
             if(screen == 0){
                 g.setColor(new Color(163, 235, 240));
                 g.fillRect(0, 0, 1200, 100);
@@ -294,14 +304,20 @@ public class FinalLevel {
                 g.fillRect(0,0,getWidth(), getHeight());
                 try {
                     Font font = Font.createFont(Font.TRUETYPE_FONT, SplashScreen.class.getResourceAsStream("Assets/ZenDots-Regular.ttf"));
-                    g.setFont(font.deriveFont(Font.BOLD, 50f));
+                    g.setFont(font.deriveFont(Font.BOLD, 40f));
                 } catch (Exception e) {
                 }
                 g.setColor(Color.white);
-                g.drawString("Your shelter was not durable enough", (getWidth() - g.getFontMetrics().stringWidth("Your shelter was not durable enough")) / 2, 50);
-                g.drawString("to survive the night. This means", (getWidth() - g.getFontMetrics().stringWidth("to survive the night. This means")) / 2, 120);
-                g.drawString("that you have lost the game. Restart", (getWidth() - g.getFontMetrics().stringWidth("that you have lost the game. Restart")) / 2, 190);
-                g.drawString("or go to the menu to play again.", (getWidth() - g.getFontMetrics().stringWidth("or go to the menu to play again.")) / 2, 260);
+                g.drawString("Your shelter was not durable enough", (getWidth() - g.getFontMetrics().stringWidth("Your shelter was not durable enough")) / 2, 150);
+                g.drawString("to survive the night. This means", (getWidth() - g.getFontMetrics().stringWidth("to survive the night. This means")) / 2, 200);
+                g.drawString("that you have lost the game. Restart", (getWidth() - g.getFontMetrics().stringWidth("that you have lost the game. Restart")) / 2, 250);
+                g.drawString("or go to the menu to play again.", (getWidth() - g.getFontMetrics().stringWidth("or go to the menu to play again.")) / 2, 300);
+                g.setColor(new Color(60, 120, 220));
+                g.fillRect(300,350,getWidth()/2, 100);
+                g.fillRect(300,470,getWidth()/2, 100);
+                g.setColor(Color.white);
+                g.drawString("Restart Level", (getWidth() - g.getFontMetrics().stringWidth("Restart Level")) / 2, 415);
+                g.drawString("Main Menu", (getWidth() - g.getFontMetrics().stringWidth("Main Menu")) / 2, 535);
             }
             if(screen != 6) g.drawImage(homeBtn, 10,20,60,60,null);
         }
