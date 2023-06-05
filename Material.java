@@ -93,6 +93,6 @@ public class Material {
 
     public int getWidth(){return width;}
     public int getHeight() {return height;}
-
+    public int getWeight(){return weight;}
 
 }
