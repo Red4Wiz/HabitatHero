@@ -61,7 +61,9 @@ public class FinalLevel {
             }
 
             if((e.getKeyChar()+"").toLowerCase().equals("b")){
-
+                if(screen != 1){
+                    screen = 6;
+                }
             }
 
             //test code, real code would use this when the person moves into their house
@@ -182,25 +184,28 @@ public class FinalLevel {
             g.fillRect(playerX, playerY, 20, 20);
 
             //timing logic
-            long curTime = System.currentTimeMillis();
+            if(screen != 6 && screen != 7){
+                long curTime = System.currentTimeMillis();
 
-            if(justTurnedDay){
-                screen = 2;
-                materialGeneration();
-                justTurnedDay = false;
-            }
-
-            if(dayTime){
-                if(curTime - startTime >= MAX_DAYTIME){
-                    startTime = System.currentTimeMillis();
-                    dayTime = false;
+                if(justTurnedDay){
+                    screen = 2;
+                    materialGeneration();
+                    justTurnedDay = false;
                 }
-                repaint();
+
+                if(dayTime){
+                    if(curTime - startTime >= MAX_DAYTIME){
+                        startTime = System.currentTimeMillis();
+                        dayTime = false;
+                    }
+                    repaint();
+                }
+                else{
+                    screen = 1;
+                    repaint();
+                }
             }
-            else{
-                screen = 1;
-                repaint();
-            }
+
 
             //System.out.println(curTime-startTime);
 
@@ -288,6 +293,49 @@ public class FinalLevel {
                 g.setColor(new Color(0,0,0));
                 g.drawString("Nice! You have used the materials in your backpack to", (getWidth() - g.getFontMetrics().stringWidth("Nice! You have used the materials in your backpack to")) / 2, 30);
                 g.drawString("upgrade your shelter. The durability of your home just went up!", (getWidth() - g.getFontMetrics().stringWidth("upgrade your shelter. The durability of your home just went up!")) / 2, 60);
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            else if(screen == 7){//building screen
+                int wood = 0;
+                int metal = 0;
+                int brick = 0;
+                int cement = 0;
+
+                //background
+                g.setColor(new Color(0,0,0, 240));
+                g.fillRect(0,0,getWidth(), getHeight());
+
+                g.setColor(new Color(163, 235, 240));
+                g.fillRoundRect(80, 400, 200, 200, 50, 50);
+                g.fillRoundRect(360, 400, 200, 200, 50, 50);
+                g.fillRoundRect(640, 400, 200, 200, 50, 50);
+                g.fillRoundRect(920, 400, 200, 200, 50, 50);
             }
 
 
