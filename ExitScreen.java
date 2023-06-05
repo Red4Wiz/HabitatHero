@@ -43,7 +43,7 @@ public class ExitScreen {
                 g.drawImage(house, 100, 300, null);
             }
             catch (IOException e){}
-            if(System.currentTimeMillis() - start >= 5000){
+            if(System.currentTimeMillis() - start >= 3000){
                 frame.dispose();
             }
             else {

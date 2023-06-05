@@ -62,7 +62,7 @@ public class FinalLevel {
 
             if((e.getKeyChar()+"").toLowerCase().equals("b")){
                 if(screen != 1){
-                    screen = 6;
+                    screen = 7;
                 }
             }
 
@@ -121,9 +121,20 @@ public class FinalLevel {
     class MouseHandler extends MouseAdapter{
         public void mouseClicked(MouseEvent e){
             System.out.println(e.getX() + ", " + e.getY());
-            if(e.getX() >= 10 && e.getX() <= 70 && e.getY()>=20 && e.getY() <= 80){
+            if(e.getX() >= 10 && e.getX() <= 70 && e.getY()>=20 && e.getY() <= 80 && screen != 6){
                 new MainMenu();
                 frame.dispose();
+            }
+            if(screen == 6){
+                if(e.getX() >= 300 && e.getX() <= 900 && e.getY() >= 350 && e.getY() <= 450){ //Click on restart level
+                    System.out.println("here");
+                    new FinalLevel();
+                    frame.dispose();
+                }
+                else if(e.getX() >= 300 && e.getX() <= 900 && e.getY() >= 470 && e.getY() <= 570){ //Click on restart level
+                    new MainMenu();
+                    frame.dispose();
+                }
             }
         }
         public void mouseMoved(MouseEvent e){
@@ -151,7 +162,6 @@ public class FinalLevel {
             g.fillRect(1040, 110, 150, 200);
             g.fillRect(1040, 320, 150, 175);
 
-            // Add code
             g.setFont(new Font("Arial", Font.BOLD, 16)); // Set font to Arial bold with size 24
             g.setColor(new Color(0, 0, 0));
             g.drawString("Backpack", 1085, 354);
@@ -185,6 +195,7 @@ public class FinalLevel {
 
             //timing logic
             if(screen != 6 && screen != 7){
+                //timing logic
                 long curTime = System.currentTimeMillis();
 
                 if(justTurnedDay){
@@ -204,10 +215,9 @@ public class FinalLevel {
                     screen = 1;
                     repaint();
                 }
+
+                //System.out.println(curTime-startTime);
             }
-
-
-            //System.out.println(curTime-startTime);
 
             if(screen == 0){
                 g.setColor(new Color(163, 235, 240));
@@ -222,7 +232,6 @@ public class FinalLevel {
                 g.drawString("Welcome to the final level! The goal is to have shelter heading into", (getWidth() - g.getFontMetrics().stringWidth("Welcome to the final level! The goal is to have shelter heading into")) / 2, 25);
                 g.drawString("ever night. Look around for materials and pick them up to build your", (getWidth() - g.getFontMetrics().stringWidth("ever night. Look around for materials and pick them up to build your")) / 2, 55);
                 g.drawString("house. Quick! Before night time comes!", (getWidth() - g.getFontMetrics().stringWidth("house. Quick! Before night time comes!")) / 2, 85);
-
 
             }
             else if(screen == 1){ //nighttime
@@ -290,37 +299,30 @@ public class FinalLevel {
                     g.setFont(font.deriveFont(Font.BOLD, 20f));
                 } catch (Exception e) {
                 }
-                g.setColor(new Color(0,0,0));
+                g.setColor(Color.black);
                 g.drawString("Nice! You have used the materials in your backpack to", (getWidth() - g.getFontMetrics().stringWidth("Nice! You have used the materials in your backpack to")) / 2, 30);
                 g.drawString("upgrade your shelter. The durability of your home just went up!", (getWidth() - g.getFontMetrics().stringWidth("upgrade your shelter. The durability of your home just went up!")) / 2, 60);
             }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            else if(screen == 6){ //didn't survive
+                g.setColor(Color.black);
+                g.fillRect(0,0,getWidth(), getHeight());
+                try {
+                    Font font = Font.createFont(Font.TRUETYPE_FONT, SplashScreen.class.getResourceAsStream("Assets/ZenDots-Regular.ttf"));
+                    g.setFont(font.deriveFont(Font.BOLD, 40f));
+                } catch (Exception e) {
+                }
+                g.setColor(Color.white);
+                g.drawString("Your shelter was not durable enough", (getWidth() - g.getFontMetrics().stringWidth("Your shelter was not durable enough")) / 2, 150);
+                g.drawString("to survive the night. This means", (getWidth() - g.getFontMetrics().stringWidth("to survive the night. This means")) / 2, 200);
+                g.drawString("that you have lost the game. Restart", (getWidth() - g.getFontMetrics().stringWidth("that you have lost the game. Restart")) / 2, 250);
+                g.drawString("or go to the menu to play again.", (getWidth() - g.getFontMetrics().stringWidth("or go to the menu to play again.")) / 2, 300);
+                g.setColor(new Color(60, 120, 220));
+                g.fillRect(300,350,getWidth()/2, 100);
+                g.fillRect(300,470,getWidth()/2, 100);
+                g.setColor(Color.white);
+                g.drawString("Restart Level", (getWidth() - g.getFontMetrics().stringWidth("Restart Level")) / 2, 415);
+                g.drawString("Main Menu", (getWidth() - g.getFontMetrics().stringWidth("Main Menu")) / 2, 535);
+            }
             else if(screen == 7){//building screen
                 int wood = 0;
                 int metal = 0;
@@ -331,15 +333,26 @@ public class FinalLevel {
                 g.setColor(new Color(0,0,0, 240));
                 g.fillRect(0,0,getWidth(), getHeight());
 
+                //squares
                 g.setColor(new Color(163, 235, 240));
-                g.fillRoundRect(80, 400, 200, 200, 50, 50);
-                g.fillRoundRect(360, 400, 200, 200, 50, 50);
-                g.fillRoundRect(640, 400, 200, 200, 50, 50);
-                g.fillRoundRect(920, 400, 200, 200, 50, 50);
+                g.fillRoundRect(80, 250, 200, 200, 50, 50);
+                g.fillRoundRect(360, 250, 200, 200, 50, 50);
+                g.fillRoundRect(640, 250, 200, 200, 50, 50);
+                g.fillRoundRect(920, 250, 200, 200, 50, 50);
+
+                //heading
+                g.setFont(new Font("Arial", Font.BOLD, 80));
+                g.setColor(Color.white);
+                g.drawString("Building Screen", (getWidth() - g.getFontMetrics().stringWidth("Building Screen")) / 2, 100);
+
+                //build button
+                g.setColor(new Color(60, 120, 220));
+                g.fillRoundRect(400,600,400, 100,100,50);
+                g.setColor(Color.WHITE);
+                g.drawString("Build", (getWidth() - g.getFontMetrics().stringWidth("Build")) / 2, 680);
             }
 
-
-            g.drawImage(homeBtn, 10,20,60,60,null);
+            if(screen != 6) g.drawImage(homeBtn, 10,20,60,60,null);
         }
     }
     public String randomMaterial(){

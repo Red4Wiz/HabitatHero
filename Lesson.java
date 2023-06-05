@@ -8,7 +8,7 @@ import java.io.IOException;
 public class Lesson {
     JFrame frame = new JFrame("Lessons");
     Drawing drawing = new Drawing();
-    int choice = 3;
+    int choice = 0;
     MouseHandler mouseListener = new MouseHandler();
     Image homeBtn = null;
     File whiteBtn = new File("Assets/homeButtonW.png"), blackBtn = new File("Assets/homeButton.png");
