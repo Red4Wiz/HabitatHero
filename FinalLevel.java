@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class FinalLevel {
     JFrame frame = new JFrame("Final Level");
     Drawing drawing = new Drawing();
-    int screen = 7;
+    int screen = 0;
     int radius = 0;
     Image homeBtn = null;
     MouseHandler mouseHandler = new MouseHandler();
@@ -20,7 +20,7 @@ public class FinalLevel {
     boolean dayTime = true, justTurnedDay = false;
     private Player player;
     private ArrayList<Material> materials = new ArrayList<>();
-    private ArrayList<Building> buildings = new ArrayList<>();
+//    private Building house = new Building();
     final long MAX_DAYTIME = 7500;
     Color color1 = Color.white, color2 = Color.white;
     long secondStartTime;
@@ -265,6 +265,9 @@ public class FinalLevel {
                 }
 
                 //System.out.println(curTime-startTime);
+            }
+            if(getCntItem("wood") > 0 || getCntItem("brick")>0 || getCntItem("metal") >0 || getCntItem("concrete")>0){ //has some materials
+
             }
 
             if(screen == 0){
