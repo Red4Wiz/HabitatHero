@@ -61,4 +61,44 @@ class Player {
         if(bagWeight+x > MAX_WEIGHT) return true;
         return false;
     }
+
+    public int getWood(){
+        int x = 0;
+        for(Material m : bag){
+            if(m.getType().equals("wood")){
+                x++;
+            }
+        }
+        return x;
+    }
+
+    public int getBrick(){
+        int x = 0;
+        for(Material m : bag){
+            if(m.getType().equals("brick")){
+                x++;
+            }
+        }
+        return x;
+    }
+
+    public int getMetal(){
+        int x = 0;
+        for(Material m : bag){
+            if(m.getType().equals("metal")){
+                x++;
+            }
+        }
+        return x;
+    }
+
+    public int getConcrete(){
+        int x = 0;
+        for(Material m : bag){
+            if(m.getType().equals("concrete")){
+                x++;
+            }
+        }
+        return x;
+    }
 }
