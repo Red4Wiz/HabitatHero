@@ -101,4 +101,30 @@ class Player {
         }
         return x;
     }
+    public void removeMaterial(String material, int n){
+        int i = 0;
+        int numRemoved = 0;
+        while(i < bag.size()){
+            if(numRemoved == n) break;
+            if(bag.get(i).getType().equals(material) && numRemoved < n){
+                numRemoved++;
+                bag.remove(i);
+            }
+            else{
+                i++;
+            }
+        }
+        if(material.equals("wood")){
+            bagWeight-= n;
+        }
+        else if(material.equals("brick")){
+            bagWeight -= 3*n;
+        }
+        else if(material.equals("metal")){
+            bagWeight -= 5*n;
+        }
+        else if(material.equals("concrete")){
+            bagWeight -= 7*n;
+        }
+    }
 }

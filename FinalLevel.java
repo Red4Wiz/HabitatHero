@@ -185,11 +185,21 @@ public class FinalLevel {
 
                 //build
                 if(e.getX() >= 400 && e.getX() <= 800 && e.getY() >= 600 && e.getY() <= 700){
-                    //build house
+                    house.addBrick(brickCount);
+                    house.addWood(woodCount);
+                    house.addMetal(metalCount);
+                    house.addConcrete(concreteCount);
+                    player.removeMaterial("brick", brickCount);
+                    player.removeMaterial("wood", woodCount);
+                    player.removeMaterial("metal", metalCount);
+                    player.removeMaterial("concrete", concreteCount);
+                    builtAHouse = true;
+                    screen = 5;
+                    drawing.repaint();
                 }
 
                 if(e.getX() >= 10 && e.getX() <= 70 && e.getY()>=20 && e.getY() <= 80){
-                    //build house
+                    //exit
                     screen = lastScreen;
                 }
 
@@ -252,13 +262,13 @@ public class FinalLevel {
 
             // Bag Stats
             g.drawString("Wood:", 1053, 365);
-            g.drawString(getCntItem("wood")+"", 1111, 365);
+            g.drawString(player.getWood()+"", 1111, 365);
             g.drawString("Brick:", 1053, 385);
-            g.drawString(getCntItem("brick")+"", 1105, 385);
+            g.drawString(player.getBrick()+"", 1105, 385);
             g.drawString("Metal:", 1053, 405);
-            g.drawString(getCntItem("metal")+"", 1103, 405);
+            g.drawString(player.getMetal()+"", 1103, 405);
             g.drawString("Concrete:", 1053, 425);
-            g.drawString(getCntItem("concrete")+"", 1136, 425);
+            g.drawString(player.getConcrete()+"", 1136, 425);
             g.drawString("Weight:", 1053, 455);
             g.drawString(player.getBagWeight()+"", 1115, 455);
 
@@ -301,9 +311,6 @@ public class FinalLevel {
                 }
 
                 //System.out.println(curTime-startTime);
-            }
-            if(getCntItem("wood") > 0 || getCntItem("brick")>0 || getCntItem("metal") >0 || getCntItem("concrete")>0){ //has some materials
-
             }
 
             if(screen == 0){//start screen
@@ -487,8 +494,6 @@ public class FinalLevel {
                 g.drawString(brickCount+"", 460-(g.getFontMetrics().stringWidth(brickCount+"")/ 2), 410);
                 g.drawString(metalCount+"", 740-(g.getFontMetrics().stringWidth(metalCount+"")/ 2), 410);
                 g.drawString(concreteCount+"", 1020-(g.getFontMetrics().stringWidth(concreteCount+"")/ 2), 410);
-
-
             }
 
             if(screen != 6 && screen != 7) g.drawImage(homeBtn, 10,20,60,60,null);
@@ -507,14 +512,6 @@ public class FinalLevel {
         for(int i = 0; i < x; i++){
             materials.add(new Material((int)(Math.random()*1001),(int)(Math.random()*701)+100,randomMaterial()));
         }
-    }
-
-    private int getCntItem(String s){
-        int x = 0;
-        for(Material m : player.getBag()){
-            if(m.getType().equals(s))x++;
-        }
-        return x;
     }
 
 }
