@@ -12,12 +12,8 @@ import java.util.ArrayList;
 public class FinalLevel {
     JFrame frame = new JFrame("Final Level");
     Drawing drawing = new Drawing();
-<<<<<<< HEAD
-    int screen = 6;
+    int screen = 7;
     int radius = 0;
-=======
-    int screen = 0;
->>>>>>> 9e56e08c83ad509bbd0b1c2494471dcccbf3205b
     Image homeBtn = null;
     MouseHandler mouseHandler = new MouseHandler();
     File whiteBtn = new File("Assets/homeButtonW.png"), blackBtn = new File("Assets/homeButton.png");
@@ -28,6 +24,11 @@ public class FinalLevel {
     final long MAX_DAYTIME = 7500;
     Color color1 = Color.white, color2 = Color.white;
     long secondStartTime;
+
+    private int woodCount = 0;
+    private int brickCount = 0;
+    private int metalCount = 0;
+    private int cementCount = 0;
 
     long startTime;
     public FinalLevel(){
@@ -96,30 +97,26 @@ public class FinalLevel {
                     case "w":
                         if (playerY > 107) {
                             player.moveUp();
-                            drawing.repaint();
                         }
                         break;
                     case "s":
                         if (playerY < 750) {
                             player.moveDown();
-                            drawing.repaint();
                         }
                         break;
                     case "a":
                         if (playerX > 50) {
                             player.moveLeft();
-                            drawing.repaint();
                         }
                         break;
 
                     case "d":
                         if (playerX < 1150) {
                             player.moveRight();
-                            drawing.repaint();
                         }
                         break;
                 }
-                
+                drawing.repaint();
                 System.out.println(keyCode);
             }
         }
@@ -142,6 +139,38 @@ public class FinalLevel {
                     new MainMenu();
                     frame.dispose();
                 }
+            }
+            if(screen == 7){
+                if (isWithinArrowBounds(e.getX(), e.getY(), 150, 240, 210, 200)) {
+                    if (e.getY() <= 270) {
+                        woodCount++; // Increment wood count
+                    } else if(e.getY() >= 470) {
+                        woodCount--; // Decrement wood count
+                    }
+                    System.out.println("Wood count: " + woodCount);
+                } else if (isWithinArrowBounds(e.getX(), e.getY(), 430, 240, 490, 200)) {
+                    if (e.getY() <= 270) {
+                        brickCount++; // Increment brick count
+                    } else if(e.getY() >= 470) {
+                        brickCount--; // Decrement brick count
+                    }
+                    System.out.println("Brick count: " + brickCount);
+                } else if (isWithinArrowBounds(e.getX(), e.getY(), 710, 240, 770, 200)) {
+                    if (e.getY() <= 270) {
+                        metalCount++; // Increment metal count
+                    } else if(e.getY() >= 470) {
+                        metalCount--; // Decrement metal count
+                    }
+                    System.out.println("Metal count: " + metalCount);
+                } else if (isWithinArrowBounds(e.getX(), e.getY(), 990, 240, 1050, 200)) {
+                    if (e.getY() <= 270) {
+                        cementCount++; // Increment cement count
+                    } else if(e.getY() >= 470) {
+                        cementCount--; // Decrement cement count
+                    }
+                    System.out.println("Cement count: " + cementCount);
+                }
+                drawing.repaint(); // Redraw the arrows after the counts have been updated
             }
         }
         public void mouseMoved(MouseEvent e){
@@ -371,6 +400,30 @@ public class FinalLevel {
                 g.fillRoundRect(640, 250, 200, 200, 50, 50);
                 g.fillRoundRect(920, 250, 200, 200, 50, 50);
 
+                //arrows
+
+                //wood
+                int[] xTri = { 150, 210, 180 };
+                int[] yTriUp = { 240, 240, 200 };
+                int[] yTriDown = { 460, 460, 500 };
+                g.fillPolygon(xTri, yTriUp, 3);
+                g.fillPolygon(xTri, yTriDown, 3);
+
+                //brick
+                int[] xTri2 = { 430, 490, 460 };
+                g.fillPolygon(xTri2, yTriUp, 3);
+                g.fillPolygon(xTri2, yTriDown, 3);
+
+                //metal
+                int[] xTri3 = { 710, 770, 740 };
+                g.fillPolygon(xTri3, yTriUp, 3);
+                g.fillPolygon(xTri3, yTriDown, 3);
+
+                //cement
+                int[] xTri4 = { 990, 1050, 1020 };
+                g.fillPolygon(xTri4, yTriUp, 3);
+                g.fillPolygon(xTri4, yTriDown, 3);
+
                 //heading
                 g.setFont(new Font("Arial", Font.BOLD, 80));
                 g.setColor(Color.white);
@@ -381,12 +434,27 @@ public class FinalLevel {
                 g.fillRoundRect(400,600,400, 100,100,50);
                 g.setColor(Color.WHITE);
                 g.drawString("Build", (getWidth() - g.getFontMetrics().stringWidth("Build")) / 2, 680);
+
+                //item names
+                g.setFont(new Font("Arial", Font.BOLD, 30));
+                g.setColor(Color.BLACK);
+                g.drawString("Wood", 125, 335);
+                g.drawString("Brick", 405, 335);
+                g.drawString("Metal", 680, 335);
+                g.drawString("Cement", 970, 335);
+
+                g.drawString(wood+"", 125, 335);
+                g.drawString("Brick", 405, 335);
+                g.drawString("Metal", 680, 335);
+                g.drawString("Cement", 970, 335);
+
+
             }
 
             if(screen != 6) g.drawImage(homeBtn, 10,20,60,60,null);
         }
     }
-    public String randomMaterial(){
+    private String randomMaterial(){
         int x = (int)(Math.random()*10)+1;
         if(x<=4)return "wood";
         else if(x<=7) return "brick";
@@ -394,18 +462,22 @@ public class FinalLevel {
         else return "concrete";
     }
 
-    public void materialGeneration(){
+    private void materialGeneration(){
         int x = (int)(Math.random()*4)+1;
         for(int i = 0; i < x; i++){
             materials.add(new Material((int)(Math.random()*1001),(int)(Math.random()*701)+100,randomMaterial()));
         }
     }
 
-    public int getCntItem(String s){
+    private int getCntItem(String s){
         int x = 0;
         for(Material m : player.getBag()){
             if(m.getType().equals(s))x++;
         }
         return x;
+    }
+    private boolean isWithinArrowBounds(int x, int y, int x1, int y1, int x2, int y2) {
+        // Check if the given coordinates (x, y) are within the triangle bounds
+        return (x >= x1 && x <= x2 && y >= y2 && y <= y1);
     }
 }
