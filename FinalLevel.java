@@ -15,12 +15,13 @@ public class FinalLevel {
     int screen = 0;
     int radius = 0;
     Image homeBtn = null;
+    boolean builtAHouse = false;
     MouseHandler mouseHandler = new MouseHandler();
     File whiteBtn = new File("Assets/homeButtonW.png"), blackBtn = new File("Assets/homeButton.png");
     boolean dayTime = true, justTurnedDay = false;
     private Player player;
     private ArrayList<Material> materials = new ArrayList<>();
-//    private Building house = new Building();
+    private Building house = new Building(0,0,0,0);
     final long MAX_DAYTIME = 7500;
     Color color1 = Color.white, color2 = Color.white;
     long secondStartTime;
@@ -141,32 +142,36 @@ public class FinalLevel {
                 }
             }
             if(screen == 7){
-                if (isWithinArrowBounds(e.getX(), e.getY(), 150, 240, 210, 200)) {
-                    if (e.getY() <= 270) {
-                        woodCount++; // Increment wood count
-                    } else if(e.getY() >= 470) {
-                        woodCount--; // Decrement wood count
+                if (e.getX() >= 150 && e.getX() <= 210) {
+                    if(e.getY() >= 200 && e.getY() <= 240){
+                        woodCount++;
+                    }
+                    else if(e.getY() >= 460 && e.getY() <= 500) {
+                        woodCount--;
                     }
                     System.out.println("Wood count: " + woodCount);
-                } else if (isWithinArrowBounds(e.getX(), e.getY(), 430, 240, 490, 200)) {
-                    if (e.getY() <= 270) {
-                        brickCount++; // Increment brick count
-                    } else if(e.getY() >= 470) {
-                        brickCount--; // Decrement brick count
+                } else if (e.getX() >= 430 && e.getX() <= 490) {
+                    if(e.getY() >= 200 && e.getY() <= 240){
+                        brickCount++;
+                    }
+                    else if(e.getY() >= 460 && e.getY() <= 500) {
+                        brickCount--;
                     }
                     System.out.println("Brick count: " + brickCount);
-                } else if (isWithinArrowBounds(e.getX(), e.getY(), 710, 240, 770, 200)) {
-                    if (e.getY() <= 270) {
-                        metalCount++; // Increment metal count
-                    } else if(e.getY() >= 470) {
-                        metalCount--; // Decrement metal count
+                } else if (e.getX() >= 710 && e.getX() <= 770) {
+                    if(e.getY() >= 200 && e.getY() <= 240){
+                        metalCount++;
+                    }
+                    else if(e.getY() >= 460 && e.getY() <= 500) {
+                        metalCount--;
                     }
                     System.out.println("Metal count: " + metalCount);
-                } else if (isWithinArrowBounds(e.getX(), e.getY(), 990, 240, 1050, 200)) {
-                    if (e.getY() <= 270) {
-                        cementCount++; // Increment cement count
-                    } else if(e.getY() >= 470) {
-                        cementCount--; // Decrement cement count
+                } else if (e.getX() >= 990 && e.getX() <= 1050) {
+                    if(e.getY() >= 200 && e.getY() <= 240){
+                        cementCount++;
+                    }
+                    else if(e.getY() >= 460 && e.getY() <= 500) {
+                        cementCount--;
                     }
                     System.out.println("Cement count: " + cementCount);
                 }
@@ -207,24 +212,37 @@ public class FinalLevel {
             g.fillRect(0,0,getWidth(), getHeight());
             //boxes stats
             g.setColor(new Color(241, 194, 51));
-            g.fillRect(1040, 110, 150, 200);
-            g.fillRect(1040, 320, 150, 175);
+            g.fillRect(1040, 110, 150, 175);
+            g.fillRect(1040, 300, 150, 175);
 
             g.setFont(new Font("Arial", Font.BOLD, 16)); // Set font to Arial bold with size 24
             g.setColor(new Color(0, 0, 0));
-            g.drawString("Backpack", 1085, 354);
+            g.drawString("Backpack", 1085, 334);
+            g.drawString("House", 1085, 144);
+
+            //House Stats
+            g.drawString("Wood:", 1053, 175);
+            g.drawString(house.getNumOfWood()+"", 1111, 175);
+            g.drawString("Brick:", 1053, 195);
+            g.drawString(house.getNumOfBrick()+"", 1105, 195);
+            g.drawString("Metal:", 1053, 215);
+            g.drawString(house.getNumOfMetal()+"", 1103, 215);
+            g.drawString("Concrete:", 1053, 235);
+            g.drawString(house.getNumOfConcrete()+"", 1136, 235);
+            g.drawString("Durability:", 1053, 265);
+            g.drawString(house.getDurability()+"", 1135, 265);
 
             // Bag Stats
-            g.drawString("Wood:", 1053, 385);
-            g.drawString(getCntItem("wood")+"", 1111, 385);
-            g.drawString("Brick:", 1053, 405);
-            g.drawString(getCntItem("brick")+"", 1105, 405);
-            g.drawString("Metal:", 1053, 425);
-            g.drawString(getCntItem("metal")+"", 1103, 425);
-            g.drawString("Concrete:", 1053, 445);
-            g.drawString(getCntItem("concrete")+"", 1136, 445);
-            g.drawString("Weight:", 1053, 475);
-            g.drawString(player.getBagWeight()+"", 1115, 475);
+            g.drawString("Wood:", 1053, 365);
+            g.drawString(getCntItem("wood")+"", 1111, 365);
+            g.drawString("Brick:", 1053, 385);
+            g.drawString(getCntItem("brick")+"", 1105, 385);
+            g.drawString("Metal:", 1053, 405);
+            g.drawString(getCntItem("metal")+"", 1103, 405);
+            g.drawString("Concrete:", 1053, 425);
+            g.drawString(getCntItem("concrete")+"", 1136, 425);
+            g.drawString("Weight:", 1053, 455);
+            g.drawString(player.getBagWeight()+"", 1115, 455);
 
             //materials
             for(Material m : materials){
@@ -325,8 +343,14 @@ public class FinalLevel {
                 } catch (Exception e) {
                 }
                 g.setColor(new Color(0,0,0));
-                g.drawString("You have successfully picked up a piece of " + player.getBag().get(player.getBag().size()-1).getType() + ". Return", (getWidth() - g.getFontMetrics().stringWidth("You have successfully picked up a piece of " + player.getBag().get(player.getBag().size()-1).getType() + ". Return")) / 2, 30);
-                g.drawString("to your shelter area to build something with it.", (getWidth() - g.getFontMetrics().stringWidth("to your shelter area to build something with it.")) / 2, 60);
+                if(builtAHouse){
+                    g.drawString("You have successfully picked up a piece of " + player.getBag().get(player.getBag().size()-1).getType() + ". Return", (getWidth() - g.getFontMetrics().stringWidth("You have successfully picked up a piece of " + player.getBag().get(player.getBag().size()-1).getType() + ". Return")) / 2, 30);
+                    g.drawString("to your shelter area to build something with it.", (getWidth() - g.getFontMetrics().stringWidth("to your shelter area to build something with it.")) / 2, 60);
+                }
+                else{
+                    g.drawString("You have successfully picked up a piece of " + player.getBag().get(player.getBag().size()-1).getType() + ". Pick", (getWidth() - g.getFontMetrics().stringWidth("You have successfully picked up a piece of " + player.getBag().get(player.getBag().size()-1).getType() + ". Pick")) / 2, 30);
+                    g.drawString("anywhere on the map to build your shelter!", (getWidth() - g.getFontMetrics().stringWidth("anywhere on the map to build your shelter!")) / 2, 60);
+                }
             }
             else if(screen == 4){ //backpack full
                 g.setColor(new Color(163, 235, 240));
@@ -387,11 +411,6 @@ public class FinalLevel {
                 }
             }
             else if(screen == 7){//building screen
-                int wood = 0;
-                int metal = 0;
-                int brick = 0;
-                int cement = 0;
-
                 //background
                 g.setColor(new Color(0,0,0, 240));
                 g.fillRect(0,0,getWidth(), getHeight());
@@ -441,15 +460,15 @@ public class FinalLevel {
                 //item names
                 g.setFont(new Font("Arial", Font.BOLD, 30));
                 g.setColor(Color.BLACK);
-                g.drawString("Wood", 125, 335);
-                g.drawString("Brick", 405, 335);
-                g.drawString("Metal", 680, 335);
-                g.drawString("Cement", 970, 335);
+                g.drawString("Wood", 180-(g.getFontMetrics().stringWidth("Wood")/ 2), 335);
+                g.drawString("Brick", 460-(g.getFontMetrics().stringWidth("Brick")/ 2), 335);
+                g.drawString("Metal", 740-(g.getFontMetrics().stringWidth("Metal")/ 2), 335);
+                g.drawString("Cement", 1020-(g.getFontMetrics().stringWidth("Cement")/ 2), 335);
 
-                g.drawString(wood+"", 125, 335);
-                g.drawString("Brick", 405, 335);
-                g.drawString("Metal", 680, 335);
-                g.drawString("Cement", 970, 335);
+                g.drawString(woodCount+"", 180-(g.getFontMetrics().stringWidth(woodCount+"")/ 2), 410);
+                g.drawString(brickCount+"", 460-(g.getFontMetrics().stringWidth(brickCount+"")/ 2), 410);
+                g.drawString(metalCount+"", 740-(g.getFontMetrics().stringWidth(metalCount+"")/ 2), 410);
+                g.drawString(cementCount+"", 1020-(g.getFontMetrics().stringWidth(cementCount+"")/ 2), 410);
 
 
             }
@@ -479,8 +498,5 @@ public class FinalLevel {
         }
         return x;
     }
-    private boolean isWithinArrowBounds(int x, int y, int x1, int y1, int x2, int y2) {
-        // Check if the given coordinates (x, y) are within the triangle bounds
-        return (x >= x1 && x <= x2 && y >= y2 && y <= y1);
-    }
+
 }

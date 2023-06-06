@@ -48,6 +48,10 @@ public class Building {
         return numOfWood;
     }
 
+    public int getDurability() {
+        return durability;
+    }
+
     public int getX() {
         return x;
     }
