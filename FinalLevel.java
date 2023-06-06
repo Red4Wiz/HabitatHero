@@ -141,32 +141,36 @@ public class FinalLevel {
                 }
             }
             if(screen == 7){
-                if (isWithinArrowBounds(e.getX(), e.getY(), 150, 240, 210, 200)) {
-                    if (e.getY() <= 270) {
-                        woodCount++; // Increment wood count
-                    } else if(e.getY() >= 470) {
-                        woodCount--; // Decrement wood count
+                if (e.getX() >= 150 && e.getX() <= 210) {
+                    if(e.getY() >= 200 && e.getY() <= 240){
+                        woodCount++;
+                    }
+                    else if(e.getY() >= 460 && e.getY() <= 500) {
+                        woodCount--;
                     }
                     System.out.println("Wood count: " + woodCount);
-                } else if (isWithinArrowBounds(e.getX(), e.getY(), 430, 240, 490, 200)) {
-                    if (e.getY() <= 270) {
-                        brickCount++; // Increment brick count
-                    } else if(e.getY() >= 470) {
-                        brickCount--; // Decrement brick count
+                } else if (e.getX() >= 430 && e.getX() <= 490) {
+                    if(e.getY() >= 200 && e.getY() <= 240){
+                        brickCount++;
+                    }
+                    else if(e.getY() >= 460 && e.getY() <= 500) {
+                        brickCount--;
                     }
                     System.out.println("Brick count: " + brickCount);
-                } else if (isWithinArrowBounds(e.getX(), e.getY(), 710, 240, 770, 200)) {
-                    if (e.getY() <= 270) {
-                        metalCount++; // Increment metal count
-                    } else if(e.getY() >= 470) {
-                        metalCount--; // Decrement metal count
+                } else if (e.getX() >= 710 && e.getX() <= 770) {
+                    if(e.getY() >= 200 && e.getY() <= 240){
+                        metalCount++;
+                    }
+                    else if(e.getY() >= 460 && e.getY() <= 500) {
+                        metalCount--;
                     }
                     System.out.println("Metal count: " + metalCount);
-                } else if (isWithinArrowBounds(e.getX(), e.getY(), 990, 240, 1050, 200)) {
-                    if (e.getY() <= 270) {
-                        cementCount++; // Increment cement count
-                    } else if(e.getY() >= 470) {
-                        cementCount--; // Decrement cement count
+                } else if (e.getX() >= 990 && e.getX() <= 1050) {
+                    if(e.getY() >= 200 && e.getY() <= 240){
+                        cementCount++;
+                    }
+                    else if(e.getY() >= 460 && e.getY() <= 500) {
+                        cementCount--;
                     }
                     System.out.println("Cement count: " + cementCount);
                 }
@@ -384,11 +388,6 @@ public class FinalLevel {
                 }
             }
             else if(screen == 7){//building screen
-                int wood = 0;
-                int metal = 0;
-                int brick = 0;
-                int cement = 0;
-
                 //background
                 g.setColor(new Color(0,0,0, 240));
                 g.fillRect(0,0,getWidth(), getHeight());
@@ -438,15 +437,15 @@ public class FinalLevel {
                 //item names
                 g.setFont(new Font("Arial", Font.BOLD, 30));
                 g.setColor(Color.BLACK);
-                g.drawString("Wood", 125, 335);
-                g.drawString("Brick", 405, 335);
-                g.drawString("Metal", 680, 335);
-                g.drawString("Cement", 970, 335);
+                g.drawString("Wood", 180-(g.getFontMetrics().stringWidth("Wood")/ 2), 335);
+                g.drawString("Brick", 460-(g.getFontMetrics().stringWidth("Brick")/ 2), 335);
+                g.drawString("Metal", 740-(g.getFontMetrics().stringWidth("Metal")/ 2), 335);
+                g.drawString("Cement", 1020-(g.getFontMetrics().stringWidth("Cement")/ 2), 335);
 
-                g.drawString(wood+"", 125, 335);
-                g.drawString("Brick", 405, 335);
-                g.drawString("Metal", 680, 335);
-                g.drawString("Cement", 970, 335);
+                g.drawString(woodCount+"", 180-(g.getFontMetrics().stringWidth(woodCount+"")/ 2), 410);
+                g.drawString(brickCount+"", 460-(g.getFontMetrics().stringWidth(brickCount+"")/ 2), 410);
+                g.drawString(metalCount+"", 740-(g.getFontMetrics().stringWidth(metalCount+"")/ 2), 410);
+                g.drawString(cementCount+"", 1020-(g.getFontMetrics().stringWidth(cementCount+"")/ 2), 410);
 
 
             }
@@ -476,8 +475,5 @@ public class FinalLevel {
         }
         return x;
     }
-    private boolean isWithinArrowBounds(int x, int y, int x1, int y1, int x2, int y2) {
-        // Check if the given coordinates (x, y) are within the triangle bounds
-        return (x >= x1 && x <= x2 && y >= y2 && y <= y1);
-    }
+
 }
