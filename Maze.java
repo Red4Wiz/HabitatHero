@@ -110,7 +110,7 @@ public class Maze {
 
             if((e.getKeyChar()+"").toLowerCase().equals("b") && screen == 1){
                 if(player.getX() >= 450 && player.getX() <= 700 && player.getY() >= 400 && player.getY() <= 550 && materials.isEmpty()){
-                    buildings.add(new Building(525,425,150,75));
+                    buildings.add(new Building(525,425, 1));
                     maze[mazeHeight-2][mazeWidth-1] = ' ';
                     maze[mazeHeight-3][mazeWidth-1] = ' ';
                 }
@@ -236,8 +236,7 @@ public class Maze {
                     }
                 }
                 for(Building b : buildings){
-                    g.setColor(Color.YELLOW);
-                    g.fillRect(b.getX(), b.getY(), b.getWidth(), b.getHeight());
+                    b.draw(g);
                 }
 
                 g.setColor(new Color(163, 235, 240));

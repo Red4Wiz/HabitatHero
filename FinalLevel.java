@@ -21,14 +21,13 @@ public class FinalLevel {
     boolean dayTime = true, justTurnedDay = false;
     private Player player;
     private ArrayList<Material> materials = new ArrayList<>();
-    private Building house = new Building(0,0,0,0);
     final long MAX_DAYTIME = 60;
     int displayTime = (int) MAX_DAYTIME; //in seconds
     long timeTicker;
     Color color1 = Color.white, color2 = Color.white;
     long secondStartTime;
     int numOfNights = 0;
-
+    private Building house = new Building(500,300, 2);
     private int woodCount = 0;
     private int brickCount = 0;
     private int metalCount = 0;
@@ -303,6 +302,8 @@ public class FinalLevel {
             g.drawString(player.getConcrete()+"", 1136, 425);
             g.drawString("Weight:", 1053, 455);
             g.drawString(player.getBagWeight()+"", 1115, 455);
+
+            house.draw(g);
 
             //materials
             for(Material m : materials){
