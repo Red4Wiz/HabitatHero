@@ -77,7 +77,7 @@ public class Building {
             g.setColor(Color.YELLOW);
             g.fillRect(x+20,y+90, 25, 20);
             g.fillRect(x+155,y+90, 25, 20);
-            
+
         }
     }
 
