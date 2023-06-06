@@ -15,21 +15,36 @@ public class Building {
         this.numOfMetal = 0;
         this.numOfConcrete = 0;
     }
+    public void removeDurability(int n){
+        this.durability -= n;
+    }
     public void addBrick(int n){
         this.numOfBrick += n;
-        durability += 15*n;
+        durability += 10*n;
     }
     public void addMetal(int n){
         this.numOfMetal += n;
-        durability += 20*n;
+        durability += 15*n;
     }
     public void addWood(int n){
         this.numOfWood += n;
-        durability += 10*n;
+        durability += 5*n;
     }
     public void addConcrete(int n){
         this.numOfConcrete += n;
-        durability += 25*n;
+        durability += 20*n;
+    }
+    public void removeBrick(int n){
+        this.numOfBrick -= n;
+    }
+    public void removeWood(int n){
+        this.numOfWood -= n;
+    }
+    public void removeMetal(int n){
+        this.numOfMetal -= n;
+    }
+    public void removeConcrete(int n){
+        this.numOfConcrete -= n;
     }
 
     public int getNumOfBrick() {

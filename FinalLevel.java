@@ -22,9 +22,12 @@ public class FinalLevel {
     private Player player;
     private ArrayList<Material> materials = new ArrayList<>();
     private Building house = new Building(0,0,0,0);
-    final long MAX_DAYTIME = 7500;
+    final long MAX_DAYTIME = 60;
+    int displayTime = (int) MAX_DAYTIME; //in seconds
+    long timeTicker;
     Color color1 = Color.white, color2 = Color.white;
     long secondStartTime;
+    int numOfNights = 0;
 
     private int woodCount = 0;
     private int brickCount = 0;
@@ -34,6 +37,7 @@ public class FinalLevel {
 
     long startTime;
     public FinalLevel(){
+        timeTicker = System.currentTimeMillis();
         try {
             homeBtn = ImageIO.read(blackBtn);
         } catch (IOException d){}
@@ -84,9 +88,37 @@ public class FinalLevel {
             //test code, real code would use this when the person moves into their house
             if((e.getKeyChar()+"").toLowerCase().equals("x")){
                 if(!dayTime){
-                    justTurnedDay = true;
-                    dayTime = true;
-                    startTime = System.currentTimeMillis();
+                    int damage = 15 + 10*numOfNights;
+                    house.removeDurability(damage);
+                    int concreteLost = damage/20;
+                    if(concreteLost >= house.getNumOfConcrete()) {
+                        damage -= 20*concreteLost;
+                        house.removeConcrete(concreteLost);
+                    }
+                    int metalLost = damage/15;
+                    if(metalLost >= house.getNumOfMetal()) {
+                        damage -= 15*metalLost;
+                        house.removeMetal(metalLost);
+                    }
+                    int brickLost = damage/10;
+                    if(brickLost >= house.getNumOfBrick()) {
+                        damage -= 10*brickLost;
+                        house.removeBrick(brickLost);
+                    }
+                    int woodLost = damage/5;
+                    if(woodLost >= house.getNumOfWood()){
+                        house.removeWood(woodLost);
+                    }
+                    if(house.getDurability() < 0){
+                        screen = 6;
+                    }
+                    else{
+                        justTurnedDay = true;
+                        dayTime = true;
+                        startTime = System.currentTimeMillis();
+                        screen = 2;
+                    }
+                    numOfNights++;
                 }
             }
 
@@ -296,10 +328,12 @@ public class FinalLevel {
                     screen = 2;
                     materialGeneration();
                     justTurnedDay = false;
+                    timeTicker = System.currentTimeMillis();
+                    displayTime = (int) MAX_DAYTIME;
                 }
 
                 if(dayTime){
-                    if(curTime - startTime >= MAX_DAYTIME){
+                    if(displayTime == 0){
                         startTime = System.currentTimeMillis();
                         dayTime = false;
                     }
@@ -496,7 +530,34 @@ public class FinalLevel {
                 g.drawString(concreteCount+"", 1020-(g.getFontMetrics().stringWidth(concreteCount+"")/ 2), 410);
             }
 
-            if(screen != 6 && screen != 7) g.drawImage(homeBtn, 10,20,60,60,null);
+            if(screen != 6 && screen != 7) {
+                g.drawImage(homeBtn, 10,20,60,60,null);
+                //drawing seconds
+                g.setColor(new Color(241, 194, 51));
+                g.fillRect(getWidth()-80, getHeight()-50, 80, 50);
+                g.setFont(new Font("Arial", Font.BOLD, 26));
+                int min = displayTime/60;
+                int sec = displayTime - 60*min;
+                String time = "";
+                if(sec < 10){
+                    time = min + ":0" + sec;
+                }
+                else{
+                    time = min + ":" + sec;
+                }
+                g.setColor(Color.black);
+                g.drawString(time, 1130,755);
+                if(System.currentTimeMillis() - timeTicker >= 1000 && displayTime != 0){
+                    displayTime--;
+                    System.out.println(time);
+                    timeTicker = System.currentTimeMillis();
+                    repaint();
+                }
+                if(displayTime == 0){
+                    g.setColor(new Color(0,0,0, 100));
+                    g.fillRect(getWidth()-80, getHeight()-50, 80, 50);
+                }
+            }
         }
     }
     private String randomMaterial(){
@@ -508,7 +569,7 @@ public class FinalLevel {
     }
 
     private void materialGeneration(){
-        int x = (int)(Math.random()*4)+1;
+        int x = (int)(Math.random()*4)+3;
         for(int i = 0; i < x; i++){
             materials.add(new Material((int)(Math.random()*1001),(int)(Math.random()*701)+100,randomMaterial()));
         }

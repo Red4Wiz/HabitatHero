@@ -18,19 +18,19 @@ public class Material {
         this.type = s;
         switch(s){
             case "wood":
-                this.strength = 10;
+                this.strength = 5;
                 this.weight = 1;
                 break;
             case "brick":
-                this.strength = 15;
+                this.strength = 10;
                 this.weight = 3;
                 break;
             case "metal":
-                this.strength = 20;
+                this.strength = 15;
                 this.weight = 5;
                 break;
             case "concrete":
-                this.strength = 25;
+                this.strength = 20;
                 this.weight = 7;
         }
     }
