@@ -1,15 +1,16 @@
+import java.awt.*;
+
 public class Building {
     private int x; // x-coordinate of material position
     private int y; // y-coordinate of material position
     private int width; // y-coordinate of material position
     private int height; // y-coordinate of material position
     private int numOfBrick, numOfWood, numOfMetal, numOfConcrete;
-    private int durability;
-    public Building(int x, int y, int w, int h) {
+    private int durability, screen;
+    public Building(int x, int y, int s) {
         this.x = x;
         this.y = y;
-        this.width = w;
-        this.height = h;
+        this.screen = s;
         this.numOfBrick = 0;
         this.numOfWood = 0;
         this.numOfMetal = 0;
@@ -59,16 +60,25 @@ public class Building {
     public int getY() {
         return y;
     }
-    public int getWidth() {
-        return width;
-    }
 
-    public int getHeight() {
-        return height;
-    }
+    public void draw(Graphics g){
+        if(screen == 1){
 
-    public void draw(){
+        }
+        if(screen == 2){
+            g.setColor(new Color(255, 0, 0));
+            int[] xTri = { x, x+100, x+200 };
+            int[] yTri = { y+70, y, y+70 };
+            g.fillPolygon(xTri, yTri, 3);
 
+            g.setColor(Color.WHITE);
+            g.fillRect(x,y+70, 200, 110);
+
+            g.setColor(Color.YELLOW);
+            g.fillRect(x+20,y+90, 25, 20);
+            g.fillRect(x+155,y+90, 25, 20);
+            
+        }
     }
 
 
