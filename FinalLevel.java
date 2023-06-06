@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class FinalLevel {
     JFrame frame = new JFrame("Final Level");
     Drawing drawing = new Drawing();
-    int screen = 7;
+    int screen = 0;
     int radius = 0;
     Image homeBtn = null;
     MouseHandler mouseHandler = new MouseHandler();
@@ -20,7 +20,6 @@ public class FinalLevel {
     boolean dayTime = true, justTurnedDay = false;
     private Player player;
     private ArrayList<Material> materials = new ArrayList<>();
-    private ArrayList<Building> buildings = new ArrayList<>();
     final long MAX_DAYTIME = 7500;
     Color color1 = Color.white, color2 = Color.white;
     long secondStartTime;
@@ -28,7 +27,8 @@ public class FinalLevel {
     private int woodCount = 0;
     private int brickCount = 0;
     private int metalCount = 0;
-    private int cementCount = 0;
+    private int concreteCount = 0;
+    int lastScreen = 0;
 
     long startTime;
     public FinalLevel(){
@@ -70,7 +70,12 @@ public class FinalLevel {
 
             if((e.getKeyChar()+"").toLowerCase().equals("b")){
                 if(screen != 1){
+                    lastScreen = screen;
                     screen = 7;
+                    woodCount = 0;
+                    brickCount = 0;
+                    metalCount = 0;
+                    concreteCount = 0;
                 }
             }
 
@@ -125,7 +130,7 @@ public class FinalLevel {
     class MouseHandler extends MouseAdapter{
         public void mouseClicked(MouseEvent e){
             System.out.println(e.getX() + ", " + e.getY());
-            if(e.getX() >= 10 && e.getX() <= 70 && e.getY()>=20 && e.getY() <= 80 && screen != 6){
+            if(e.getX() >= 10 && e.getX() <= 70 && e.getY()>=20 && e.getY() <= 80 && screen != 6 && screen != 7){
                 new MainMenu();
                 frame.dispose();
             }
@@ -141,39 +146,51 @@ public class FinalLevel {
                 }
             }
             if(screen == 7){
+                //up and down arrows
                 if (e.getX() >= 150 && e.getX() <= 210) {
-                    if(e.getY() >= 200 && e.getY() <= 240){
+                    if(e.getY() >= 230 && e.getY() <= 270 && woodCount < player.getWood()){
                         woodCount++;
                     }
-                    else if(e.getY() >= 460 && e.getY() <= 500) {
+                    else if(e.getY() >= 490 && e.getY() <= 530 && woodCount > 0) {
                         woodCount--;
                     }
                     System.out.println("Wood count: " + woodCount);
                 } else if (e.getX() >= 430 && e.getX() <= 490) {
-                    if(e.getY() >= 200 && e.getY() <= 240){
+                    if(e.getY() >= 230 && e.getY() <= 270 && brickCount < player.getBrick()){
                         brickCount++;
                     }
-                    else if(e.getY() >= 460 && e.getY() <= 500) {
+                    else if(e.getY() >= 490 && e.getY() <= 530 && brickCount > 0) {
                         brickCount--;
                     }
                     System.out.println("Brick count: " + brickCount);
                 } else if (e.getX() >= 710 && e.getX() <= 770) {
-                    if(e.getY() >= 200 && e.getY() <= 240){
+                    if(e.getY() >= 230 && e.getY() <= 270 && metalCount < player.getMetal()){
                         metalCount++;
                     }
-                    else if(e.getY() >= 460 && e.getY() <= 500) {
+                    else if(e.getY() >= 490 && e.getY() <= 530 && metalCount > 0) {
                         metalCount--;
                     }
                     System.out.println("Metal count: " + metalCount);
                 } else if (e.getX() >= 990 && e.getX() <= 1050) {
-                    if(e.getY() >= 200 && e.getY() <= 240){
-                        cementCount++;
+                    if(e.getY() >= 230 && e.getY() <= 270 && concreteCount < player.getConcrete()){
+                        concreteCount++;
                     }
-                    else if(e.getY() >= 460 && e.getY() <= 500) {
-                        cementCount--;
+                    else if(e.getY() >= 490 && e.getY() <= 530 && concreteCount > 0) {
+                        concreteCount--;
                     }
-                    System.out.println("Cement count: " + cementCount);
+                    System.out.println("Concrete count: " + concreteCount);
                 }
+
+                //build
+                if(e.getX() >= 400 && e.getX() <= 800 && e.getY() >= 600 && e.getY() <= 700){
+                    //build house
+                }
+
+                if(e.getX() >= 10 && e.getX() <= 70 && e.getY()>=20 && e.getY() <= 80){
+                    //build house
+                    screen = lastScreen;
+                }
+
                 drawing.repaint(); // Redraw the arrows after the counts have been updated
             }
         }
@@ -271,7 +288,7 @@ public class FinalLevel {
                 //System.out.println(curTime-startTime);
             }
 
-            if(screen == 0){
+            if(screen == 0){//start screen
                 g.setColor(new Color(163, 235, 240));
                 g.fillRect(0, 0, 1200, 100);
 
@@ -418,7 +435,7 @@ public class FinalLevel {
                 g.fillPolygon(xTri3, yTriUp, 3);
                 g.fillPolygon(xTri3, yTriDown, 3);
 
-                //cement
+                //concrete
                 int[] xTri4 = { 990, 1050, 1020 };
                 g.fillPolygon(xTri4, yTriUp, 3);
                 g.fillPolygon(xTri4, yTriDown, 3);
@@ -440,17 +457,17 @@ public class FinalLevel {
                 g.drawString("Wood", 180-(g.getFontMetrics().stringWidth("Wood")/ 2), 335);
                 g.drawString("Brick", 460-(g.getFontMetrics().stringWidth("Brick")/ 2), 335);
                 g.drawString("Metal", 740-(g.getFontMetrics().stringWidth("Metal")/ 2), 335);
-                g.drawString("Cement", 1020-(g.getFontMetrics().stringWidth("Cement")/ 2), 335);
+                g.drawString("concrete", 1020-(g.getFontMetrics().stringWidth("concrete")/ 2), 335);
 
                 g.drawString(woodCount+"", 180-(g.getFontMetrics().stringWidth(woodCount+"")/ 2), 410);
                 g.drawString(brickCount+"", 460-(g.getFontMetrics().stringWidth(brickCount+"")/ 2), 410);
                 g.drawString(metalCount+"", 740-(g.getFontMetrics().stringWidth(metalCount+"")/ 2), 410);
-                g.drawString(cementCount+"", 1020-(g.getFontMetrics().stringWidth(cementCount+"")/ 2), 410);
+                g.drawString(concreteCount+"", 1020-(g.getFontMetrics().stringWidth(concreteCount+"")/ 2), 410);
 
 
             }
 
-            if(screen != 6) g.drawImage(homeBtn, 10,20,60,60,null);
+            if(screen != 6 && screen != 7) g.drawImage(homeBtn, 10,20,60,60,null);
         }
     }
     private String randomMaterial(){
