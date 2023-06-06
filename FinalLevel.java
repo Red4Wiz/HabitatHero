@@ -13,6 +13,7 @@ public class FinalLevel {
     JFrame frame = new JFrame("Final Level");
     Drawing drawing = new Drawing();
     int screen = 6;
+    int radius = 0;
     Image homeBtn = null;
     MouseHandler mouseHandler = new MouseHandler();
     File whiteBtn = new File("Assets/homeButtonW.png"), blackBtn = new File("Assets/homeButton.png");
@@ -21,6 +22,8 @@ public class FinalLevel {
     private ArrayList<Material> materials = new ArrayList<>();
     private ArrayList<Building> buildings = new ArrayList<>();
     final long MAX_DAYTIME = 7500;
+    Color color1 = Color.white, color2 = Color.white;
+    long secondStartTime;
 
     long startTime;
     public FinalLevel(){
@@ -144,6 +147,18 @@ public class FinalLevel {
                     homeBtn = ImageIO.read(blackBtn);
                 }
             } catch (IOException d){}
+            if(screen == 6){
+                if(e.getX() >= 300 && e.getX() <= 900 && e.getY() >= 350 && e.getY() <= 450){ //Click on restart level
+                    color1 = Color.black;
+                }
+                else if(e.getX() >= 300 && e.getX() <= 900 && e.getY() >= 470 && e.getY() <= 570){ //Click on restart level
+                    color2 = Color.black;
+                }
+                else {
+                    color1 = Color.white;
+                    color2 = Color.white;
+                }
+            }
             drawing.repaint();
         }
     }
@@ -300,24 +315,36 @@ public class FinalLevel {
                 g.drawString("upgrade your shelter. The durability of your home just went up!", (getWidth() - g.getFontMetrics().stringWidth("upgrade your shelter. The durability of your home just went up!")) / 2, 60);
             }
             else if(screen == 6){ //didn't survive
-                g.setColor(Color.black);
+                g.setColor(new Color(0,0,0,100));
                 g.fillRect(0,0,getWidth(), getHeight());
-                try {
-                    Font font = Font.createFont(Font.TRUETYPE_FONT, SplashScreen.class.getResourceAsStream("Assets/ZenDots-Regular.ttf"));
-                    g.setFont(font.deriveFont(Font.BOLD, 40f));
-                } catch (Exception e) {
+                g.setColor(new Color(0,0,0));
+                g.fillOval(getWidth()/2 - radius/2, getHeight()/2 - radius/2, radius, radius);
+                if(radius < 3400){
+                    radius+=15;
+                    repaint();
+                    secondStartTime = System.currentTimeMillis();
                 }
-                g.setColor(Color.white);
-                g.drawString("Your shelter was not durable enough", (getWidth() - g.getFontMetrics().stringWidth("Your shelter was not durable enough")) / 2, 150);
-                g.drawString("to survive the night. This means", (getWidth() - g.getFontMetrics().stringWidth("to survive the night. This means")) / 2, 200);
-                g.drawString("that you have lost the game. Restart", (getWidth() - g.getFontMetrics().stringWidth("that you have lost the game. Restart")) / 2, 250);
-                g.drawString("or go to the menu to play again.", (getWidth() - g.getFontMetrics().stringWidth("or go to the menu to play again.")) / 2, 300);
-                g.setColor(new Color(60, 120, 220));
-                g.fillRect(300,350,getWidth()/2, 100);
-                g.fillRect(300,470,getWidth()/2, 100);
-                g.setColor(Color.white);
-                g.drawString("Restart Level", (getWidth() - g.getFontMetrics().stringWidth("Restart Level")) / 2, 415);
-                g.drawString("Main Menu", (getWidth() - g.getFontMetrics().stringWidth("Main Menu")) / 2, 535);
+                else{
+                    g.setColor(Color.black);
+                    g.fillRect(0,0,getWidth(), getHeight());
+                    try {
+                        Font font = Font.createFont(Font.TRUETYPE_FONT, SplashScreen.class.getResourceAsStream("Assets/ZenDots-Regular.ttf"));
+                        g.setFont(font.deriveFont(Font.BOLD, 40f));
+                    } catch (Exception e) {
+                    }
+                    g.setColor(Color.white);
+                    g.drawString("Your shelter was not durable enough", (getWidth() - g.getFontMetrics().stringWidth("Your shelter was not durable enough")) / 2, 150);
+                    g.drawString("to survive the night. This means", (getWidth() - g.getFontMetrics().stringWidth("to survive the night. This means")) / 2, 200);
+                    g.drawString("that you have lost the game. Restart", (getWidth() - g.getFontMetrics().stringWidth("that you have lost the game. Restart")) / 2, 250);
+                    g.drawString("or go to the menu to play again.", (getWidth() - g.getFontMetrics().stringWidth("or go to the menu to play again.")) / 2, 300);
+                    g.setColor(new Color(60, 120, 220));
+                    g.fillRect(300,350,getWidth()/2, 100);
+                    g.fillRect(300,470,getWidth()/2, 100);
+                    g.setColor(color1);
+                    g.drawString("Restart Level", (getWidth() - g.getFontMetrics().stringWidth("Restart Level")) / 2, 415);
+                    g.setColor(color2);
+                    g.drawString("Main Menu", (getWidth() - g.getFontMetrics().stringWidth("Main Menu")) / 2, 535);
+                }
             }
             if(screen != 6) g.drawImage(homeBtn, 10,20,60,60,null);
         }
