@@ -12,8 +12,12 @@ import java.util.ArrayList;
 public class FinalLevel {
     JFrame frame = new JFrame("Final Level");
     Drawing drawing = new Drawing();
+<<<<<<< HEAD
     int screen = 6;
     int radius = 0;
+=======
+    int screen = 0;
+>>>>>>> 9e56e08c83ad509bbd0b1c2494471dcccbf3205b
     Image homeBtn = null;
     MouseHandler mouseHandler = new MouseHandler();
     File whiteBtn = new File("Assets/homeButtonW.png"), blackBtn = new File("Assets/homeButton.png");
@@ -64,7 +68,9 @@ public class FinalLevel {
             }
 
             if((e.getKeyChar()+"").toLowerCase().equals("b")){
-
+                if(screen != 1){
+                    screen = 7;
+                }
             }
 
             //test code, real code would use this when the person moves into their house
@@ -175,7 +181,6 @@ public class FinalLevel {
             g.fillRect(1040, 110, 150, 200);
             g.fillRect(1040, 320, 150, 175);
 
-            // Add code
             g.setFont(new Font("Arial", Font.BOLD, 16)); // Set font to Arial bold with size 24
             g.setColor(new Color(0, 0, 0));
             g.drawString("Backpack", 1085, 354);
@@ -207,7 +212,8 @@ public class FinalLevel {
             g.setColor(Color.BLUE);
             g.fillRect(playerX, playerY, 20, 20);
 
-            if(screen !=6){
+            //timing logic
+            if(screen != 6 && screen != 7){
                 //timing logic
                 long curTime = System.currentTimeMillis();
 
@@ -228,7 +234,10 @@ public class FinalLevel {
                     screen = 1;
                     repaint();
                 }
+
+                //System.out.println(curTime-startTime);
             }
+
             if(screen == 0){
                 g.setColor(new Color(163, 235, 240));
                 g.fillRect(0, 0, 1200, 100);
@@ -242,7 +251,6 @@ public class FinalLevel {
                 g.drawString("Welcome to the final level! The goal is to have shelter heading into", (getWidth() - g.getFontMetrics().stringWidth("Welcome to the final level! The goal is to have shelter heading into")) / 2, 25);
                 g.drawString("ever night. Look around for materials and pick them up to build your", (getWidth() - g.getFontMetrics().stringWidth("ever night. Look around for materials and pick them up to build your")) / 2, 55);
                 g.drawString("house. Quick! Before night time comes!", (getWidth() - g.getFontMetrics().stringWidth("house. Quick! Before night time comes!")) / 2, 85);
-
 
             }
             else if(screen == 1){ //nighttime
@@ -346,6 +354,35 @@ public class FinalLevel {
                     g.drawString("Main Menu", (getWidth() - g.getFontMetrics().stringWidth("Main Menu")) / 2, 535);
                 }
             }
+            else if(screen == 7){//building screen
+                int wood = 0;
+                int metal = 0;
+                int brick = 0;
+                int cement = 0;
+
+                //background
+                g.setColor(new Color(0,0,0, 240));
+                g.fillRect(0,0,getWidth(), getHeight());
+
+                //squares
+                g.setColor(new Color(163, 235, 240));
+                g.fillRoundRect(80, 250, 200, 200, 50, 50);
+                g.fillRoundRect(360, 250, 200, 200, 50, 50);
+                g.fillRoundRect(640, 250, 200, 200, 50, 50);
+                g.fillRoundRect(920, 250, 200, 200, 50, 50);
+
+                //heading
+                g.setFont(new Font("Arial", Font.BOLD, 80));
+                g.setColor(Color.white);
+                g.drawString("Building Screen", (getWidth() - g.getFontMetrics().stringWidth("Building Screen")) / 2, 100);
+
+                //build button
+                g.setColor(new Color(60, 120, 220));
+                g.fillRoundRect(400,600,400, 100,100,50);
+                g.setColor(Color.WHITE);
+                g.drawString("Build", (getWidth() - g.getFontMetrics().stringWidth("Build")) / 2, 680);
+            }
+
             if(screen != 6) g.drawImage(homeBtn, 10,20,60,60,null);
         }
     }
