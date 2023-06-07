@@ -8,7 +8,7 @@ import java.io.IOException;
 public class Lesson {
     JFrame frame = new JFrame("Lessons");
     Drawing drawing = new Drawing();
-    int choice = 0;
+    int choice = 3;
     MouseHandler mouseListener = new MouseHandler();
     Image homeBtn = null;
     File whiteBtn = new File("Assets/homeButtonW.png"), blackBtn = new File("Assets/homeButton.png");
@@ -311,14 +311,11 @@ public class Lesson {
                 g.drawString("the lightest material and", 3*getWidth()/4 - 50 - (g.getFontMetrics().stringWidth("the lightest material and"))/2, 490);
                 g.drawString("cement the heaviest.", 3*getWidth()/4 - 50 - (g.getFontMetrics().stringWidth("cement the heaviest."))/2, 540);
 
-                g.fillRoundRect(170,360,210,200, 30,30);
-                g.fillRect(170,360,210,100);
-                int[] xPolys = {170,190,360,380};
-                int[] yPolys = {360,285,285,360};
-                g.fillPolygon(xPolys,yPolys,4);
-                g.setColor(Color.white);
-                g.fillRoundRect(190,285,170,105, 30,30);
-                g.fillRect(190,285,170,70);
+                try{
+                    Image backpack = ImageIO.read(new File("Assets/backpack.png"));
+                    g.drawImage(backpack, 60, 170, 450,450, null);
+                }
+                catch(IOException d){}
             }
             else if(choice == 4){
                 try{

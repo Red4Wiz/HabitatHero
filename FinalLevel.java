@@ -21,13 +21,13 @@ public class FinalLevel {
     boolean dayTime = true, justTurnedDay = false;
     private Player player;
     private ArrayList<Material> materials = new ArrayList<>();
-    final long MAX_DAYTIME = 60;
+    final long MAX_DAYTIME = 30;
     int displayTime = (int) MAX_DAYTIME; //in seconds
     long timeTicker;
     Color color1 = Color.white, color2 = Color.white;
     long secondStartTime;
     int numOfNights = 0;
-    private Building house = new Building(500,300, 2);
+    private Building house = new Building(500,300);
     private int woodCount = 0;
     private int brickCount = 0;
     private int metalCount = 0;
@@ -90,22 +90,22 @@ public class FinalLevel {
                     int damage = 15 + 10*numOfNights;
                     house.removeDurability(damage);
                     int concreteLost = damage/20;
-                    if(concreteLost >= house.getNumOfConcrete()) {
+                    if(concreteLost <= house.getNumOfConcrete()) {
                         damage -= 20*concreteLost;
                         house.removeConcrete(concreteLost);
                     }
                     int metalLost = damage/15;
-                    if(metalLost >= house.getNumOfMetal()) {
+                    if(metalLost <= house.getNumOfMetal()) {
                         damage -= 15*metalLost;
                         house.removeMetal(metalLost);
                     }
                     int brickLost = damage/10;
-                    if(brickLost >= house.getNumOfBrick()) {
+                    if(brickLost <= house.getNumOfBrick()) {
                         damage -= 10*brickLost;
                         house.removeBrick(brickLost);
                     }
                     int woodLost = damage/5;
-                    if(woodLost >= house.getNumOfWood()){
+                    if(woodLost <= house.getNumOfWood()){
                         house.removeWood(woodLost);
                     }
                     if(house.getDurability() < 0){
