@@ -306,11 +306,19 @@ public class Lesson {
                 catch(Exception e){}
                 g.drawString("The bag can only hold a set", 3*getWidth()/4 - 50 - (g.getFontMetrics().stringWidth("The bag can only hold a set"))/2, 290);
                 g.drawString("a set number of materials.", 3*getWidth()/4 - 50 - (g.getFontMetrics().stringWidth("a set number of materials."))/2, 340);
-                g.drawString("You have to prioritize the", 3*getWidth()/4 - 50 - (g.getFontMetrics().stringWidth("You have to prioritize the"))/2, 390);
-                g.drawString("materials you want to keep,", 3*getWidth()/4 - 50 - (g.getFontMetrics().stringWidth("materials you want to keep,"))/2, 440);
-                g.drawString("or throw away. You will be", 3*getWidth()/4 - 50 - (g.getFontMetrics().stringWidth("or throw away. You will be."))/2, 490);
-                g.drawString("notified when your bag is full.", 3*getWidth()/4 - 50 - (g.getFontMetrics().stringWidth("notified when your bag is full.."))/2, 540);
+                g.drawString("Your bag has a max weight", 3*getWidth()/4 - 50 - (g.getFontMetrics().stringWidth("Your bag has a max weight"))/2, 390);
+                g.drawString("of 25, with wood being", 3*getWidth()/4 - 50 - (g.getFontMetrics().stringWidth("of 25, with wood being"))/2, 440);
+                g.drawString("the lightest material and", 3*getWidth()/4 - 50 - (g.getFontMetrics().stringWidth("the lightest material and"))/2, 490);
+                g.drawString("cement the heaviest.", 3*getWidth()/4 - 50 - (g.getFontMetrics().stringWidth("cement the heaviest."))/2, 540);
 
+                g.fillRoundRect(170,360,210,200, 30,30);
+                g.fillRect(170,360,210,100);
+                int[] xPolys = {170,190,360,380};
+                int[] yPolys = {360,285,285,360};
+                g.fillPolygon(xPolys,yPolys,4);
+                g.setColor(Color.white);
+                g.fillRoundRect(190,285,170,105, 30,30);
+                g.fillRect(190,285,170,70);
             }
             else if(choice == 4){
                 try{
@@ -334,7 +342,7 @@ public class Lesson {
                 g.drawString("The better the strength of the material,", (100+(getWidth()-200)/2) - (g.getFontMetrics().stringWidth("The better the strength of the material,"))/2, 320);
                 g.drawString("the less you can carry in your backpack.", (100+(getWidth()-200)/2) - (g.getFontMetrics().stringWidth("the less you can carry in your backpack."))/2, 370);
                 g.drawString("The order from least strength to most is:", (100+(getWidth()-200)/2) - (g.getFontMetrics().stringWidth("The order from least strength to most is:"))/2, 420);
-                g.drawString("Wood - Brick - Metal - Concrete", (100+(getWidth()-200)/2) - (g.getFontMetrics().stringWidth("Wood - Brick - Metal - Concrete"))/2, 470);
+                g.drawString("Wood (5) - Brick (10) - Metal (15) - Concrete (20)", (100+(getWidth()-200)/2) - (g.getFontMetrics().stringWidth("Wood (5) - Brick (10) - Metal (15) - Concrete (20)"))/2, 470);
                 try{
                     Image brick = ImageIO.read(new File("Assets/brick.png"));
                     Image cement = ImageIO.read(new File("Assets/cement.png"));
