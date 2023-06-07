@@ -8,7 +8,7 @@ import java.io.IOException;
 public class Lesson {
     JFrame frame = new JFrame("Lessons");
     Drawing drawing = new Drawing();
-    int choice = 3;
+    int choice = 0;
     MouseHandler mouseListener = new MouseHandler();
     Image homeBtn = null;
     File whiteBtn = new File("Assets/homeButtonW.png"), blackBtn = new File("Assets/homeButton.png");
@@ -345,10 +345,10 @@ public class Lesson {
                     Image cement = ImageIO.read(new File("Assets/cement.png"));
                     Image metal = ImageIO.read(new File("Assets/metal.png"));
                     Image wood = ImageIO.read(new File("Assets/wood.png"));
-                    g.drawImage(wood, 150, 550, 200, 140, null);
-                    g.drawImage(brick, 370, 550, 200,140,null);
-                    g.drawImage(metal, 590, 550, 200,140,null);
-                    g.drawImage(cement, 810, 550, 200,140, null);
+                    g.drawImage(wood, 150, 520, 200, 200, null);
+                    g.drawImage(brick, 370, 520, 200,200,null);
+                    g.drawImage(metal, 590, 520, 200,200,null);
+                    g.drawImage(cement, 810, 520, 200,200, null);
                 }
                 catch(IOException d){}
             }

@@ -54,7 +54,7 @@ public class Material {
         if(x==0) {
             if (type.equals("wood")) {
                 Image wood = ImageIO.read(new File("Assets/wood.png"));
-                g.drawImage(wood, this.x, this.y, 30, 30, null);
+                g.drawImage(wood, this.x, this.y, 70, 70, null);
             } else if (type.equals("brick")) {
                 Image brick = ImageIO.read(new File("Assets/brick.png"));
                 g.drawImage(brick, this.x, this.y, 50, 30, null);
@@ -63,29 +63,29 @@ public class Material {
                 g.drawImage(concrete, this.x, this.y, 60, 30, null);
             } else {
                 Image metal = ImageIO.read(new File("Assets/metal.png"));
-                g.drawImage(metal, this.x, this.y, 60, 40, null);
+                g.drawImage(metal, this.x, this.y, 50, 50, null);
             }
         }
         else{
             if (type.equals("wood")) {
                 Image wood = ImageIO.read(new File("Assets/wood.png"));
-                width = 70;
-                height = 50;
+                width = 100;
+                height = 100;
                 g.drawImage(wood, this.x, this.y, width, height, null);
             } else if (type.equals("brick")) {
                 Image brick = ImageIO.read(new File("Assets/brick.png"));
-                width = 80;
-                height = 50;
+                width = 100;
+                height = 100;
                 g.drawImage(brick, this.x, this.y, width, height, null);
             } else if (type.equals("concrete")) {
                 Image concrete = ImageIO.read(new File("Assets/cement.png"));
-                width = 80;
-                height = 50;
+                width = 100;
+                height = 100;
                 g.drawImage(concrete, this.x, this.y, width, height, null);
             } else {
                 Image metal = ImageIO.read(new File("Assets/metal.png"));
                 width = 100;
-                height = 60;
+                height = 100;
                 g.drawImage(metal, this.x, this.y, width, height, null);
             }
         }
