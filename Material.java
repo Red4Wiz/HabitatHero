@@ -1,3 +1,10 @@
+/**
+ * <h1>ICS4U ISP - Habitat Hero</h1>
+ * <h2>Course Info:</h2>
+ *ICS4U0.2 with Ms. Krasteva.
+ * @author Sailesh Badri
+ * @version 09-06-2023
+ */
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.File;
@@ -6,16 +13,24 @@ import java.io.IOException;
 public class Material {
     private int x; // x-coordinate of material position
     private int y; // y-coordinate of material position
+    //Width and height of the material
     private int width;
     private int height;
     private String type;
     private int strength;
     private int weight;
 
+    /**
+     * {@link Material} Constructor
+     * @param x X-coordinate of material
+     * @param y Y-coordinate of material
+     * @param s Type of material
+     */
     public Material(int x, int y, String s) {
         this.x = x;
         this.y = y;
         this.type = s;
+        //Setting the strength and weight of the material based on its type
         switch(s){
             case "wood":
                 this.strength = 5;
@@ -35,23 +50,42 @@ public class Material {
         }
     }
 
+    /**
+     * @return X-coordinate
+     */
     public int getX() {
         return x;
     }
 
+    /**
+     * @return Y-coordinate
+     */
     public int getY() {
         return y;
     }
+
+    /**
+     * @return Type of material
+     */
     public String getType(){
         return type;
     }
 
+    /**
+     * @return Strength of material
+     */
     public int getStrength(){
         return strength;
     }
 
+    /**
+     * Drawing a material on a given canvas
+     * @param g Canvas to draw on
+     * @param x Which screen the material is being drawn in (0 indicating the maze)
+     * @throws IOException
+     */
     public void draw(Graphics g,int x) throws IOException {
-        if(x==0) {
+        if(x==0) { //Drawing in the maze (material are scaled down)
             if (type.equals("wood")) {
                 Image wood = ImageIO.read(new File("Assets/wood.png"));
                 g.drawImage(wood, this.x, this.y, 70, 70, null);
@@ -66,7 +100,7 @@ public class Material {
                 g.drawImage(metal, this.x, this.y, 50, 50, null);
             }
         }
-        else{
+        else{ //Drawing in the final level (regular sized materials)
             if (type.equals("wood")) {
                 Image wood = ImageIO.read(new File("Assets/wood.png"));
                 width = 100;
@@ -91,8 +125,17 @@ public class Material {
         }
     }
 
+    /**
+     * @return Width of the image of the material
+     */
     public int getWidth(){return width;}
+    /**
+     * @return Height of the image of the material
+     */
     public int getHeight() {return height;}
+    /**
+     * @return Weight of the material
+     */
     public int getWeight(){return weight;}
 
 }

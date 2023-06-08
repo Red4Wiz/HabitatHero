@@ -33,7 +33,6 @@ public class MainMenu{
                 new ExitScreen();
                 frame.dispose();
             }
-            System.out.println(x+ ", " + y);
         }
         public void mouseMoved(MouseEvent e){
             int x = e.getX();

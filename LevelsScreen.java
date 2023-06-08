@@ -46,7 +46,6 @@ public class LevelsScreen {
                 new MainMenu();
                 frame.dispose();
             }
-            System.out.println(x+ ", " + y);
         }
         public void mouseMoved(MouseEvent e){
             int x = e.getX();
