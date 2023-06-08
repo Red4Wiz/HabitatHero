@@ -33,6 +33,7 @@ public class FinalLevel {
     private int metalCount = 0;
     private int concreteCount = 0;
     int lastScreen = 0;
+    int dimness;
 
     long startTime;
     public FinalLevel(){
@@ -87,7 +88,7 @@ public class FinalLevel {
             //test code, real code would use this when the person moves into their house
             if((e.getKeyChar()+"").toLowerCase().equals("x")){
                 if(!dayTime){
-                    int damage = 10 + 10*numOfNights;
+                    int damage = 15 + 10*numOfNights;
                     house.removeDurability(damage);
                     int concreteLost = damage/20;
                     if(concreteLost <= house.getNumOfConcrete()) {
@@ -120,11 +121,13 @@ public class FinalLevel {
                     numOfNights++;
                 }
             }
+
             drawing.repaint();
+            System.out.println(e.getKeyChar());
         }
 
         public void keyPressed(KeyEvent e) {
-            if (screen != 6) {
+            if (screen != 6 && screen != 7) {
                 String keyCode = (e.getKeyChar()+"").toLowerCase();
                 int playerX = player.getX();
                 int playerY = player.getY();
@@ -152,19 +155,62 @@ public class FinalLevel {
                         }
                         break;
                 }
+                if(playerX>=620 && playerX <= 660 && playerY >= 490 && playerY <= 530){
+                    if(!dayTime){
+                        int damage = 15 + 10*numOfNights;
+                        house.removeDurability(damage);
+                        int concreteLost = damage/20;
+                        if(concreteLost <= house.getNumOfConcrete()) {
+                            damage -= 20*concreteLost;
+                            house.removeConcrete(concreteLost);
+                        }
+                        int metalLost = damage/15;
+                        if(metalLost <= house.getNumOfMetal()) {
+                            damage -= 15*metalLost;
+                            house.removeMetal(metalLost);
+                        }
+                        int brickLost = damage/10;
+                        if(brickLost <= house.getNumOfBrick()) {
+                            damage -= 10*brickLost;
+                            house.removeBrick(brickLost);
+                        }
+                        int woodLost = damage/5;
+                        if(woodLost <= house.getNumOfWood()){
+                            house.removeWood(woodLost);
+                        }
+                        if(house.getDurability() < 0){
+                            screen = 6;
+                        }
+//                        else{
+//                            justTurnedDay = true;
+//                            dayTime = true;
+//                            startTime = System.currentTimeMillis();
+//                            screen = 2;
+//                        }
+                        else{
+                            dimness = 100;
+                            screen = 8;
+                        }
+                        numOfNights++;
+                    }
+                }
+                System.out.println(house.getDurability());
                 drawing.repaint();
+                System.out.println(keyCode);
             }
         }
     }
 
     class MouseHandler extends MouseAdapter{
         public void mouseClicked(MouseEvent e){
+            System.out.println(e.getX() + ", " + e.getY());
             if(e.getX() >= 10 && e.getX() <= 70 && e.getY()>=20 && e.getY() <= 80 && screen != 6 && screen != 7){
                 new MainMenu();
                 frame.dispose();
             }
             if(screen == 6){
                 if(e.getX() >= 300 && e.getX() <= 900 && e.getY() >= 350 && e.getY() <= 450){ //Click on restart level
+                    System.out.println("here");
                     new FinalLevel();
                     frame.dispose();
                 }
@@ -182,6 +228,7 @@ public class FinalLevel {
                     else if(e.getY() >= 490 && e.getY() <= 530 && woodCount > 0) {
                         woodCount--;
                     }
+                    System.out.println("Wood count: " + woodCount);
                 } else if (e.getX() >= 430 && e.getX() <= 490) {
                     if(e.getY() >= 230 && e.getY() <= 270 && brickCount < player.getBrick()){
                         brickCount++;
@@ -189,6 +236,7 @@ public class FinalLevel {
                     else if(e.getY() >= 490 && e.getY() <= 530 && brickCount > 0) {
                         brickCount--;
                     }
+                    System.out.println("Brick count: " + brickCount);
                 } else if (e.getX() >= 710 && e.getX() <= 770) {
                     if(e.getY() >= 230 && e.getY() <= 270 && metalCount < player.getMetal()){
                         metalCount++;
@@ -196,6 +244,7 @@ public class FinalLevel {
                     else if(e.getY() >= 490 && e.getY() <= 530 && metalCount > 0) {
                         metalCount--;
                     }
+                    System.out.println("Metal count: " + metalCount);
                 } else if (e.getX() >= 990 && e.getX() <= 1050) {
                     if(e.getY() >= 230 && e.getY() <= 270 && concreteCount < player.getConcrete()){
                         concreteCount++;
@@ -203,6 +252,7 @@ public class FinalLevel {
                     else if(e.getY() >= 490 && e.getY() <= 530 && concreteCount > 0) {
                         concreteCount--;
                     }
+                    System.out.println("Concrete count: " + concreteCount);
                 }
 
                 //build
@@ -218,6 +268,7 @@ public class FinalLevel {
                     builtAHouse = true;
                     screen = 5;
                     drawing.repaint();
+                    if(!builtAHouse) builtAHouse = true;
                 }
 
                 if(e.getX() >= 10 && e.getX() <= 70 && e.getY()>=20 && e.getY() <= 80){
@@ -260,6 +311,18 @@ public class FinalLevel {
             //background
             g.setColor(new Color(105,168,79));
             g.fillRect(0,0,getWidth(), getHeight());
+
+            //roads
+            g.setColor(new Color(50,50,50));
+            g.fillRect(100,100,100,670);
+            g.fillRect(900,100,100,300);
+            g.fillRect(750,600,100,200);
+            g.fillRect(315,200,100,250);
+
+            g.fillRect(0,200,1200,100);
+            g.fillRect(0,700,800,100);
+            g.fillRect(850,650,400,100);
+
             //boxes stats
             g.setColor(new Color(241, 194, 51));
             g.fillRect(1040, 110, 150, 175);
@@ -294,7 +357,14 @@ public class FinalLevel {
             g.drawString("Weight:", 1053, 455);
             g.drawString(player.getBagWeight()+"", 1115, 455);
 
-            house.draw(g);
+            if(builtAHouse){
+                try {
+                    house.draw(g, 250, 250);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+
 
             //materials
             for(Material m : materials){
@@ -332,10 +402,11 @@ public class FinalLevel {
                     repaint();
                 }
                 else{
-                    if(builtAHouse) screen = 1;
-                    else screen = 6;
+                    screen = 1;
                     repaint();
                 }
+
+                //System.out.println(curTime-startTime);
             }
 
             if(screen == 0){//start screen
@@ -371,28 +442,17 @@ public class FinalLevel {
                 g.drawString("that has been brewing. Good Luck!", (getWidth() - g.getFontMetrics().stringWidth("that has been brewing. Good Luck!")) / 2, 85);
             }
             else if(screen == 2){ //wakeup
-                g.setColor(new Color(0,0,0,100));
-                g.fillRect(0,0,getWidth(), getHeight());
-                g.setColor(new Color(0,0,0));
-                g.fillOval(getWidth()/2 - radius/2, getHeight()/2 - radius/2, radius, radius);
-                if(radius < 3400){
-                    radius+=15;
-                    repaint();
-                    secondStartTime = System.currentTimeMillis();
-                }
-                else{
-                    g.setColor(new Color(163, 235, 240));
-                    g.fillRect(0, 0, 1200, 100);
+                g.setColor(new Color(163, 235, 240));
+                g.fillRect(0, 0, 1200, 100);
 
-                    try {
-                        Font font = Font.createFont(Font.TRUETYPE_FONT, SplashScreen.class.getResourceAsStream("Assets/ZenDots-Regular.ttf"));
-                        g.setFont(font.deriveFont(Font.BOLD, 20f));
-                    } catch (Exception e) {
-                    }
-                    g.setColor(new Color(0,0,0));
-                    g.drawString("Wakey wakey! Congratulations, your shelter survived the night,", (getWidth() - g.getFontMetrics().stringWidth("Wakey wakey! Congratulations, your shelter survived the night,")) / 2, 30);
-                    g.drawString("but next night’s damage will be even worse. Get building!", (getWidth() - g.getFontMetrics().stringWidth("but next night’s damage will be even worse. Get building!")) / 2, 60);
+                try {
+                    Font font = Font.createFont(Font.TRUETYPE_FONT, SplashScreen.class.getResourceAsStream("Assets/ZenDots-Regular.ttf"));
+                    g.setFont(font.deriveFont(Font.BOLD, 20f));
+                } catch (Exception e) {
                 }
+                g.setColor(new Color(0,0,0));
+                g.drawString("Wakey wakey! Congratulations, your shelter survived the night,", (getWidth() - g.getFontMetrics().stringWidth("Wakey wakey! Congratulations, your shelter survived the night,")) / 2, 30);
+                g.drawString("but next night’s damage will be even worse. Get building!", (getWidth() - g.getFontMetrics().stringWidth("but next night’s damage will be even worse. Get building!")) / 2, 60);
             }
             else if(screen == 3){ //pickup
                 g.setColor(new Color(163, 235, 240));
@@ -524,17 +584,27 @@ public class FinalLevel {
                 g.drawString("Wood", 180-(g.getFontMetrics().stringWidth("Wood")/ 2), 335);
                 g.drawString("Brick", 460-(g.getFontMetrics().stringWidth("Brick")/ 2), 335);
                 g.drawString("Metal", 740-(g.getFontMetrics().stringWidth("Metal")/ 2), 335);
-                g.drawString("Concrete", 1020-(g.getFontMetrics().stringWidth("Concrete")/ 2), 335);
+                g.drawString("concrete", 1020-(g.getFontMetrics().stringWidth("concrete")/ 2), 335);
 
                 g.drawString(woodCount+"", 180-(g.getFontMetrics().stringWidth(woodCount+"")/ 2), 410);
                 g.drawString(brickCount+"", 460-(g.getFontMetrics().stringWidth(brickCount+"")/ 2), 410);
                 g.drawString(metalCount+"", 740-(g.getFontMetrics().stringWidth(metalCount+"")/ 2), 410);
                 g.drawString(concreteCount+"", 1020-(g.getFontMetrics().stringWidth(concreteCount+"")/ 2), 410);
-                try{
-                    Image redX = ImageIO.read(new File("Assets/redX.png"));
-                    g.drawImage(redX, 10, 20, 60, 60, null);
+            }
+            if(screen == 8){
+                g.setColor(new Color(0,0,0, dimness));
+                g.fillRect(0,0,getWidth(), getHeight());
+                if(dimness < 255){
+                    dimness++;
+
                 }
-                catch (IOException d){}
+                else{
+                    justTurnedDay = true;
+                    dayTime = true;
+                    startTime = System.currentTimeMillis();
+                    screen = 2;
+                }
+                repaint();
             }
 
             if(screen != 6 && screen != 7) {
@@ -556,6 +626,7 @@ public class FinalLevel {
                 g.drawString(time, 1130,755);
                 if(System.currentTimeMillis() - timeTicker >= 1000 && displayTime != 0){
                     displayTime--;
+                    System.out.println(time);
                     timeTicker = System.currentTimeMillis();
                     repaint();
                 }
@@ -575,9 +646,9 @@ public class FinalLevel {
     }
 
     private void materialGeneration(){
-        int x = (int)(Math.random()*4)+3;
+        int x = (int)(Math.random()*5)+3;
         for(int i = 0; i < x; i++){
-            materials.add(new Material((int)(Math.random()*1001),(int)(Math.random()*701)+100,randomMaterial()));
+            materials.add(new Material((int)(Math.random()*950),(int)(Math.random()*550)+100,randomMaterial()));
         }
     }
 

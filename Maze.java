@@ -1,10 +1,3 @@
-/**
- * <h1>ICS4U ISP - Habitat Hero</h1>
- * <h2>Course Info:</h2>
- *ICS4U0.2 with Ms. Krasteva.
- * @author Sailesh Badri
- * @version 09-06-2023
- */
 import java.awt.*;
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -28,12 +21,7 @@ public class Maze {
     private int cellSize;
     MouseHandler mouseListener = new MouseHandler();
     Image homeBtn = null;
-    //Two home buttons (different colours when hovering)
     File whiteBtn = new File("Assets/homeButtonW.png"), blackBtn = new File("Assets/homeButton.png");;
-
-    /**
-     * {@link Maze} Constructor
-     */
     public Maze() {
         try {
             homeBtn = ImageIO.read(blackBtn);
@@ -49,7 +37,7 @@ public class Maze {
 
         mazeWidth = 24; // Adjust the width as needed
         mazeHeight = 14; // Adjust the height as needed
-        //Maze (# represents a wall, ' ' represents open space)
+
         maze = new char[][]{
                 {'#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#'},
                 {'#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#'},
@@ -66,31 +54,33 @@ public class Maze {
                 {'#', ' ', ' ', ' ', ' ', ' ', '#', ' ', '#', ' ', '#', '#', '#', '#', '#', '#', ' ', ' ', ' ', ' ', ' ', '#', ' ', '#'},
                 {'#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#'}
         };
+
         cellSize = 50;
+
+
+
     }
 
-    /**
-     * Class to handle mouse activites on the canvas.
-     */
     class MouseHandler extends MouseAdapter {
         public void mouseClicked(MouseEvent e) {
             if(screen == 1){
-                if(e.getX() >= 10 && e.getX() <= 70 && e.getY()>=20 && e.getY() <= 80){ //clicked on the home button
+                if(e.getX() >= 10 && e.getX() <= 70 && e.getY()>=20 && e.getY() <= 80){
                     new MainMenu();
                     frame.dispose();
                 }
             }
             int x = e.getX();
             int y = e.getY();
+            System.out.println(x + ", " + y);
         }
         public void mouseMoved(MouseEvent e){
             if(screen == 1){
                 try {
                     if(e.getX() >= 10 && e.getX() <= 70 && e.getY()>=20 && e.getY() <= 80){
-                        homeBtn = ImageIO.read(whiteBtn); //hovering over home button
+                        homeBtn = ImageIO.read(whiteBtn);
                     }
                     else{
-                        homeBtn = ImageIO.read(blackBtn); //not hovering over home button
+                        homeBtn = ImageIO.read(blackBtn);
                     }
                 } catch (IOException d){}
             }
@@ -98,51 +88,48 @@ public class Maze {
         }
     }
 
-    /**
-     * Class to handle key events in this level.
-     */
     class KeyHandler extends KeyAdapter{
         public void keyTyped(KeyEvent e){
-            if(e.getKeyChar() == '\n' && screen == 0) { //User moves from instructions screen to the maze
+            if(e.getKeyChar() == '\n' && screen == 0) {
                 screen = 1;
                 draw.repaint();
-                //Generating the materials and the player
                 player = new Player(60, 350);
                 materials.add(new Material(1060,390, "wood"));
                 materials.add(new Material(50,590, "wood"));
                 materials.add(new Material(740,150,"metal"));
             }
-            if((e.getKeyChar()+"").toLowerCase().equals("p")  && screen == 1){ //User attempts to pick something up
-                for(int i = 0; i < materials.size(); i++){ //Checking if they are near a material
-                    if(player.pick(materials.get(i))){ //Picking up
+            if((e.getKeyChar()+"").toLowerCase().equals("p")  && screen == 1){
+                for(int i = 0; i < materials.size(); i++){
+                    if(player.pick(materials.get(i))){
                         materials.remove(i);
                         break;
                     }
                 }
                 draw.repaint();
+
             }
 
-            if((e.getKeyChar()+"").toLowerCase().equals("b") && screen == 1){ //User attempts to build
-                //Checking that the user is in the build area
+            if((e.getKeyChar()+"").toLowerCase().equals("b") && screen == 1){
                 if(player.getX() >= 450 && player.getX() <= 700 && player.getY() >= 400 && player.getY() <= 550 && materials.isEmpty()){
-                    buildings.add(new Building(525,425));
+                    buildings.add(new Building(500,400));
                     maze[mazeHeight-2][mazeWidth-1] = ' ';
                     maze[mazeHeight-3][mazeWidth-1] = ' ';
                 }
                 draw.repaint();
             }
-            if(e.getKeyChar() == '\n' && screen == 2) { //User completes maze and moves onto final level
+            if(e.getKeyChar() == '\n' && screen == 2) {
                 new FinalLevel();
                 frame.dispose();
             }
+            System.out.println(e.getKeyChar());
         }
 
         public void keyPressed(KeyEvent e) {
-            if (screen == 1) { //Inside the maze level
+            if (screen == 1) {
                 String keyCode = (e.getKeyChar()+"").toLowerCase();
                 int playerX = player.getX();
                 int playerY = player.getY();
-                //Checking for movement
+
                 switch (keyCode) {
                     case "w":
                         if (playerY > 50 && maze[(playerY-107) / cellSize][(playerX / cellSize)] != '#') {
@@ -169,24 +156,24 @@ public class Maze {
                         }
                         break;
                 }
+
+                System.out.println("Player y: " + playerY + " Cell y: " + (playerY / cellSize) + "\nPlayer x: " + playerX + " Cell x: " + (playerX / cellSize));
                 draw.repaint();
             }
 
         }
 
     }
-
-    /**
-     * Class to draw all of the graphics in this level.
-     */
     class Drawing extends JComponent {
         public void paint(Graphics g) {
-            if (screen == 0) { //Instructions screen
+            if (screen == 0) {
                 try {
                     Font font = Font.createFont(Font.TRUETYPE_FONT, SplashScreen.class.getResourceAsStream("Assets/ZenDots-Regular.ttf"));
                     g.setFont(font.deriveFont(Font.BOLD, 100f));
                 } catch (Exception e) {
                 }
+
+
                 g.setColor(new Color(227, 100, 100));
                 g.fillRect(0, 0, getWidth(), getHeight());
 
@@ -208,7 +195,7 @@ public class Maze {
                 g.drawString("your knowledge to move on to the game!", (getWidth() - g.getFontMetrics().stringWidth("your knowledge to move on to the game!")) / 2, 490);
                 g.drawString("Press <enter> to move on", (getWidth() - g.getFontMetrics().stringWidth("Press <enter> to move on")) / 2, 620);
             }
-            else if(screen == 1){ //Maze screen
+            else if(screen == 1){
 
                 // Draw the maze
                 for (int i = 0; i < mazeHeight; i++) {
@@ -232,6 +219,24 @@ public class Maze {
 
                 }
 
+
+                for(Building b : buildings){
+                    try {
+                        b.draw(g, 150,150);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+
+                for(Material m : materials){
+                    try {
+                        m.draw(g, 0);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+
+                //player drawing
                 int playerSize = 20;
                 int playerX = player.getX();
                 int playerY = player.getY();
@@ -239,18 +244,7 @@ public class Maze {
                 g.setColor(Color.BLUE);
                 g.fillRect(playerX, playerY, playerSize, playerSize);
 
-                //Drawing the materials
-                for(Material m : materials){
-                    g.setColor(Color.RED);
-                    try {
-                        m.draw(g, 0);
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
-                }
-                for(Building b : buildings){
-                    b.draw(g);
-                }
+
 
                 g.setColor(new Color(163, 235, 240));
                 g.fillRect(0, 0, 1200, 100);
@@ -260,7 +254,7 @@ public class Maze {
                     g.setFont(font.deriveFont(Font.BOLD, 20f));
                 } catch (Exception e) {
                 }
-                //Maze instructions
+
                 g.setColor(new Color(255, 229, 153));
                 g.setColor(new Color(0,0,0));
                 g.drawString("In order to leave the maze, you must first build a house in the middle square block.", (getWidth() - g.getFontMetrics().stringWidth("In order to leave the maze, you must first build a house in the middle square block.")) / 2, 25);
@@ -277,14 +271,14 @@ public class Maze {
                 }
                 g.drawImage(homeBtn, 10,20,60,60,null);
             }
-            else if(screen == 2){ //Congratulations screen
+            else if(screen == 2){
                 try {
                     Font font = Font.createFont(Font.TRUETYPE_FONT, SplashScreen.class.getResourceAsStream("Assets/ZenDots-Regular.ttf"));
                     g.setFont(font.deriveFont(Font.BOLD, 100f));
                 } catch (Exception e) {
                 }
 
-                //Final message directing them to the final level
+
                 g.setColor(new Color(227, 100, 100));
                 g.fillRect(0, 0, getWidth(), getHeight());
 
