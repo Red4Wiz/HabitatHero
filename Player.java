@@ -216,30 +216,30 @@ class Player {
             Image player1 = ImageIO.read(new File("Assets/player_back1.png"));
             Image player2 = ImageIO.read(new File("Assets/player_back2.png"));
 
-            if(player)  g.drawImage(player1, this.x, this.y, 70, 70, null);
-            else  g.drawImage(player2, this.x, this.y, 70, 70, null);
+            if(player)  g.drawImage(player1, this.x, this.y, 70, 80, null);
+            else  g.drawImage(player2, this.x, this.y, 70, 80, null);
         }
         else if(direction.equals("front")){
             Image player1 = ImageIO.read(new File("Assets/player_front_1.png"));
             Image player2 = ImageIO.read(new File("Assets/player_front_2.png"));
 
-            if(player)  g.drawImage(player1, this.x, this.y, 70, 70, null);
-            else  g.drawImage(player2, this.x, this.y, 70, 70, null);
+            if(player)  g.drawImage(player1, this.x, this.y, 70, 80, null);
+            else  g.drawImage(player2, this.x, this.y, 70, 80, null);
         }
         else if(direction.equals("right")){
             Image player1 = ImageIO.read(new File("Assets/player_right1.png"));
             Image player2 = ImageIO.read(new File("Assets/player_right2.png"));
 
-            if(player)  g.drawImage(player1, this.x, this.y, 70, 70, null);
-            else  g.drawImage(player2, this.x, this.y, 70, 70, null);
+            if(player)  g.drawImage(player1, this.x, this.y, 70, 80, null);
+            else  g.drawImage(player2, this.x, this.y, 70, 90, null);
 
         }
         else{
             Image player1 = ImageIO.read(new File("Assets/player_left1.png"));
             Image player2 = ImageIO.read(new File("Assets/player_left2.png"));
 
-            if(player)  g.drawImage(player1, this.x, this.y, 70, 70, null);
-            else  g.drawImage(player2, this.x, this.y, 70, 70, null);
+            if(player)  g.drawImage(player1, this.x, this.y, 70, 80, null);
+            else  g.drawImage(player2, this.x, this.y, 70, 90, null);
 
         }
     }
