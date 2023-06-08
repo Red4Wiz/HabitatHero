@@ -165,7 +165,12 @@ class Player {
         }
         return x;
     }
-
+    public boolean hasMaterials(){
+        if(getWood() > 0 || getBrick() > 0 || getMetal() > 0 || getConcrete() > 0){
+            return true;
+        }
+        return false;
+    }
     /**
      * Remove n number of material m from the player's bag.
      * @param material Material being removed
@@ -187,20 +192,16 @@ class Player {
         }
         //Updating the weight of the bag
         if(material.equals("wood")){
-            Material m = new Material(0,0,"wood");
-            bagWeight-= m.getWeight();
+            bagWeight-= n;
         }
         else if(material.equals("brick")){
-            Material m = new Material(0,0,"brick");
-            bagWeight -= m.getWeight()*n;
+            bagWeight -= 3*n;
         }
         else if(material.equals("metal")){
-            Material m = new Material(0,0,"metal");
-            bagWeight -= m.getWeight()*n;
+            bagWeight -= 5*n;
         }
         else if(material.equals("concrete")){
-            Material m = new Material(0,0,"concrete");
-            bagWeight -= m.getWeight()*n;
+            bagWeight -= 7*n;
         }
     }
 }

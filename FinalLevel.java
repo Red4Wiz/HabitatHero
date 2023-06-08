@@ -74,7 +74,7 @@ public class FinalLevel {
             }
 
             if((e.getKeyChar()+"").toLowerCase().equals("b")){
-                if(screen != 1){
+                if(screen != 1 && screen != 6 && player.hasMaterials()){
                     lastScreen = screen;
                     screen = 7;
                     woodCount = 0;
@@ -85,7 +85,7 @@ public class FinalLevel {
             }
 
             //test code, real code would use this when the person moves into their house
-            if((e.getKeyChar()+"").toLowerCase().equals("x")){
+            if((e.getKeyChar()+"").toLowerCase().equals("x") && screen == 1){
                 if(!dayTime){
                     int damage = 10 + 10*numOfNights;
                     house.removeDurability(damage);
@@ -332,8 +332,7 @@ public class FinalLevel {
                     repaint();
                 }
                 else{
-                    if(builtAHouse) screen = 1;
-                    else screen = 6;
+                    screen = 1;
                     repaint();
                 }
             }
@@ -371,11 +370,11 @@ public class FinalLevel {
                 g.drawString("that has been brewing. Good Luck!", (getWidth() - g.getFontMetrics().stringWidth("that has been brewing. Good Luck!")) / 2, 85);
             }
             else if(screen == 2){ //wakeup
-                g.setColor(new Color(0,0,0,100));
-                g.fillRect(0,0,getWidth(), getHeight());
-                g.setColor(new Color(0,0,0));
-                g.fillOval(getWidth()/2 - radius/2, getHeight()/2 - radius/2, radius, radius);
                 if(radius < 3400){
+                    g.setColor(new Color(0,0,0,100));
+                    g.fillRect(0,0,getWidth(), getHeight());
+                    g.setColor(new Color(0,0,0));
+                    g.fillOval(getWidth()/2 - radius/2, getHeight()/2 - radius/2, radius, radius);
                     radius+=15;
                     repaint();
                     secondStartTime = System.currentTimeMillis();
