@@ -5,6 +5,10 @@
  * @author Sailesh Badri
  * @version 09-06-2023
  */
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 class Player {
@@ -14,6 +18,7 @@ class Player {
     private ArrayList<Material> bag;
     final int MAX_WEIGHT = 10; //Max weight of their bag
     private int bagWeight = 0;
+    boolean playerBack = false, playerFront = false, playerRight = false, playerLeft = false;
 
     /**
      * {@link Player} Constructor
@@ -51,6 +56,7 @@ class Player {
      */
     public void moveUp() {
         y-=speed;
+
     }
 
     /**
@@ -202,6 +208,39 @@ class Player {
         }
         else if(material.equals("concrete")){
             bagWeight -= 7*n;
+        }
+    }
+    
+    public void draw(Graphics g, String direction, boolean player) throws IOException {
+        if(direction.equals("back")){
+            Image player1 = ImageIO.read(new File("Assets/player_back1.png"));
+            Image player2 = ImageIO.read(new File("Assets/player_back2.png"));
+
+            if(player)  g.drawImage(player1, this.x, this.y, 70, 70, null);
+            else  g.drawImage(player2, this.x, this.y, 70, 70, null);
+        }
+        else if(direction.equals("front")){
+            Image player1 = ImageIO.read(new File("Assets/player_front_1.png"));
+            Image player2 = ImageIO.read(new File("Assets/player_front_2.png"));
+
+            if(player)  g.drawImage(player1, this.x, this.y, 70, 70, null);
+            else  g.drawImage(player2, this.x, this.y, 70, 70, null);
+        }
+        else if(direction.equals("right")){
+            Image player1 = ImageIO.read(new File("Assets/player_right1.png"));
+            Image player2 = ImageIO.read(new File("Assets/player_right2.png"));
+
+            if(player)  g.drawImage(player1, this.x, this.y, 70, 70, null);
+            else  g.drawImage(player2, this.x, this.y, 70, 70, null);
+
+        }
+        else{
+            Image player1 = ImageIO.read(new File("Assets/player_left1.png"));
+            Image player2 = ImageIO.read(new File("Assets/player_left2.png"));
+
+            if(player)  g.drawImage(player1, this.x, this.y, 70, 70, null);
+            else  g.drawImage(player2, this.x, this.y, 70, 70, null);
+
         }
     }
 }
