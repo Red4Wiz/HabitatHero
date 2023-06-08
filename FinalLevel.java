@@ -127,7 +127,7 @@ public class FinalLevel {
                         }
                         break;
                 }
-                if(playerX >= 500 && playerX <= 750 && playerY >=300 && playerY <= 550) insideHouse = true;
+                if(player.withinRange(house)) insideHouse = true;
                 else insideHouse = false;
                 drawing.repaint();
             }
@@ -309,6 +309,9 @@ public class FinalLevel {
                 throw new RuntimeException(e);
             }
 
+            g.setColor(Color.BLUE);
+            g.drawRect(player.getX(), player.getY(), 100, 90);
+
             //timing logic
             if(screen != 6 && screen != 7){
                 //timing logic
@@ -353,7 +356,7 @@ public class FinalLevel {
             }
             else if(screen == 1){ //nighttime
                 if(insideHouse){
-                    int damage = 10 + 10*numOfNights;
+                    int damage = 15 + 10*numOfNights;
                     house.removeDurability(damage);
                     int concreteLost = damage/20;
                     if(concreteLost <= house.getNumOfConcrete()) {
@@ -606,9 +609,17 @@ public class FinalLevel {
     }
 
     private void materialGeneration(){
-        int x = (int)(Math.random()*5)+3;
-        for(int i = 0; i < x; i++){
-            materials.add(new Material((int)(Math.random()*950),(int)(Math.random()*550)+100,randomMaterial()));
+        int num = (int)(Math.random()*4)+2;
+        for(int i = 0; i < num; i++){
+            int x = (int)(Math.random()*950);
+            int y = (int)(Math.random()*550)+100;
+
+            while(x >= 450 && x <= 750 && y >= 250 && y <= 550){
+                x = (int)(Math.random()*950);
+                y = (int)(Math.random()*550)+100;
+            }
+
+            materials.add(new Material(x,y,randomMaterial()));
         }
     }
 
