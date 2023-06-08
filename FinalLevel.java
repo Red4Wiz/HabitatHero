@@ -62,12 +62,12 @@ public class FinalLevel {
             if((e.getKeyChar()+"").toLowerCase().equals("p")){
                 if(screen != 1) {
                     for (int i = 0; i < materials.size(); i++) {
-                        if (player.pick(materials.get(i))) {
+                        if (player.pick(materials.get(i), 100)) {
                             materials.remove(i);
                             screen = 3;
                             break;
                         }
-                        else if(player.withinRange(materials.get(i)) && player.isFull(materials.get(i).getWeight())){
+                        else if(player.withinRange(materials.get(i),100) && player.isFull(materials.get(i).getWeight())){
                             screen = 4;
                             break;
                         }
@@ -304,7 +304,7 @@ public class FinalLevel {
 //            g.setColor(Color.BLUE);
 //            g.fillRect(playerX, playerY, 20, 20);
             try {
-                player.draw(g, direction, playerImage);
+                player.draw(g, direction, playerImage, 1);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

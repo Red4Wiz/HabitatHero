@@ -1,3 +1,12 @@
+/**
+ * <h1>ICS4U ISP - Habitat Hero</h1>
+ * <h2>Course Info:</h2>
+ * ICS4U0.2 with Ms. Krasteva.
+ * @author Sailesh Badri & Pouya Karimi
+ * @version 09-06-2023
+ * Pouya Karimi added timing into the program, Sailesh Badri did all the other graphics and animations for the splash screen
+ */
+
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
@@ -8,31 +17,45 @@ import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 
+/**
+ * Class that creates the splash screen for the game
+ */
 public class SplashScreen {
+
+    /** Drawing object used to display graphics */
     Drawing draw = new Drawing();
+    /** Frame for the splash screen */
     JFrame frame = new JFrame("Habitat Hero");
+    /** The first underline rectangble below the game title*/
     private int rect1 = 0;
+    /** The second underline rectangble below the game title */
     private int rect2 = 0;
+    /** The rotating angle for the logo */
     private double rotationAngle = 0.0;
+    /** Checks if the animation should still run */
     private boolean run = true;
+    /** The start time of the program */
     private long start = 0;
 
+    /**
+     * {@link SplashScreen} Constructor
+     */
     public SplashScreen() {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(1200, 800);
         frame.add(draw);
-        draw.addMouseListener(new MouseHandler());
         frame.setResizable(false);
         frame.setVisible(true);
     }
 
-    class MouseHandler extends MouseAdapter {
-        public void mouseClicked(MouseEvent e) {
-            int x = e.getX();
-            int y = e.getY();
-        }
-    }
+    /**
+     * Drawing class used to draw the graphics
+     */
     class Drawing extends JComponent {
+        /**
+         * The method paint that draws out the graphics
+         * @param g  the <code>Graphics</code> context in which to paint
+         */
         public void paint(Graphics g) {
             try {
                 Font font = Font.createFont(Font.TRUETYPE_FONT, SplashScreen.class.getResourceAsStream("Assets/ZenDots-Regular.ttf"));
@@ -40,6 +63,7 @@ public class SplashScreen {
             } catch (Exception e) {
             }
 
+            /** Background static drawings */
             g.setColor(new Color(255, 229, 153));
             g.fillRect(0, 0, getWidth(), getHeight());
 
@@ -73,7 +97,7 @@ public class SplashScreen {
 
             g.setColor(new Color(0, 0, 0));
 
-            // Load the image file from the file directory
+            //logo
             try {
                 Image image = ImageIO.read(new File("Assets/logo.png"));
                 int width = 450;
@@ -94,9 +118,13 @@ public class SplashScreen {
                 e.printStackTrace();
             }
 
+
+            /** Underline drawings */
             g.setColor(new Color(241, 194, 50));
             g.fillRect(300, 250, rect1, 30);
             g.fillRect(400, 300, rect2, 30);
+
+            /** Checks if the animation is complete */
             if (run) {
                 if(rect1 < 600){
                     rect1 += 6;

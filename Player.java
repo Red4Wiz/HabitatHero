@@ -1,7 +1,7 @@
-/**
+ /**
  * <h1>ICS4U ISP - Habitat Hero</h1>
  * <h2>Course Info:</h2>
- *ICS4U0.2 with Ms. Krasteva.
+ * ICS4U0.2 with Ms. Krasteva.
  * @author Sailesh Badri
  * @version 09-06-2023
  */
@@ -12,13 +12,18 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 class Player {
+    /** X coordinate of the player */
     private int x; // x-coordinate of player position
+    /** Y coordinate of the player */
     private int y; // y-coordinate of player position
+    /** Speed of the player */
     private int speed;
+    /** ArrayList of all the materials in the bag of the player */
     private ArrayList<Material> bag;
+    /** The maximum weight the player can hold in their bag */
     final int MAX_WEIGHT = 10; //Max weight of their bag
+    /** The current weight of the bag */
     private int bagWeight = 0;
-    boolean playerBack = false, playerFront = false, playerRight = false, playerLeft = false;
 
     /**
      * {@link Player} Constructor
@@ -92,8 +97,8 @@ class Player {
      * @param m Material being picked up
      * @return Whether the material was picked up
      */
-    public boolean pick(Material m){
-        if(withinRange(m) && !isFull(m.getWeight())){
+    public boolean pick(Material m, int range){
+        if(withinRange(m, range) && !isFull(m.getWeight())){
             bag.add(m);
             bagWeight += m.getWeight();
             return true;
@@ -106,8 +111,8 @@ class Player {
      * @param m Material being checked for
      * @return True if the player is within range of a material, false otherwise
      */
-    public boolean withinRange(Material m){
-        if(Math.abs((x+45) - (m.getX()+(m.getWidth()/2))) <= 100 && Math.abs((y+50) - (m.getY()+(m.getHeight()/2))) <= 100){
+    public boolean withinRange(Material m, int range){
+        if(Math.abs((x+45) - (m.getX()+(m.getWidth()/2))) <= range && Math.abs((y+50) - (m.getY()+(m.getHeight()/2))) <= range){
             return true;
         }
         return false;
@@ -222,37 +227,76 @@ class Player {
             bagWeight -= 7*n;
         }
     }
-    
-    public void draw(Graphics g, String direction, boolean player) throws IOException {
-        if(direction.equals("back")){
-            Image player1 = ImageIO.read(new File("Assets/player_back1.png"));
-            Image player2 = ImageIO.read(new File("Assets/player_back2.png"));
 
-            if(player)  g.drawImage(player1, this.x, this.y, 70, 90, null);
-            else  g.drawImage(player2, this.x, this.y, 70, 90, null);
-        }
-        else if(direction.equals("front")){
-            Image player1 = ImageIO.read(new File("Assets/player_front_1.png"));
-            Image player2 = ImageIO.read(new File("Assets/player_front_2.png"));
+    /**
+     * The method to draw the player in different screens
+     * @param g
+     * @param direction
+     * @param player
+     * @throws IOException
+     */
+    public void draw(Graphics g, String direction, boolean player, int screen) throws IOException {
+        if(screen == 0){
+            if(direction.equals("back")){
+                Image player1 = ImageIO.read(new File("Assets/player_back1.png"));
+                Image player2 = ImageIO.read(new File("Assets/player_back2.png"));
 
-            if(player)  g.drawImage(player1, this.x, this.y, 70, 90, null);
-            else  g.drawImage(player2, this.x, this.y, 70, 90, null);
-        }
-        else if(direction.equals("right")){
-            Image player1 = ImageIO.read(new File("Assets/player_right1.png"));
-            Image player2 = ImageIO.read(new File("Assets/player_right2.png"));
+                if(player)  g.drawImage(player1, this.x-10, this.y-10, 40, 50, null);
+                else  g.drawImage(player2, this.x-10, this.y-10, 40, 50, null);
+            }
+            else if(direction.equals("front")){
+                Image player1 = ImageIO.read(new File("Assets/player_front_1.png"));
+                Image player2 = ImageIO.read(new File("Assets/player_front_2.png"));
 
-            if(player)  g.drawImage(player1, this.x, this.y, 100, 90, null);
-            else  g.drawImage(player2, this.x, this.y, 100, 90, null);
+                if(player)  g.drawImage(player1, this.x-10, this.y-10, 40, 50, null);
+                else  g.drawImage(player2, this.x-10, this.y-10, 40, 50, null);
+            }
+            else if(direction.equals("right")){
+                Image player1 = ImageIO.read(new File("Assets/player_right1.png"));
+                Image player2 = ImageIO.read(new File("Assets/player_right2.png"));
 
+                if(player)  g.drawImage(player1, this.x-20, this.y-10, 60, 50, null);
+                else  g.drawImage(player2, this.x-20, this.y-10, 60, 50, null);
+
+            }
+            else{
+                Image player1 = ImageIO.read(new File("Assets/player_left1.png"));
+                Image player2 = ImageIO.read(new File("Assets/player_left2.png"));
+
+                if(player)  g.drawImage(player1, this.x-25, this.y-10, 60, 50, null);
+                else  g.drawImage(player2, this.x-25, this.y-10, 60, 50, null);
+            }
         }
         else{
-            Image player1 = ImageIO.read(new File("Assets/player_left1.png"));
-            Image player2 = ImageIO.read(new File("Assets/player_left2.png"));
+            if(direction.equals("back")){
+                Image player1 = ImageIO.read(new File("Assets/player_back1.png"));
+                Image player2 = ImageIO.read(new File("Assets/player_back2.png"));
 
-            if(player)  g.drawImage(player1, this.x, this.y, 100, 90, null);
-            else  g.drawImage(player2, this.x, this.y, 100, 90, null);
+                if(player)  g.drawImage(player1, this.x, this.y, 70, 90, null);
+                else  g.drawImage(player2, this.x, this.y, 70, 90, null);
+            }
+            else if(direction.equals("front")){
+                Image player1 = ImageIO.read(new File("Assets/player_front_1.png"));
+                Image player2 = ImageIO.read(new File("Assets/player_front_2.png"));
 
+                if(player)  g.drawImage(player1, this.x, this.y, 70, 90, null);
+                else  g.drawImage(player2, this.x, this.y, 70, 90, null);
+            }
+            else if(direction.equals("right")){
+                Image player1 = ImageIO.read(new File("Assets/player_right1.png"));
+                Image player2 = ImageIO.read(new File("Assets/player_right2.png"));
+
+                if(player)  g.drawImage(player1, this.x-10, this.y, 100, 90, null);
+                else  g.drawImage(player2, this.x-10, this.y, 100, 90, null);
+
+            }
+            else{
+                Image player1 = ImageIO.read(new File("Assets/player_left1.png"));
+                Image player2 = ImageIO.read(new File("Assets/player_left2.png"));
+
+                if(player)  g.drawImage(player1, this.x-10, this.y, 100, 90, null);
+                else  g.drawImage(player2, this.x-10, this.y, 100, 90, null);
+            }
         }
     }
 }
