@@ -27,6 +27,8 @@ public class FinalLevel {
     Color color1 = Color.white, color2 = Color.white;
     long secondStartTime;
     int numOfNights = 0;
+    private String direction;
+    boolean playerImage = false;
     private Building house = new Building(500,300);
     private int woodCount = 0;
     private int brickCount = 0;
@@ -53,6 +55,7 @@ public class FinalLevel {
         //start of program
         startTime = System.currentTimeMillis();
         materialGeneration();
+        direction = "front";
     }
     class KeyHandler extends KeyAdapter{
         public void keyTyped(KeyEvent e){
@@ -97,22 +100,30 @@ public class FinalLevel {
                     case "w":
                         if (playerY > 107) {
                             player.moveUp();
+                            direction = "back";
+                            playerImage = !playerImage;
                         }
                         break;
                     case "s":
                         if (playerY < 750) {
                             player.moveDown();
+                            direction = "front";
+                            playerImage = !playerImage;
                         }
                         break;
                     case "a":
                         if (playerX > 50) {
                             player.moveLeft();
+                            direction = "left";
+                            playerImage = !playerImage;
                         }
                         break;
 
                     case "d":
                         if (playerX < 1150) {
                             player.moveRight();
+                            direction = "right";
+                            playerImage = !playerImage;
                         }
                         break;
                 }
@@ -288,10 +299,15 @@ public class FinalLevel {
             }
 
             //player
-            int playerX = player.getX();
-            int playerY = player.getY();
-            g.setColor(Color.BLUE);
-            g.fillRect(playerX, playerY, 20, 20);
+//            int playerX = player.getX();
+//            int playerY = player.getY();
+//            g.setColor(Color.BLUE);
+//            g.fillRect(playerX, playerY, 20, 20);
+            try {
+                player.draw(g, direction, playerImage);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
 
             //timing logic
             if(screen != 6 && screen != 7){

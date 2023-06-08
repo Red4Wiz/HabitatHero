@@ -84,7 +84,7 @@ public class Material {
      * @param x Which screen the material is being drawn in (0 indicating the maze)
      * @throws IOException
      */
-    public void draw(Graphics g,int x) throws IOException {
+    public void draw(Graphics g, int x) throws IOException {
         if(x==0) { //Drawing in the maze (material are scaled down)
             if (type.equals("wood")) {
                 Image wood = ImageIO.read(new File("Assets/wood.png"));
