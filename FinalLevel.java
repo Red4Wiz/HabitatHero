@@ -596,7 +596,6 @@ public class FinalLevel {
                 g.fillRect(0,0,getWidth(), getHeight());
                 if(dimness < 255){
                     dimness++;
-
                 }
                 else{
                     justTurnedDay = true;
