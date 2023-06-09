@@ -30,7 +30,9 @@ public class LevelsScreen {
     /** Image of the home button */
     Image homeBtn = null;
     /** Image of the white home button (different colour when hovering) */
-    File whiteBtn = new File("Assets/homeButtonW.png"), blackBtn = new File("Assets/homeButton.png");;
+//    File whiteBtn = new File("Assets/homeButtonW.png"), blackBtn = new File("Assets/homeButton.png");;
+    String whiteBtnPath = "/Assets/homeButtonW.png";
+    String blackBtnPath = "/Assets/homeButton.png";
 
     /**
      * {@link LevelsScreen} Constructor
@@ -38,8 +40,10 @@ public class LevelsScreen {
     public LevelsScreen(){
         //Loading the home button
         try {
-            homeBtn = ImageIO.read(blackBtn);
-        } catch (IOException d){}
+            homeBtn = ImageIO.read(LevelsScreen.class.getResource(blackBtnPath));
+        } catch (IOException d){
+            d.printStackTrace();
+        }
         //Creating and drawing the levels screen
         frame.setSize(1200, 800);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -101,13 +105,15 @@ public class LevelsScreen {
             }
             //Hovering over home button
             try {
-                if(x >= 10 && x <= 70 && y>=20 && y <= 80){
-                    homeBtn = ImageIO.read(whiteBtn);
+                if(x >= 10 && x <= 70 && y >= 20 && y <= 80){
+                    homeBtn = ImageIO.read(LevelsScreen.class.getResource(whiteBtnPath));
                 }
                 else{
-                    homeBtn = ImageIO.read(blackBtn);
+                    homeBtn = ImageIO.read(LevelsScreen.class.getResource(blackBtnPath));
                 }
-            } catch (IOException d){}
+            } catch (IOException d){
+                d.printStackTrace();
+            }
             drawing.repaint();
         }
     }
@@ -144,7 +150,7 @@ public class LevelsScreen {
             g.setColor(label3);
             g.drawString("Game", getWidth()/2 - (g.getFontMetrics().stringWidth("Game")/2), 670);
             //Drawing the home button
-            g.drawImage(homeBtn, 10,20,60,60,null);
+            g.drawImage(homeBtn, 10, 20, 60, 60, null);
         }
     }
 }

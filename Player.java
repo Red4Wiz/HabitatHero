@@ -266,8 +266,8 @@ import java.util.ArrayList;
     public void draw(Graphics g, String direction, boolean player, int screen) throws IOException {
         if(screen == 0){
             if(direction.equals("back")){
-                Image player1 = ImageIO.read(new File("Assets/player_back1.png"));
-                Image player2 = ImageIO.read(new File("Assets/player_back2.png"));
+                Image player1 = ImageIO.read(Player.class.getResource("/Assets/player_back1.png"));
+                Image player2 = ImageIO.read(Player.class.getResource("/Assets/player_back2.png"));
 
                 if(player)  g.drawImage(player1, this.x-10, this.y-10, 40, 50, null);
                 else  g.drawImage(player2, this.x-10, this.y-10, 40, 50, null);
@@ -275,8 +275,8 @@ import java.util.ArrayList;
                 height = 50;
             }
             else if(direction.equals("front")){
-                Image player1 = ImageIO.read(new File("Assets/player_front_1.png"));
-                Image player2 = ImageIO.read(new File("Assets/player_front_2.png"));
+                Image player1 = ImageIO.read(Player.class.getResource("/Assets/player_front_1.png"));
+                Image player2 = ImageIO.read(Player.class.getResource("/Assets/player_front_2.png"));
 
                 if(player)  g.drawImage(player1, this.x-10, this.y-10, 40, 50, null);
                 else  g.drawImage(player2, this.x-10, this.y-10, 40, 50, null);
@@ -284,8 +284,8 @@ import java.util.ArrayList;
                 height = 50;
             }
             else if(direction.equals("right")){
-                Image player1 = ImageIO.read(new File("Assets/player_right1.png"));
-                Image player2 = ImageIO.read(new File("Assets/player_right2.png"));
+                Image player1 = ImageIO.read(Player.class.getResource("/Assets/player_right1.png"));
+                Image player2 = ImageIO.read(Player.class.getResource("/Assets/player_right2.png"));
 
                 if(player)  g.drawImage(player1, this.x-20, this.y-10, 60, 50, null);
                 else  g.drawImage(player2, this.x-20, this.y-10, 60, 50, null);
@@ -294,8 +294,8 @@ import java.util.ArrayList;
 
             }
             else{
-                Image player1 = ImageIO.read(new File("Assets/player_left1.png"));
-                Image player2 = ImageIO.read(new File("Assets/player_left2.png"));
+                Image player1 = ImageIO.read(Player.class.getResource("/Assets/player_left1.png"));
+                Image player2 = ImageIO.read(Player.class.getResource("/Assets/player_left2.png"));
 
                 if(player)  g.drawImage(player1, this.x-25, this.y-10, 60, 50, null);
                 else  g.drawImage(player2, this.x-25, this.y-10, 60, 50, null);
@@ -305,8 +305,8 @@ import java.util.ArrayList;
         }
         else{
             if(direction.equals("back")){
-                Image player1 = ImageIO.read(new File("Assets/player_back1.png"));
-                Image player2 = ImageIO.read(new File("Assets/player_back2.png"));
+                Image player1 = ImageIO.read(Player.class.getResource("/Assets/player_back1.png"));
+                Image player2 = ImageIO.read(Player.class.getResource("/Assets/player_back2.png"));
 
                 if(player)  g.drawImage(player1, this.x, this.y, 70, 90, null);
                 else  g.drawImage(player2, this.x, this.y, 70, 90, null);
@@ -314,8 +314,8 @@ import java.util.ArrayList;
                 height = 90;
             }
             else if(direction.equals("front")){
-                Image player1 = ImageIO.read(new File("Assets/player_front_1.png"));
-                Image player2 = ImageIO.read(new File("Assets/player_front_2.png"));
+                Image player1 = ImageIO.read(Player.class.getResource("/Assets/player_front_1.png"));
+                Image player2 = ImageIO.read(Player.class.getResource("/Assets/player_front_2.png"));
 
                 if(player)  g.drawImage(player1, this.x, this.y, 70, 90, null);
                 else  g.drawImage(player2, this.x, this.y, 70, 90, null);
@@ -323,8 +323,8 @@ import java.util.ArrayList;
                 height = 90;
             }
             else if(direction.equals("right")){
-                Image player1 = ImageIO.read(new File("Assets/player_right1.png"));
-                Image player2 = ImageIO.read(new File("Assets/player_right2.png"));
+                Image player1 = ImageIO.read(Player.class.getResource("/Assets/player_right1.png"));
+                Image player2 = ImageIO.read(Player.class.getResource("/Assets/player_right2.png"));
 
                 if(player)  g.drawImage(player1, this.x-10, this.y, 100, 90, null);
                 else  g.drawImage(player2, this.x-10, this.y, 100, 90, null);
@@ -332,8 +332,8 @@ import java.util.ArrayList;
                 height = 90;
             }
             else{
-                Image player1 = ImageIO.read(new File("Assets/player_left1.png"));
-                Image player2 = ImageIO.read(new File("Assets/player_left2.png"));
+                Image player1 = ImageIO.read(Player.class.getResource("/Assets/player_left1.png"));
+                Image player2 = ImageIO.read(Player.class.getResource("/Assets/player_left2.png"));
 
                 if(player)  g.drawImage(player1, this.x-10, this.y, 100, 90, null);
                 else  g.drawImage(player2, this.x-10, this.y, 100, 90, null);

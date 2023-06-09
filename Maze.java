@@ -45,7 +45,8 @@ public class Maze {
     /** Image for the home button on top right */
     Image homeBtn = null;
     /** Hovering version of the home button */
-    File whiteBtn = new File("Assets/homeButtonW.png"), blackBtn = new File("Assets/homeButton.png");
+    String whiteBtnPath = "/Assets/homeButtonW.png";
+    String blackBtnPath = "/Assets/homeButton.png";
     private String direction = "front";
     private boolean playerImg = false;
 
@@ -55,8 +56,10 @@ public class Maze {
     public Maze() {
         /** Creating the Maze Level */
         try {
-            homeBtn = ImageIO.read(blackBtn);
-        } catch (IOException d){}
+            homeBtn = ImageIO.read(LevelsScreen.class.getResource(blackBtnPath));
+        } catch (IOException d){
+            d.printStackTrace();
+        }
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(1215, 839);
         frame.add(draw);
@@ -113,15 +116,20 @@ public class Maze {
          * @param e the event to be processed
          */
         public void mouseMoved(MouseEvent e){
+            int x = e.getX();
+            int y = e.getY();
+
             if(screen == 1){
                 try {
-                    if(e.getX() >= 10 && e.getX() <= 70 && e.getY()>=20 && e.getY() <= 80){
-                        homeBtn = ImageIO.read(whiteBtn); //hovering over home button
+                    if(x >= 10 && x <= 70 && y >= 20 && y <= 80){
+                        homeBtn = ImageIO.read(LevelsScreen.class.getResource(whiteBtnPath));
                     }
                     else{
-                        homeBtn = ImageIO.read(blackBtn); //not hovering over home button
+                        homeBtn = ImageIO.read(LevelsScreen.class.getResource(blackBtnPath));
                     }
-                } catch (IOException d){}
+                } catch (IOException d){
+                    d.printStackTrace();
+                }
             }
             draw.repaint();
         }
@@ -136,15 +144,7 @@ public class Maze {
          * @param e the event to be processed
          */
         public void keyTyped(KeyEvent e){
-            if(e.getKeyChar() == '\n' && screen == 0) { //User moves from instructions screen to the maze
-                screen = 1;
-                draw.repaint();
-                //Generating the materials and the player
-                player = new Player(60, 350);
-                materials.add(new Material(1060,390, "wood"));
-                materials.add(new Material(40,690, "wood"));
-                materials.add(new Material(740,150,"metal"));
-            }
+
             if((e.getKeyChar()+"").toLowerCase().equals("p")  && screen == 1){ //User attempts to pick something up
                 for(int i = 0; i < materials.size(); i++){ //Checking if they are near a material
                     if(player.pick(materials.get(i), 50)){ //Picking up
@@ -176,6 +176,15 @@ public class Maze {
          * @param e the event to be processed
          */
         public void keyPressed(KeyEvent e) {
+            if(e.getKeyChar() == '\n' && screen == 0) { //User moves from instructions screen to the maze
+                screen = 1;
+                draw.repaint();
+                //Generating the materials and the player
+                player = new Player(60, 350);
+                materials.add(new Material(1060,390, "wood"));
+                materials.add(new Material(40,690, "wood"));
+                materials.add(new Material(740,150,"metal"));
+            }
             if (screen == 1) { //Inside the maze level
                 String keyCode = (e.getKeyChar()+"").toLowerCase();
                 int playerX = player.getX();

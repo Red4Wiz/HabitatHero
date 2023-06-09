@@ -160,7 +160,7 @@ public class Building {
      * @param g Graphic in which the house is drawn in.
      */
     public void draw(Graphics g, int w, int h) throws IOException {
-        Image house = ImageIO.read(new File("Assets/house.png"));
+        Image house = ImageIO.read(Material.class.getResource("/Assets/house.png"));
         g.drawImage(house, this.x, this.y, w, h, null);
         width = w;
         height = h;
