@@ -36,7 +36,8 @@ public class FinalLevel {
     /** Mousehandler to handle all mouse actions in this level. */
     private MouseHandler mouseHandler = new MouseHandler();
     /** File directories of both white and black home buttons. */
-    private File whiteBtn = new File("Assets/homeButtonW.png"), blackBtn = new File("Assets/homeButton.png");
+    String whiteBtnPath = "/Assets/homeButtonW.png";
+    String blackBtnPath = "/Assets/homeButton.png";
     /** Booleans to know whether it is currently daytime or whether it just turned day. */
     private boolean dayTime = true, justTurnedDay = false;
     /** Player in the game */
@@ -82,8 +83,10 @@ public class FinalLevel {
     public FinalLevel(){
         timeTicker = System.currentTimeMillis();
         try {
-            homeBtn = ImageIO.read(blackBtn);
-        } catch (IOException d){}
+            homeBtn = ImageIO.read(LevelsScreen.class.getResource(blackBtnPath));
+        } catch (IOException d){
+            d.printStackTrace();
+        }
         //Creating and drawing the screens
         frame.setSize(1200, 800);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -279,15 +282,19 @@ public class FinalLevel {
          * @param e the event to be processed
          */
         public void mouseMoved(MouseEvent e){
+            int x = e.getX();
+            int y = e.getY();
             //Changing the colour of the home button on hover
             try {
-                if(e.getX() >= 10 && e.getX() <= 70 && e.getY()>=20 && e.getY() <= 80){
-                    homeBtn = ImageIO.read(whiteBtn);
+                if(x >= 10 && x <= 70 && y >= 20 && y <= 80){
+                    homeBtn = ImageIO.read(LevelsScreen.class.getResource(whiteBtnPath));
                 }
                 else{
-                    homeBtn = ImageIO.read(blackBtn);
+                    homeBtn = ImageIO.read(LevelsScreen.class.getResource(blackBtnPath));
                 }
-            } catch (IOException d){}
+            } catch (IOException d){
+                d.printStackTrace();
+            }
             if(screen == 6){ //Death screen
                 //Changing the colour of the labels in the death screen on hover
                 if(e.getX() >= 300 && e.getX() <= 900 && e.getY() >= 350 && e.getY() <= 450){ //Click on restart level
@@ -647,7 +654,7 @@ public class FinalLevel {
                 g.drawString(metalCount+"", 740-(g.getFontMetrics().stringWidth(metalCount+"")/ 2), 410);
                 g.drawString(concreteCount+"", 1020-(g.getFontMetrics().stringWidth(concreteCount+"")/ 2), 410);
                 try{
-                    Image redX = ImageIO.read(new File("Assets/redX.png"));
+                    Image redX = ImageIO.read(Material.class.getResource("/Assets/redX.png"));
                     g.drawImage(redX, 10, 20, 60, 60, null);
                 }
                 catch (IOException d){}

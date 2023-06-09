@@ -27,12 +27,15 @@ public class Lesson {
     /** Regular home button */
     Image homeBtn = null;
     /** White version of the home button used when the mouse is hovering over it */
-    File whiteBtn = new File("Assets/homeButtonW.png"), blackBtn = new File("Assets/homeButton.png");
+    String whiteBtnPath = "/Assets/homeButtonW.png";
+    String blackBtnPath = "/Assets/homeButton.png";
     public Lesson(){
         //Loading the home button
         try {
-            homeBtn = ImageIO.read(blackBtn);
-        } catch (IOException d){}
+            homeBtn = ImageIO.read(LevelsScreen.class.getResource(blackBtnPath));
+        } catch (IOException d){
+            d.printStackTrace();
+        }
         //Creating and drawing the lessons screens
         frame.setSize(1200, 800);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -86,15 +89,19 @@ public class Lesson {
          * @param e the event to be processed
          */
         public void mouseMoved(MouseEvent e){
+            int x = e.getX();
+            int y = e.getY();
             //Hovering over the home button
             try {
-                if(e.getX() >= 10 && e.getX() <= 70 && e.getY()>=20 && e.getY() <= 80 && choice != 5){
-                    homeBtn = ImageIO.read(whiteBtn);
+                if(x >= 10 && x <= 70 && y >= 20 && y <= 80){
+                    homeBtn = ImageIO.read(LevelsScreen.class.getResource(whiteBtnPath));
                 }
                 else{
-                    homeBtn = ImageIO.read(blackBtn);
+                    homeBtn = ImageIO.read(LevelsScreen.class.getResource(blackBtnPath));
                 }
-            } catch (IOException d){}
+            } catch (IOException d){
+                d.printStackTrace();
+            }
             drawing.repaint();
         }
     }
@@ -386,7 +393,7 @@ public class Lesson {
 
                 //Drawing the backpack image
                 try{
-                    Image backpack = ImageIO.read(new File("Assets/backpack.png"));
+                    Image backpack = ImageIO.read(Lesson.class.getResource("/Assets/backpack.png"));
                     g.drawImage(backpack, 60, 170, 450,450, null);
                 }
                 catch(IOException d){}
@@ -422,10 +429,10 @@ public class Lesson {
                 g.drawString("Wood (5) - Brick (10) - Metal (15) - Concrete (20)", (100+(getWidth()-200)/2) - (g.getFontMetrics().stringWidth("Wood (5) - Brick (10) - Metal (15) - Concrete (20)"))/2, 470);
                 //Drawing images of the materials
                 try{
-                    Image brick = ImageIO.read(new File("Assets/brick.png"));
-                    Image cement = ImageIO.read(new File("Assets/cement.png"));
-                    Image metal = ImageIO.read(new File("Assets/metal.png"));
-                    Image wood = ImageIO.read(new File("Assets/wood.png"));
+                    Image brick = ImageIO.read(Lesson.class.getResource("/Assets/brick.png"));
+                    Image cement = ImageIO.read(Lesson.class.getResource("/Assets/cement.png"));
+                    Image metal = ImageIO.read(Lesson.class.getResource("/Assets/metal.png"));
+                    Image wood = ImageIO.read(Lesson.class.getResource("/Assets/wood.png"));
                     g.drawImage(wood, 150, 520, 200, 200, null);
                     g.drawImage(brick, 370, 520, 200,200,null);
                     g.drawImage(metal, 590, 520, 200,200,null);
