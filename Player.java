@@ -11,7 +11,10 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
-class Player {
+ /**
+  * Class to represent a player in our game.
+  */
+ class Player {
     /** X coordinate of the player */
     private int x; // x-coordinate of player position
     /** Y coordinate of the player */
@@ -35,7 +38,7 @@ class Player {
     public Player(int x, int y) {
         this.x = x;
         this.y = y;
-        speed = 7;
+        speed = 10;
         bag = new ArrayList<>();
     }
 
@@ -43,6 +46,7 @@ class Player {
         return speed;
     }
     /**
+     * Return the X-coordinate of the person
      * @return X-coordinate of person
      */
     public int getX() {
@@ -50,6 +54,7 @@ class Player {
     }
 
     /**
+     * Return the Y-coordinate of the person
      * @return Y-coordinate of person
      */
     public int getY() {
@@ -63,6 +68,7 @@ class Player {
     }
 
     /**
+     * Return the weight of the player's bag
      * @return Weight of their bag
      */
     public int getBagWeight(){return bagWeight;}
@@ -97,6 +103,7 @@ class Player {
     }
 
     /**
+     * Return the player's bag.
      * @return Player's bag
      */
     public ArrayList<Material> getBag(){
@@ -153,6 +160,7 @@ class Player {
     }
 
     /**
+     * Return Number of wood in the player's backpack
      * @return Number of wood in the player's backpack
      */
     public int getWood(){
@@ -165,6 +173,7 @@ class Player {
         return x;
     }
     /**
+     * Return Number of brick in the player's backpack
      * @return Number of brick in the player's backpack
      */
     public int getBrick(){
@@ -177,6 +186,7 @@ class Player {
         return x;
     }
     /**
+     * Return Number of metal in the player's backpack
      * @return Number of metal in the player's backpack
      */
     public int getMetal(){
@@ -189,6 +199,7 @@ class Player {
         return x;
     }
     /**
+     * Return Number of concrete in the player's backpack
      * @return Number of concrete in the player's backpack
      */
     public int getConcrete(){
@@ -200,6 +211,11 @@ class Player {
         }
         return x;
     }
+
+     /**
+      * Checking if the user has any material, return true if they do.
+      * @return Whether the player has any material in their bag.
+      */
     public boolean hasMaterials(){
         if(getWood() > 0 || getBrick() > 0 || getMetal() > 0 || getConcrete() > 0){
             return true;

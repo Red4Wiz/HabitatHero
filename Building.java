@@ -5,12 +5,16 @@
  * @author Sailesh Badri & Pouya Karimi
  * @version 09-06-2023
  * A class to represent a house/building drawn in the game.
+ * Pouya added a few getter and setter methods, Sailesh coded all of the logistics and the outline of the class.
  */
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * Class to represent a building in our game.
+ */
 public class Building {
     private int x; // x-coordinate of material position
     private int y; // y-coordinate of material position
@@ -102,42 +106,49 @@ public class Building {
         this.numOfConcrete -= n;
     }
     /**
+     * Return Number of bricks in the house.
      * @return Number of bricks in the house.
      */
     public int getNumOfBrick() {
         return numOfBrick;
     }
     /**
+     * Return Number of concrete in the house.
      * @return Number of concrete in the house.
      */
     public int getNumOfConcrete() {
         return numOfConcrete;
     }
     /**
+     * Return Number of metal in the house.
      * @return Number of metal in the house.
      */
     public int getNumOfMetal() {
         return numOfMetal;
     }
     /**
+     * Return Number of wood in the house.
      * @return Number of wood in the house.
      */
     public int getNumOfWood() {
         return numOfWood;
     }
     /**
+     * Return amount of durability the house has.
      * @return Amount of durability in the house
      */
     public int getDurability() {
         return durability;
     }
     /**
+     * Return X-coordinate of the house
      * @return X-coordinate of the house
      */
     public int getX() {
         return x;
     }
     /**
+     * Return Y-cooridnate of the house
      * @return Y-coordinate of the house
      */
     public int getY() {
@@ -155,12 +166,14 @@ public class Building {
         height = h;
     }
     /**
+     * Return the height of the house
      * @return Height of the house
      */
     public int getHeight(){
         return height;
     }
     /**
+     * Return the width of the house
      * @return Width of the house
      */
     public int getWidth(){

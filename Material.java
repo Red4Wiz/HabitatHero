@@ -10,6 +10,9 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * Class to represent a material in our game (wood, brick, metal, or concrete)
+ */
 public class Material {
     private int x; // x-coordinate of material position
     private int y; // y-coordinate of material position
@@ -51,6 +54,7 @@ public class Material {
     }
 
     /**
+     * Return X-coordinate
      * @return X-coordinate
      */
     public int getX() {
@@ -58,6 +62,7 @@ public class Material {
     }
 
     /**
+     * Return Y-coordinate
      * @return Y-coordinate
      */
     public int getY() {
@@ -65,6 +70,7 @@ public class Material {
     }
 
     /**
+     * Return the type of material
      * @return Type of material
      */
     public String getType(){
@@ -72,6 +78,7 @@ public class Material {
     }
 
     /**
+     * Return the strength of material
      * @return Strength of material
      */
     public int getStrength(){
@@ -130,14 +137,17 @@ public class Material {
     }
 
     /**
+     * Return the width of the image of the material
      * @return Width of the image of the material
      */
     public int getWidth(){return width;}
     /**
+     * Return the height of the image of the material
      * @return Height of the image of the material
      */
     public int getHeight() {return height;}
     /**
+     * Return the weight of the material.
      * @return Weight of the material
      */
     public int getWeight(){return weight;}

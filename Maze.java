@@ -283,8 +283,8 @@ public class Maze {
                 int playerX = player.getX();
                 int playerY = player.getY();
 
-                g.setColor(Color.BLUE);
-                g.fillRect(playerX, playerY, playerSize, playerSize);
+//                g.setColor(Color.BLUE);
+//                g.fillRect(playerX, playerY, playerSize, playerSize);
                 try {
                     player.draw(g, direction, playerImg, 0);
                 } catch (IOException e) {
@@ -299,8 +299,7 @@ public class Maze {
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
-                    g.setColor(Color.RED);
-                    g.fillRect(m.getX()+m.getWidth()/2, m.getY()+m.getHeight()/2, 3, 3);
+
                 }
                 if(b!= null){
                     try {

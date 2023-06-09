@@ -1,3 +1,11 @@
+/**
+ * <h1>ICS4U ISP - Habitat Hero</h1>
+ * <h2>Course Info:</h2>
+ *ICS4U0.2 with Ms. Krasteva.
+ * @author Sailesh Badri & Pouya Karimi
+ * @version 09-06-2023
+ * Individual parts of the program done by each person are inline commented to show who did what.
+ */
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -9,39 +17,74 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Class to represent the third and final level of our game.
+ */
 public class FinalLevel {
-    JFrame frame = new JFrame("Final Level");
-    Drawing drawing = new Drawing();
-    int screen = 0;
-    int radius = 0;
-    Image homeBtn = null;
-    boolean builtAHouse = false, insideHouse = false;
-    MouseHandler mouseHandler = new MouseHandler();
-    File whiteBtn = new File("Assets/homeButtonW.png"), blackBtn = new File("Assets/homeButton.png");
-    boolean dayTime = true, justTurnedDay = false;
+    /** Frame which the final level is drawn on. */
+    private JFrame frame = new JFrame("Final Level");
+    /** Drawing of our final level. */
+    private Drawing drawing = new Drawing();
+    /** The current screen being displayed. */
+    private int screen = 0;
+    /** Radius of the circle that gets bigger in the death screen. */
+    private int radius = 0;
+    /** Image of the home button. */
+    private Image homeBtn = null;
+    /** Booleans to know whether the player has built a house or is currently inside the house. */
+    private boolean builtAHouse = false, insideHouse = false;
+    /** Mousehandler to handle all mouse actions in this level. */
+    private MouseHandler mouseHandler = new MouseHandler();
+    /** File directories of both white and black home buttons. */
+    private File whiteBtn = new File("Assets/homeButtonW.png"), blackBtn = new File("Assets/homeButton.png");
+    /** Booleans to know whether it is currently daytime or whether it just turned day. */
+    private boolean dayTime = true, justTurnedDay = false;
+    /** Player in the game */
     private Player player;
+    /** All the materials in the game. */
     private ArrayList<Material> materials = new ArrayList<>();
-    final long MAX_DAYTIME = 30;
-    int displayTime = (int) MAX_DAYTIME; //in seconds
-    long timeTicker;
-    Color color1 = Color.white, color2 = Color.white;
-    long secondStartTime;
-    int numOfNights = 0;
+    /** The amount of time it is day in the game */
+    private final long MAX_DAYTIME = 30;
+    /** Time being displayed on the timer */
+    private int displayTime = (int) MAX_DAYTIME; //in seconds
+    /** Temporary variable to note the start of every second */
+    private long timeTicker;
+    /** Changing colours for hovering over labels. */
+    private Color color1 = Color.white, color2 = Color.white;
+    /** Starting time of the transition to the death screen. */
+    private long secondStartTime;
+    /** Number of nights that have passed in the game */
+    private int numOfNights = 0;
+    /** The direction the player is moving in. */
     private String direction;
-    boolean playerImage = false;
+    /** Whether or not the player should be drawn. */
+    private boolean playerImage = false;
+    /** The house in the game */
     private Building house = new Building(500,300);
+    /** Amount of wood being selected to build with */
     private int woodCount = 0;
+    /** Amount of brick being selected to build with */
     private int brickCount = 0;
+    /** Amount of metal being selected to build with */
     private int metalCount = 0;
+    /** Amount of concrete being selected to build with */
     private int concreteCount = 0;
-    int lastScreen = 0;
-    int dimness = 0;
-    long startTime;
+    /** The last screen that was being displayed */
+    private int lastScreen = 0;
+    /** Dimness of the transition from day to night */
+    private int dimness = 0;
+    /** Starting time of the program */
+    private long startTime;
+
+    /**
+     * {@link FinalLevel} Constructor
+     */
     public FinalLevel(){
         timeTicker = System.currentTimeMillis();
         try {
             homeBtn = ImageIO.read(blackBtn);
         } catch (IOException d){}
+        //Creating and drawing the screens
         frame.setSize(1200, 800);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.addMouseListener(mouseHandler);
@@ -57,17 +100,26 @@ public class FinalLevel {
         materialGeneration();
         direction = "front";
     }
+
+    /**
+     * Class to handle all key events in the program.
+     */
     class KeyHandler extends KeyAdapter{
+        /**
+         * Method called whenever a key is typed
+         * @param e the event to be processed
+         * Coded by Sailesh Badri
+         */
         public void keyTyped(KeyEvent e){
-            if((e.getKeyChar()+"").toLowerCase().equals("p")){
-                if(screen != 1) {
+            if((e.getKeyChar()+"").toLowerCase().equals("p")){ //User attempts to pick something up
+                if(screen != 1) { //Not nighttime
                     for (int i = 0; i < materials.size(); i++) {
-                        if (player.pick(materials.get(i), 100)) {
+                        if (player.pick(materials.get(i), 100)) { //Checking whether the player is near an object
                             materials.remove(i);
                             screen = 3;
                             break;
                         }
-                        else if(player.withinRange(materials.get(i),100) && player.isFull(materials.get(i).getWeight())){
+                        else if(player.withinRange(materials.get(i),100) && player.isFull(materials.get(i).getWeight())){ //Player is whithin range but their backpack is full
                             screen = 4;
                             break;
                         }
@@ -76,8 +128,8 @@ public class FinalLevel {
                 drawing.repaint();
             }
 
-            if((e.getKeyChar()+"").toLowerCase().equals("b")){
-                if(screen != 1 && screen != 6 && player.hasMaterials()){
+            if((e.getKeyChar()+"").toLowerCase().equals("b")){ //User wants to build
+                if(screen != 1 && screen != 6 && player.hasMaterials()){ //Not night time and the user actually has material
                     lastScreen = screen;
                     screen = 7;
                     woodCount = 0;
@@ -90,12 +142,18 @@ public class FinalLevel {
             drawing.repaint();
         }
 
+        /**
+         * Method called whenever a key is pressed
+         * @param e the event to be processed
+         * Coded by Sailesh Badri.
+         */
         public void keyPressed(KeyEvent e) {
-            if (screen != 6) {
+            if (screen != 6) { //Not building screen
                 String keyCode = (e.getKeyChar()+"").toLowerCase();
                 int playerX = player.getX();
                 int playerY = player.getY();
 
+                //Player's movement
                 switch (keyCode) {
                     case "w":
                         if (playerY > 107) {
@@ -127,6 +185,7 @@ public class FinalLevel {
                         }
                         break;
                 }
+                //Checking if the player is inside their house
                 if(player.withinRange(house)) insideHouse = true;
                 else insideHouse = false;
                 drawing.repaint();
@@ -134,8 +193,17 @@ public class FinalLevel {
         }
     }
 
+    /**
+     * Class to handle all mouse events in the final level.
+     * Coded by Sailesh Badri
+     */
     class MouseHandler extends MouseAdapter{
+        /**
+         * Method called whenever the mouse is clicked.
+         * @param e the event to be processed
+         */
         public void mouseClicked(MouseEvent e){
+            //Clicking on the home button
             if(e.getX() >= 10 && e.getX() <= 70 && e.getY()>=20 && e.getY() <= 80 && screen != 6 && screen != 7){
                 new MainMenu();
                 frame.dispose();
@@ -150,7 +218,7 @@ public class FinalLevel {
                     frame.dispose();
                 }
             }
-            if(screen == 7){
+            if(screen == 7){ //In the build screen
                 //up and down arrows
                 if (e.getX() >= 150 && e.getX() <= 210) {
                     if(e.getY() >= 230 && e.getY() <= 270 && woodCount < player.getWood()){
@@ -197,7 +265,7 @@ public class FinalLevel {
                     drawing.repaint();
                 }
 
-                if(e.getX() >= 10 && e.getX() <= 70 && e.getY()>=20 && e.getY() <= 80){
+                if(e.getX() >= 10 && e.getX() <= 70 && e.getY()>=20 && e.getY() <= 80){ //Click on the exit button in the build screen
                     //exit
                     screen = lastScreen;
                 }
@@ -205,7 +273,13 @@ public class FinalLevel {
                 drawing.repaint(); // Redraw the arrows after the counts have been updated
             }
         }
+
+        /**
+         * Method called whenever the mouse is moved.
+         * @param e the event to be processed
+         */
         public void mouseMoved(MouseEvent e){
+            //Changing the colour of the home button on hover
             try {
                 if(e.getX() >= 10 && e.getX() <= 70 && e.getY()>=20 && e.getY() <= 80){
                     homeBtn = ImageIO.read(whiteBtn);
@@ -214,7 +288,8 @@ public class FinalLevel {
                     homeBtn = ImageIO.read(blackBtn);
                 }
             } catch (IOException d){}
-            if(screen == 6){
+            if(screen == 6){ //Death screen
+                //Changing the colour of the labels in the death screen on hover
                 if(e.getX() >= 300 && e.getX() <= 900 && e.getY() >= 350 && e.getY() <= 450){ //Click on restart level
                     color1 = Color.black;
                 }
@@ -230,7 +305,16 @@ public class FinalLevel {
         }
     }
 
+    /**
+     * Class to represent the drawings of each screen in the final level.
+     * Parts created by Pouya Karimi: Background and material graphics, nighttime damage taking mechanics, day and night timing logic, screens 0, 2, 6
+     * Parts created by Sailesh Badri: Player and house graphics, picking up and building mechanics, screens 1, 3, 4, 5, 7
+     */
     class Drawing extends JComponent{
+        /**
+         * Method to pain each screen of the code.
+         * @param g  the <code>Graphics</code> context in which to paint
+         */
         public void paint(Graphics g){
             //static drawings
 
@@ -281,6 +365,7 @@ public class FinalLevel {
             g.drawString("Weight:", 1053, 455);
             g.drawString(player.getBagWeight()+"", 1115, 455);
 
+            //Drawing the house if it has been built
             if(builtAHouse){
                 try {
                     house.draw(g, 250, 250);
@@ -298,23 +383,15 @@ public class FinalLevel {
                 }
             }
 
-            //player
-//            int playerX = player.getX();
-//            int playerY = player.getY();
-//            g.setColor(Color.BLUE);
-//            g.fillRect(playerX, playerY, 20, 20);
+            //Drawing the player
             try {
                 player.draw(g, direction, playerImage, 1);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
 
-            g.setColor(Color.BLUE);
-            g.drawRect(player.getX(), player.getY(), 100, 90);
-
             //timing logic
-            if(screen != 6 && screen != 7){
-                //timing logic
+            if(screen != 6 && screen != 7){ //Not building or death screen
                 long curTime = System.currentTimeMillis();
 
                 if(justTurnedDay){
@@ -325,14 +402,14 @@ public class FinalLevel {
                     displayTime = (int) MAX_DAYTIME;
                 }
 
-                if(dayTime){
+                if(dayTime){ //When it is daytime, checking if it should be night yet
                     if(displayTime == 0){
                         startTime = System.currentTimeMillis();
                         dayTime = false;
                     }
                     repaint();
                 }
-                else{
+                else{ //Nightime
                     if(builtAHouse) screen = 1;
                     else screen = 6;
                     repaint();
@@ -342,12 +419,13 @@ public class FinalLevel {
             if(screen == 0){//start screen
                 g.setColor(new Color(163, 235, 240));
                 g.fillRect(0, 0, 1200, 100);
-
+                //Loading font
                 try {
                     Font font = Font.createFont(Font.TRUETYPE_FONT, SplashScreen.class.getResourceAsStream("Assets/ZenDots-Regular.ttf"));
                     g.setFont(font.deriveFont(Font.BOLD, 20f));
                 } catch (Exception e) {
                 }
+                //Starting message
                 g.setColor(new Color(0,0,0));
                 g.drawString("Welcome to the final level! The goal is to have shelter heading into", (getWidth() - g.getFontMetrics().stringWidth("Welcome to the final level! The goal is to have shelter heading into")) / 2, 25);
                 g.drawString("ever night. Look around for materials and pick them up to build your", (getWidth() - g.getFontMetrics().stringWidth("ever night. Look around for materials and pick them up to build your")) / 2, 55);
@@ -356,8 +434,10 @@ public class FinalLevel {
             }
             else if(screen == 1){ //nighttime
                 if(insideHouse){
+                    //Taking damage each night
                     int damage = 15 + 10*numOfNights;
                     house.removeDurability(damage);
+                    //Losing materials from your house after each night
                     int concreteLost = damage/20;
                     if(concreteLost <= house.getNumOfConcrete()) {
                         damage -= 20*concreteLost;
@@ -389,18 +469,19 @@ public class FinalLevel {
                     }
                     numOfNights++;
                 }
-                else{
+                else{ //It is nighttime but the player has not yet returned to their house
                     g.setColor(new Color(0,0,0, 100));
                     g.fillRect(0,0,getWidth(), getHeight());
 
                     g.setColor(new Color(163, 235, 240));
                     g.fillRect(0, 0, 1200, 100);
-
+                    //Loading font
                     try {
                         Font font = Font.createFont(Font.TRUETYPE_FONT, SplashScreen.class.getResourceAsStream("Assets/ZenDots-Regular.ttf"));
                         g.setFont(font.deriveFont(Font.BOLD, 20f));
                     } catch (Exception e) {
                     }
+                    //Telling the player to go back to their house
                     g.setColor(new Color(0,0,0));
                     g.drawString("We're heading into the night, time to return to your shelter that you", (getWidth() - g.getFontMetrics().stringWidth("We're heading into the night, time to return to your shelter that you")) / 2, 25);
                     g.drawString("(hopefully) built! Let's see if your habitat can survive the storm", (getWidth() - g.getFontMetrics().stringWidth("(hopefully) built! Let's see if your habitat can survive the storm")) / 2, 55);
@@ -408,12 +489,13 @@ public class FinalLevel {
                 }
             }
             else if(screen == 2){ //wakeup
-                if(dimness < 255){
+                if(dimness < 255){ //Animation for waking up
                     g.setColor(new Color(0,0,0, dimness));
                     g.fillRect(0,0,getWidth(), getHeight());
                     dimness++;
 
                 }
+                //Instructing the user to continue building their house
                 else{
                     g.setColor(new Color(163, 235, 240));
                     g.fillRect(0, 0, 1200, 100);
@@ -571,7 +653,7 @@ public class FinalLevel {
                 catch (IOException d){}
             }
 
-            if(screen != 6 && screen != 7) {
+            if(screen != 6 && screen != 7) { //If not in the death screen or the building screen, the counter should go down
                 g.drawImage(homeBtn, 10,20,60,60,null);
                 //drawing seconds
                 g.setColor(new Color(241, 194, 51));
@@ -600,6 +682,12 @@ public class FinalLevel {
             }
         }
     }
+
+    /**
+     * Choosing a random material to be drawn.
+     * Coded by Sailesh Badri.
+     * @return
+     */
     private String randomMaterial(){
         int x = (int)(Math.random()*10)+1;
         if(x<=4)return "wood";
@@ -608,6 +696,10 @@ public class FinalLevel {
         else return "concrete";
     }
 
+    /**
+     * Generating a random material in the game.
+     * Coded by Sailesh
+     */
     private void materialGeneration(){
         int num = (int)(Math.random()*4)+2;
         for(int i = 0; i < num; i++){
