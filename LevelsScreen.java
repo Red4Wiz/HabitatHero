@@ -15,6 +15,9 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * Class to represent the levels screen of our game.
+ */
 public class LevelsScreen {
     /** Frame to draw on. */
     JFrame frame = new JFrame("Levels");

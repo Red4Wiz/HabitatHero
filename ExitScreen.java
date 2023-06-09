@@ -11,6 +11,10 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * Class to represent the exit screen of our game.
+ */
+
 public class ExitScreen {
     /** Frame to draw on. */
     JFrame frame = new JFrame("Exit Screen");

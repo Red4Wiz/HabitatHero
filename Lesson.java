@@ -12,6 +12,9 @@ import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * Class to represent all of our lessons in the game.
+ */
 public class Lesson {
     /** Frame which is being drawn on */
     JFrame frame = new JFrame("Main Menu");

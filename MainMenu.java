@@ -10,6 +10,10 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
+
+/**
+ * Class to represent the main menu of our game.
+ */
 public class MainMenu{
     /** Frame which is being drawn on */
     JFrame frame = new JFrame("Main Menu");
