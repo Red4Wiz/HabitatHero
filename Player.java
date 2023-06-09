@@ -107,7 +107,19 @@ class Player {
      * @return True if the player is within range of a material, false otherwise
      */
     public boolean withinRange(Material m){
-        if(Math.abs(x - (m.getX()+(m.getWidth()/2))) <= 50 && Math.abs(y - (m.getY()+(m.getHeight()/2))) <= 50){
+        if(Math.abs((x+45) - (m.getX()+(m.getWidth()/2))) <= 100 && Math.abs((y+50) - (m.getY()+(m.getHeight()/2))) <= 100){
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Is the player withing range of a building
+     * @param b Building being checked for
+     * @return True if the player is within range of a material, false otherwise
+     */
+    public boolean withinRange(Building b){
+        if(Math.abs((x+45) - (b.getX()+(b.getWidth()/2))) <= 100 && Math.abs((y+50) - (b.getY()+(b.getHeight()/2))) <= 100){
             return true;
         }
         return false;
@@ -216,30 +228,30 @@ class Player {
             Image player1 = ImageIO.read(new File("Assets/player_back1.png"));
             Image player2 = ImageIO.read(new File("Assets/player_back2.png"));
 
-            if(player)  g.drawImage(player1, this.x, this.y, 70, 80, null);
-            else  g.drawImage(player2, this.x, this.y, 70, 80, null);
+            if(player)  g.drawImage(player1, this.x, this.y, 70, 90, null);
+            else  g.drawImage(player2, this.x, this.y, 70, 90, null);
         }
         else if(direction.equals("front")){
             Image player1 = ImageIO.read(new File("Assets/player_front_1.png"));
             Image player2 = ImageIO.read(new File("Assets/player_front_2.png"));
 
-            if(player)  g.drawImage(player1, this.x, this.y, 70, 80, null);
-            else  g.drawImage(player2, this.x, this.y, 70, 80, null);
+            if(player)  g.drawImage(player1, this.x, this.y, 70, 90, null);
+            else  g.drawImage(player2, this.x, this.y, 70, 90, null);
         }
         else if(direction.equals("right")){
             Image player1 = ImageIO.read(new File("Assets/player_right1.png"));
             Image player2 = ImageIO.read(new File("Assets/player_right2.png"));
 
-            if(player)  g.drawImage(player1, this.x, this.y, 70, 80, null);
-            else  g.drawImage(player2, this.x, this.y, 70, 90, null);
+            if(player)  g.drawImage(player1, this.x, this.y, 100, 90, null);
+            else  g.drawImage(player2, this.x, this.y, 100, 90, null);
 
         }
         else{
             Image player1 = ImageIO.read(new File("Assets/player_left1.png"));
             Image player2 = ImageIO.read(new File("Assets/player_left2.png"));
 
-            if(player)  g.drawImage(player1, this.x, this.y, 70, 80, null);
-            else  g.drawImage(player2, this.x, this.y, 70, 90, null);
+            if(player)  g.drawImage(player1, this.x, this.y, 100, 90, null);
+            else  g.drawImage(player2, this.x, this.y, 100, 90, null);
 
         }
     }

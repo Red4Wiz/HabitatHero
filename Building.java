@@ -5,6 +5,7 @@
  * @author Sailesh Badri & Pouya Karimi
  * @version 09-06-2023
  * A class to represent a house/building drawn in the game.
+ * Pouya added a few getter and setter methods, Sailesh coded all of the logistics and the outline of the class.
  */
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -148,8 +149,22 @@ public class Building {
      * Drawing the house in a give graphic.
      * @param g Graphic in which the house is drawn in.
      */
-    public void draw(Graphics g, int width, int height) throws IOException {
+    public void draw(Graphics g, int w, int h) throws IOException {
         Image house = ImageIO.read(new File("Assets/house.png"));
-        g.drawImage(house, this.x, this.y, width, height, null);
+        g.drawImage(house, this.x, this.y, w, h, null);
+        width = w;
+        height = h;
+    }
+    /**
+     * @return Height of the house
+     */
+    public int getHeight(){
+        return height;
+    }
+    /**
+     * @return Width of the house
+     */
+    public int getWidth(){
+        return width;
     }
 }
