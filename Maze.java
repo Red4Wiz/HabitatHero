@@ -15,6 +15,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Class to represent the maze in our game.
+ */
 public class Maze {
     /** Drawing object used to draw graphics */
     Drawing draw = new Drawing();
