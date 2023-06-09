@@ -139,15 +139,16 @@ public class Maze {
                 //Generating the materials and the player
                 player = new Player(60, 350);
                 materials.add(new Material(1060,390, "wood"));
-                materials.add(new Material(40,690, "brick"));
+                materials.add(new Material(40,690, "wood"));
                 materials.add(new Material(740,150,"metal"));
             }
             if((e.getKeyChar()+"").toLowerCase().equals("p")  && screen == 1){ //User attempts to pick something up
                 for(int i = 0; i < materials.size(); i++){ //Checking if they are near a material
-                    if(player.withinRange(materials.get(i), 50)){ //Picking up
+                    if(player.pick(materials.get(i), 50)){ //Picking up
                         materials.remove(i);
                         break;
                     }
+
                 }
                 draw.repaint();
             }
@@ -186,7 +187,7 @@ public class Maze {
                         }
                         break;
                     case "s":
-                        if (playerY < 750 && maze[(playerY-100+27) / cellSize][(playerX / cellSize)] != '#') {
+                        if (playerY < 750 && maze[(playerY-100+40) / cellSize][(playerX / cellSize)] != '#') {
                             player.moveDown();
                             direction = "front";
                             playerImg = !playerImg;
@@ -292,12 +293,14 @@ public class Maze {
 
                 //Drawing the materials
                 for(Material m : materials){
-                    g.setColor(Color.RED);
+
                     try {
                         m.draw(g, 0);
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
+                    g.setColor(Color.RED);
+                    g.fillRect(m.getX()+m.getWidth()/2, m.getY()+m.getHeight()/2, 3, 3);
                 }
                 if(b!= null){
                     try {

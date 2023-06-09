@@ -88,6 +88,8 @@ public class Material {
         if(x==0) { //Drawing in the maze (material are scaled down)
             if (type.equals("wood")) {
                 Image wood = ImageIO.read(new File("Assets/wood.png"));
+                width = 70;
+                height = 70;
                 g.drawImage(wood, this.x, this.y, 70, 70, null);
             } else if (type.equals("brick")) {
                 Image brick = ImageIO.read(new File("Assets/brick.png"));
@@ -97,6 +99,8 @@ public class Material {
                 g.drawImage(concrete, this.x, this.y, 60, 30, null);
             } else {
                 Image metal = ImageIO.read(new File("Assets/metal.png"));
+                width = 50;
+                height = 50;
                 g.drawImage(metal, this.x, this.y, 50, 50, null);
             }
         }

@@ -24,6 +24,8 @@ class Player {
     final int MAX_WEIGHT = 10; //Max weight of their bag
     /** The current weight of the bag */
     private int bagWeight = 0;
+    private int width;
+    private int height;
 
     /**
      * {@link Player} Constructor
@@ -37,6 +39,9 @@ class Player {
         bag = new ArrayList<>();
     }
 
+    public int getSpeed(){
+        return speed;
+    }
     /**
      * @return X-coordinate of person
      */
@@ -49,6 +54,12 @@ class Player {
      */
     public int getY() {
         return y;
+    }
+    public int getWidth(){
+        return width;
+    }
+    public int getHeight(){
+        return height;
     }
 
     /**
@@ -109,10 +120,11 @@ class Player {
     /**
      * Is the player withing range of a material
      * @param m Material being checked for
+     * @param range The radius the player should be within
      * @return True if the player is within range of a material, false otherwise
      */
     public boolean withinRange(Material m, int range){
-        if(Math.abs((x+45) - (m.getX()+(m.getWidth()/2))) <= range && Math.abs((y+50) - (m.getY()+(m.getHeight()/2))) <= range){
+        if(Math.abs((x+width/2) - (m.getX()+(m.getWidth()/2))) <= range && Math.abs((y+height/2) - (m.getY()+(m.getHeight()/2))) <= range){
             return true;
         }
         return false;
@@ -243,6 +255,8 @@ class Player {
 
                 if(player)  g.drawImage(player1, this.x-10, this.y-10, 40, 50, null);
                 else  g.drawImage(player2, this.x-10, this.y-10, 40, 50, null);
+                width = 40;
+                height = 50;
             }
             else if(direction.equals("front")){
                 Image player1 = ImageIO.read(new File("Assets/player_front_1.png"));
@@ -250,6 +264,8 @@ class Player {
 
                 if(player)  g.drawImage(player1, this.x-10, this.y-10, 40, 50, null);
                 else  g.drawImage(player2, this.x-10, this.y-10, 40, 50, null);
+                width = 40;
+                height = 50;
             }
             else if(direction.equals("right")){
                 Image player1 = ImageIO.read(new File("Assets/player_right1.png"));
@@ -257,6 +273,8 @@ class Player {
 
                 if(player)  g.drawImage(player1, this.x-20, this.y-10, 60, 50, null);
                 else  g.drawImage(player2, this.x-20, this.y-10, 60, 50, null);
+                width = 60;
+                height = 50;
 
             }
             else{
@@ -265,6 +283,8 @@ class Player {
 
                 if(player)  g.drawImage(player1, this.x-25, this.y-10, 60, 50, null);
                 else  g.drawImage(player2, this.x-25, this.y-10, 60, 50, null);
+                width = 60;
+                height = 50;
             }
         }
         else{
@@ -274,6 +294,8 @@ class Player {
 
                 if(player)  g.drawImage(player1, this.x, this.y, 70, 90, null);
                 else  g.drawImage(player2, this.x, this.y, 70, 90, null);
+                width = 70;
+                height = 90;
             }
             else if(direction.equals("front")){
                 Image player1 = ImageIO.read(new File("Assets/player_front_1.png"));
@@ -281,6 +303,8 @@ class Player {
 
                 if(player)  g.drawImage(player1, this.x, this.y, 70, 90, null);
                 else  g.drawImage(player2, this.x, this.y, 70, 90, null);
+                width = 70;
+                height = 90;
             }
             else if(direction.equals("right")){
                 Image player1 = ImageIO.read(new File("Assets/player_right1.png"));
@@ -288,7 +312,8 @@ class Player {
 
                 if(player)  g.drawImage(player1, this.x-10, this.y, 100, 90, null);
                 else  g.drawImage(player2, this.x-10, this.y, 100, 90, null);
-
+                width = 100;
+                height = 90;
             }
             else{
                 Image player1 = ImageIO.read(new File("Assets/player_left1.png"));
@@ -296,6 +321,8 @@ class Player {
 
                 if(player)  g.drawImage(player1, this.x-10, this.y, 100, 90, null);
                 else  g.drawImage(player2, this.x-10, this.y, 100, 90, null);
+                width = 100;
+                height = 90;
             }
         }
     }
