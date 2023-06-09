@@ -194,7 +194,7 @@ public class Maze {
                         }
                         break;
                     case "a":
-                        if (playerX > 50 && maze[(playerY-100) / cellSize][(playerX-7) / cellSize] != '#') {
+                        if (playerX > 50 && maze[(playerY-100) / cellSize][(playerX-7) / cellSize] != '#' && maze[(playerY-100+35) / cellSize][(playerX-7) / cellSize] != '#') {
                             player.moveLeft();
                             direction = "left";
                             playerImg = !playerImg;
@@ -202,7 +202,7 @@ public class Maze {
                         break;
 
                     case "d":
-                        if (playerX < 1150 && maze[((playerY-100) / cellSize)][(playerX+27) / cellSize] != '#') {
+                        if (playerX < 1150 && maze[((playerY-100) / cellSize)][(playerX+27) / cellSize] != '#' && maze[(playerY-100+35) / cellSize][(playerX+27) / cellSize] != '#') {
                             player.moveRight();
                             direction = "right";
                             playerImg = !playerImg;
@@ -279,17 +279,17 @@ public class Maze {
 
                 }
 
-                int playerSize = 20;
                 int playerX = player.getX();
                 int playerY = player.getY();
 
-//                g.setColor(Color.BLUE);
-//                g.fillRect(playerX, playerY, playerSize, playerSize);
+
                 try {
                     player.draw(g, direction, playerImg, 0);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
+                g.setColor(Color.RED);
+                g.fillRect(playerX, playerY+35, 3, 3);
 
                 //Drawing the materials
                 for(Material m : materials){
