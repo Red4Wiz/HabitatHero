@@ -291,20 +291,14 @@ public class Maze {
 
                 }
 
-                int playerX = player.getX();
-                int playerY = player.getY();
-
                 try {
                     player.draw(g, direction, playerImg, 0);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
-                g.setColor(Color.RED);
-                g.fillRect(playerX, playerY+35, 3, 3);
 
                 //Drawing the materials
                 for(Material m : materials){
-
                     try {
                         m.draw(g, 0);
                     } catch (IOException e) {

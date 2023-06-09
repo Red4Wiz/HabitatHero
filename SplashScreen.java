@@ -15,6 +15,7 @@ import java.awt.image.*;
 import java.awt.Font.*;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import javax.imageio.ImageIO;
 
 /**
@@ -99,7 +100,8 @@ public class SplashScreen {
 
             //logo
             try {
-                Image image = ImageIO.read(new File("Assets/logo.png"));
+                InputStream inputStream = SplashScreen.class.getResourceAsStream("/Assets/logo.png");
+                Image image = ImageIO.read(inputStream);
                 int width = 450;
                 int height = 300;
 
