@@ -21,7 +21,7 @@ public class Maze {
     /** JFrame used for the maze level */
     JFrame frame = new JFrame("Habitat Hero");
     /** Screen number to check the screen to be displayed within maze */
-    private int screen = 2;
+    private int screen = 0;
     /** Player object */
     private Player player;
     /** ArrayList of all the materials available within the maze */
@@ -194,7 +194,7 @@ public class Maze {
                         }
                         break;
                     case "a":
-                        if (playerX > 50 && maze[(playerY-100) / cellSize][(playerX-7) / cellSize] != '#') {
+                        if (playerX > 50 && maze[(playerY-100) / cellSize][(playerX-7) / cellSize] != '#' && maze[(playerY-100+35) / cellSize][(playerX-7) / cellSize] != '#') {
                             player.moveLeft();
                             direction = "left";
                             playerImg = !playerImg;
@@ -202,7 +202,7 @@ public class Maze {
                         break;
 
                     case "d":
-                        if (playerX < 1150 && maze[((playerY-100) / cellSize)][(playerX+27) / cellSize] != '#') {
+                        if (playerX < 1150 && maze[((playerY-100) / cellSize)][(playerX+27) / cellSize] != '#' && maze[(playerY-100+35) / cellSize][(playerX+27) / cellSize] != '#') {
                             player.moveRight();
                             direction = "right";
                             playerImg = !playerImg;
@@ -288,7 +288,6 @@ public class Maze {
 
                 }
 
-                int playerSize = 20;
                 int playerX = player.getX();
                 int playerY = player.getY();
 
@@ -297,6 +296,8 @@ public class Maze {
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
+                g.setColor(Color.RED);
+                g.fillRect(playerX, playerY+35, 3, 3);
 
                 //Drawing the materials
                 for(Material m : materials){
@@ -404,15 +405,6 @@ public class Maze {
                     g.setFont(font.deriveFont(Font.BOLD, 30f));
                 } catch (Exception e) {
                 }
-                /*
-                                It's critical to put your safety and wellbeing first by asking friends, family, or social services for
-                                support. In the meantime, consider carrying a compact emergency kit with essentials like water,
-                                non-perishable food, a sleeping bag or blanket, and basic hygiene supplies. Adaptability,
-                                resourcefulness, and maintaining a positive mindset will be key during this challenging period as
-                                you work towards securing a stable living situation. Remember, you are not alone, and there are
-                                resources available to help you navigate through shelter insecurity.
-
-                 */
                 g.setColor(new Color(0,0,0));
                 g.drawString("It's critical to put your safety and well-being first", (getWidth() - g.getFontMetrics().stringWidth("It's critical to put your safety and well-being first")) / 2, 170);
                 g.drawString("by asking friends or family for support. In the", (getWidth() - g.getFontMetrics().stringWidth("by asking friends or family for support. In the")) / 2, 210);
