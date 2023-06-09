@@ -582,8 +582,8 @@ public class FinalLevel {
                     }
                     g.setColor(Color.white);
                     g.drawString("Your shelter was not durable enough", (getWidth() - g.getFontMetrics().stringWidth("Your shelter was not durable enough")) / 2, 150);
-                    g.drawString("to survive the night. This means", (getWidth() - g.getFontMetrics().stringWidth("to survive the night. This means")) / 2, 200);
-                    g.drawString("that you have lost the game. Restart", (getWidth() - g.getFontMetrics().stringWidth("that you have lost the game. Restart")) / 2, 250);
+                    g.drawString("to survive the night. You survived", (getWidth() - g.getFontMetrics().stringWidth("to survive the night. This means")) / 2, 200);
+                    g.drawString(numOfNights + " nights in the game. Restart", (getWidth() - g.getFontMetrics().stringWidth(numOfNights + " nights in the game. Restart")) / 2, 250);
                     g.drawString("or go to the menu to play again.", (getWidth() - g.getFontMetrics().stringWidth("or go to the menu to play again.")) / 2, 300);
                     g.setColor(new Color(60, 120, 220));
                     g.fillRect(300,350,getWidth()/2, 100);
