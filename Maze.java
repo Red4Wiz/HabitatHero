@@ -22,7 +22,7 @@ public class Maze {
     JFrame frame = new JFrame("Habitat Hero");
     /** Screen number to check the screen to be displayed within maze */
     private int screen = 0;
-    /** Plyaer object */
+    /** Player object */
     private Player player;
     /** ArrayList of all the materials available within the maze */
     private ArrayList<Material> materials = new ArrayList<>();
@@ -162,7 +162,7 @@ public class Maze {
                 }
                 draw.repaint();
             }
-            if(e.getKeyChar() == '\n' && screen == 2) { //User completes maze and moves onto final level
+            if(e.getKeyChar() == '\n' && screen == 5) { //User completes maze and moves onto final level
                 new FinalLevel();
                 frame.dispose();
             }
@@ -214,13 +214,22 @@ public class Maze {
                 }
                 draw.repaint();
             }
-
+            if(e.getKeyCode() == 39){ //Click on right arrow
+                if(screen == 2 || screen == 3 || screen == 4){
+                    screen++;
+                }
+                draw.repaint();
+            }
+            if(e.getKeyCode() == 37){ //Click on left arrow
+                if(screen == 3 || screen == 4) screen--;
+                draw.repaint();
+            }
         }
 
     }
 
     /**
-     * Class to draw all of the graphics in this level.
+     * Class to draw all the graphics in this level.
      */
     class Drawing extends JComponent {
         /**
@@ -287,7 +296,6 @@ public class Maze {
 
                 //Drawing the materials
                 for(Material m : materials){
-
                     try {
                         m.draw(g, 0);
                     } catch (IOException e) {
@@ -328,7 +336,83 @@ public class Maze {
                 }
                 g.drawImage(homeBtn, 10,20,60,60,null);
             }
-            else if(screen == 2){ //Congratulations screen
+            else if(screen == 2){ //first life lesson screen
+                g.setColor(new Color(227, 100, 100));
+                g.fillRect(0, 0, getWidth(), getHeight());
+
+                g.setColor(new Color(255, 229, 153));
+                g.fillRoundRect(75, 150, 1050, 500, 50, 50);
+
+                try {
+                    Font font = Font.createFont(Font.TRUETYPE_FONT, SplashScreen.class.getResourceAsStream("Assets/ZenDots-Regular.ttf"));
+                    g.setFont(font.deriveFont(Font.BOLD, 30f));
+                } catch (Exception e) {
+                }
+                g.setColor(new Color(0,0,0));
+                g.drawString("One of the largest issues in the world is", (getWidth() - g.getFontMetrics().stringWidth("One of the largest issues in the world is")) / 2, 220);
+                g.drawString("homelessness and shelter insecurity. In African", (getWidth() - g.getFontMetrics().stringWidth("homelessness and shelter insecurity. In African")) / 2, 260);
+                g.drawString("developing countries such as Ethiopia, there", (getWidth() - g.getFontMetrics().stringWidth("developing countries such as Ethiopia, there")) / 2, 300);
+                g.drawString("are over 150,000 street children, a million in", (getWidth() - g.getFontMetrics().stringWidth("are over 150,000 street children, a million in")) / 2, 340);
+                g.drawString("Egypt, and over 250,000 in Kenya (Ogutu, 2020).", (getWidth() - g.getFontMetrics().stringWidth("Egypt, and over 250,000 in Kenya (Ogutu, 2020).")) / 2, 380);
+                g.drawString("More than 80 million African children lack", (getWidth() - g.getFontMetrics().stringWidth("More than 80 million African children lack")) / 2, 420);
+                g.drawString("access to healthy shelter, and 16 million", (getWidth() - g.getFontMetrics().stringWidth("access to healthy shelter, and 16 million")) / 2, 460);
+                g.drawString("of these children are living on the streets.", (getWidth() - g.getFontMetrics().stringWidth("of these children are living on the street.")) / 2, 500);
+                g.drawString("Press the right arrow to move on", (getWidth() - g.getFontMetrics().stringWidth("Press the right arrow to move on")) / 2, 570);
+
+            }
+            else if(screen == 3){ //second life lesson screen
+                g.setColor(new Color(227, 100, 100));
+                g.fillRect(0, 0, getWidth(), getHeight());
+
+                g.setColor(new Color(255, 229, 153));
+                g.fillRoundRect(75, 100, 1050, 600, 50, 50);
+
+                try {
+                    Font font = Font.createFont(Font.TRUETYPE_FONT, SplashScreen.class.getResourceAsStream("Assets/ZenDots-Regular.ttf"));
+                    g.setFont(font.deriveFont(Font.BOLD, 30f));
+                } catch (Exception e) {
+                }
+
+                g.setColor(new Color(0,0,0));
+                g.drawString("There are various actions you may take to improve", (getWidth() - g.getFontMetrics().stringWidth("There are various actions you may take to improve")) / 2, 170);
+                g.drawString("your chances of surviving if you ever find yourself", (getWidth() - g.getFontMetrics().stringWidth("your chances of surviving if you ever find yourself")) / 2, 210);
+                g.drawString("in a situation where your shelter is insecure.", (getWidth() - g.getFontMetrics().stringWidth("in a situation where your shelter is insecure.")) / 2, 250);
+                g.drawString("First and foremost, it's critical to analyse your", (getWidth() - g.getFontMetrics().stringWidth("First and foremost, it's critical to analyse your")) / 2, 290);
+                g.drawString("surroundings and search for secure temporary", (getWidth() - g.getFontMetrics().stringWidth("surroundings and search for secure temporary")) / 2, 330);
+                g.drawString("shelter options. This might apply to public buildings", (getWidth() - g.getFontMetrics().stringWidth("shelter options. This might apply to public buildings")) / 2, 370);
+                g.drawString("community centres, or even deserted buildings that", (getWidth() - g.getFontMetrics().stringWidth("community centres, or even deserted buildings that")) / 2, 410);
+                g.drawString("provide some sort of shelter from the weather.", (getWidth() - g.getFontMetrics().stringWidth("provide some sort of shelter from the weather.")) / 2, 450);
+                g.drawString("Additionally, get in touch with neighbourhood", (getWidth() - g.getFontMetrics().stringWidth("Additionally, get in touch with neighbourhood")) / 2, 490);
+                g.drawString("nonprofits, shelters, or support groups that", (getWidth() - g.getFontMetrics().stringWidth("nonprofits, shelters, or support groups that")) / 2, 530);
+                g.drawString("focus on helping people with housing issues.", (getWidth() - g.getFontMetrics().stringWidth("focus on helping people with housing issues.")) / 2, 570);
+                g.drawString("Press the right arrow to move on", (getWidth() - g.getFontMetrics().stringWidth("Press the right arrow to move on")) / 2, 630);
+            }
+            else if(screen == 4){ //third life lesson screen
+                g.setColor(new Color(227, 100, 100));
+                g.fillRect(0, 0, getWidth(), getHeight());
+
+                g.setColor(new Color(255, 229, 153));
+                g.fillRoundRect(75, 100, 1050, 600, 50, 50);
+
+                try {
+                    Font font = Font.createFont(Font.TRUETYPE_FONT, SplashScreen.class.getResourceAsStream("Assets/ZenDots-Regular.ttf"));
+                    g.setFont(font.deriveFont(Font.BOLD, 30f));
+                } catch (Exception e) {
+                }
+                g.setColor(new Color(0,0,0));
+                g.drawString("It's critical to put your safety and well-being first", (getWidth() - g.getFontMetrics().stringWidth("It's critical to put your safety and well-being first")) / 2, 170);
+                g.drawString("by asking friends or family for support. In the", (getWidth() - g.getFontMetrics().stringWidth("by asking friends or family for support. In the")) / 2, 210);
+                g.drawString("meantime, consider carrying a compact emergency", (getWidth() - g.getFontMetrics().stringWidth("meantime, consider carrying a compact emergency")) / 2, 250);
+                g.drawString("kit with essentials like water or a blanket.", (getWidth() - g.getFontMetrics().stringWidth("kit with essentials like water or a blanket.")) / 2, 290);
+                g.drawString("Adaptability, resourcefulness, and maintaining a", (getWidth() - g.getFontMetrics().stringWidth("Adaptability, resourcefulness, and maintaining a")) / 2, 330);
+                g.drawString("positive mindset will be key during this challenging", (getWidth() - g.getFontMetrics().stringWidth("positive mindset will be key during this challenging")) / 2, 370);
+                g.drawString("period as you work towards securing a stable", (getWidth() - g.getFontMetrics().stringWidth("period as you work towards securing a stable")) / 2, 410);
+                g.drawString("living situation. Remember, you are not alone.", (getWidth() - g.getFontMetrics().stringWidth("living situation. Remember, you are not alone.")) / 2, 450);
+                g.drawString("there are resources available to help you", (getWidth() - g.getFontMetrics().stringWidth("there are resources available to help you")) / 2, 490);
+                g.drawString("navigate through shelter insecurity.", (getWidth() - g.getFontMetrics().stringWidth("navigate through shelter insecurity.at")) / 2, 530);
+                g.drawString("Press the right arrow to move on", (getWidth() - g.getFontMetrics().stringWidth("Press the right arrow to move on")) / 2, 630);
+            }
+            else if(screen == 5){ //Congratulations screen
                 try {
                     Font font = Font.createFont(Font.TRUETYPE_FONT, SplashScreen.class.getResourceAsStream("Assets/ZenDots-Regular.ttf"));
                     g.setFont(font.deriveFont(Font.BOLD, 100f));
