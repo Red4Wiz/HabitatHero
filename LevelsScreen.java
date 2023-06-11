@@ -29,8 +29,6 @@ public class LevelsScreen {
     Color label1 = Color.black, label2 = Color.black, label3 = Color.black;
     /** Image of the home button */
     Image homeBtn = null;
-    /** Image of the white home button (different colour when hovering) */
-//    File whiteBtn = new File("Assets/homeButtonW.png"), blackBtn = new File("Assets/homeButton.png");;
     String whiteBtnPath = "/Assets/homeButtonW.png";
     String blackBtnPath = "/Assets/homeButton.png";
 

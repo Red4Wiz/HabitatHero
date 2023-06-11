@@ -546,7 +546,7 @@ public class Lesson {
                 g.drawString("of the game, click the left arrow", (getWidth() - g.getFontMetrics().stringWidth("of the game, click the left arrow")) / 2, 525);
                 g.drawString("keys to move backwards.", (getWidth() - g.getFontMetrics().stringWidth("keys to move backwards.")) / 2, 575);
             }
-            if(choice != 5){ //Drawing the home button if you are not on the final screen
+            if(choice != 8){ //Drawing the home button if you are not on the final screen
                 g.drawImage(homeBtn, 10,20,60,60,null);
             }
         }
