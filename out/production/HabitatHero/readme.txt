@@ -37,6 +37,5 @@ Project:
 
 Executable JAR:
 - Ensure JDK 19 is installed in the system before running the JAR file
-- You can access the JAR file by going through the following folder
-  out -> artifacts > HabitatHero_jar > HabitatHero.jar
+- You can access the JAR file by going running the .jar file named 'MacrohardJune9th'
 - Once the file is found run by double clicking
