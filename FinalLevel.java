@@ -101,7 +101,7 @@ public class FinalLevel {
         frame.add(drawing);
         frame.setVisible(true);
 
-        player = new Player(600, 450, 1);
+        player = new Player(600, 450, 3);
 
         //start of program
         startTime = System.currentTimeMillis();

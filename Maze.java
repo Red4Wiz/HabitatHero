@@ -190,7 +190,7 @@ public class Maze {
 
             if((e.getKeyChar()+"").toLowerCase().equals("b") && screen == 1){ //User attempts to build
                 //Checking that the user is in the build area
-                if(player.getX() >= 450 && player.getX() <= 700 && player.getY() >= 400 && player.getY() <= 550 && materials.isEmpty()){
+                if(player.getX() >= 450 && player.getX() <= 700 && player.getY() >= 300 && player.getY() <= 550 && materials.isEmpty()){
                     b = new Building(500,400);
                     maze[mazeHeight-2][mazeWidth-1] = ' ';
                     maze[mazeHeight-3][mazeWidth-1] = ' ';
