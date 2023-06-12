@@ -20,17 +20,17 @@ import java.io.IOException;
  */
 public class LevelsScreen {
     /** Frame to draw on. */
-    JFrame frame = new JFrame("Levels");
+    private JFrame frame = new JFrame("Levels");
     /** Drawing of the levels screen */
-    Drawing drawing = new Drawing();
+    private Drawing drawing = new Drawing();
     /** Mouselistener for mouse actions in the levels screen */
-    MouseHandler mouseListener = new MouseHandler();
+    private MouseHandler mouseListener = new MouseHandler();
     /** Colour labels to change when hovering over a label */
-    Color label1 = Color.black, label2 = Color.black, label3 = Color.black;
+    private Color label1 = Color.black, label2 = Color.black, label3 = Color.black;
     /** Image of the home button */
-    Image homeBtn = null;
-    String whiteBtnPath = "/Assets/homeButtonW.png";
-    String blackBtnPath = "/Assets/homeButton.png";
+    private Image homeBtn = null;
+    private String whiteBtnPath = "/Assets/homeButtonW.png";
+    private String blackBtnPath = "/Assets/homeButton.png";
 
     /**
      * {@link LevelsScreen} Constructor

@@ -17,13 +17,13 @@ import java.io.IOException;
 
 public class ExitScreen {
     /** Frame to draw on. */
-    JFrame frame = new JFrame("Exit Screen");
+    private JFrame frame = new JFrame("Exit Screen");
     /** Drawing of the levels screen */
-    Drawing drawing = new Drawing();
+    private Drawing drawing = new Drawing();
     /** Starting time for the counter to automatically close the screen.*/
-    long start = 0;
+    private long start = 0;
     /** Variable to know which screen should be drawn.*/
-    int choice = 0;
+    private int choice = 0;
     /**
      * {@link ExitScreen} Constructor
      */

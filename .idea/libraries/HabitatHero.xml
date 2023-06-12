@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="HabitatHero">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/out/artifacts/HabitatHero_jar/HabitatHero.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

@@ -14,7 +14,9 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 /**
@@ -22,9 +24,9 @@ import java.util.ArrayList;
  */
 public class FinalLevel {
     /** Frame which the final level is drawn on. */
-    private JFrame frame = new JFrame("Final Level");
+    JFrame frame = new JFrame("Final Level");
     /** Drawing of our final level. */
-    private Drawing drawing = new Drawing();
+    Drawing drawing = new Drawing();
     /** The current screen being displayed. */
     private int screen = 0;
     /** Radius of the circle that gets bigger in the death screen. */
@@ -36,14 +38,14 @@ public class FinalLevel {
     /** Mousehandler to handle all mouse actions in this level. */
     private MouseHandler mouseHandler = new MouseHandler();
     /** File directories of both white and black home buttons. */
-    String whiteBtnPath = "/Assets/homeButtonW.png";
-    String blackBtnPath = "/Assets/homeButton.png";
+    private String whiteBtnPath = "/Assets/homeButtonW.png";
+    private String blackBtnPath = "/Assets/homeButton.png";
     /** Booleans to know whether it is currently daytime or whether it just turned day. */
     private boolean dayTime = true, justTurnedDay = false;
     /** Player in the game */
     private Player player;
     /** All the materials in the game. */
-    private ArrayList<Material> materials = new ArrayList<>();
+    ArrayList<Material> materials = new ArrayList<>();
     /** The amount of time it is day in the game */
     private final long MAX_DAYTIME = 30;
     /** Time being displayed on the timer */
@@ -58,10 +60,10 @@ public class FinalLevel {
     private int numOfNights = 0;
     /** The direction the player is moving in. */
     private String direction;
-    /** Whether or not the player should be drawn. */
+    /** Whether the player should be drawn. */
     private boolean playerImage = false;
     /** The house in the game */
-    private Building house = new Building(500,300);
+    Building house = new Building(500,300);
     /** Amount of wood being selected to build with */
     private int woodCount = 0;
     /** Amount of brick being selected to build with */
@@ -76,6 +78,9 @@ public class FinalLevel {
     private int dimness = 0;
     /** Starting time of the program */
     private long startTime;
+    /** Boolean to know whether you should be asking for their name. */
+    private boolean rightName = false;
+    private boolean moveUp = false, moveDown = false, moveLeft = false, moveRight = false;
 
     /**
      * {@link FinalLevel} Constructor
@@ -96,7 +101,7 @@ public class FinalLevel {
         frame.add(drawing);
         frame.setVisible(true);
 
-        player = new Player(600, 450);
+        player = new Player(600, 450, 1);
 
         //start of program
         startTime = System.currentTimeMillis();
@@ -160,21 +165,24 @@ public class FinalLevel {
                 switch (keyCode) {
                     case "w":
                         if (playerY > 107) {
-                            player.moveUp();
+                            moveUp = true;
+                           // player.moveUp();
                             direction = "back";
                             playerImage = !playerImage;
                         }
                         break;
                     case "s":
                         if (playerY < 750) {
-                            player.moveDown();
+                            moveDown = true;
+                          //  player.moveDown();
                             direction = "front";
                             playerImage = !playerImage;
                         }
                         break;
                     case "a":
                         if (playerX > 50) {
-                            player.moveLeft();
+                            moveLeft = true;
+                         //   player.moveLeft();
                             direction = "left";
                             playerImage = !playerImage;
                         }
@@ -182,7 +190,8 @@ public class FinalLevel {
 
                     case "d":
                         if (playerX < 1150) {
-                            player.moveRight();
+                            moveRight = true;
+                          //  player.moveRight();
                             direction = "right";
                             playerImage = !playerImage;
                         }
@@ -193,6 +202,16 @@ public class FinalLevel {
                 else insideHouse = false;
                 drawing.repaint();
             }
+        }
+        public void keyReleased(KeyEvent e){
+            String keyCode = (e.getKeyChar()+"").toLowerCase();
+            switch (keyCode) {
+                case "w" -> moveUp = false;
+                case "s" -> moveDown = false;
+                case "a" -> moveLeft = false;
+                case "d" -> moveRight = false;
+            }
+            drawing.repaint();
         }
     }
 
@@ -323,6 +342,10 @@ public class FinalLevel {
          * @param g  the <code>Graphics</code> context in which to paint
          */
         public void paint(Graphics g){
+            if(moveUp) player.moveUp();
+            if(moveDown) player.moveDown();
+            if(moveLeft) player.moveLeft();
+            if(moveRight) player.moveRight();
             //static drawings
 
             //background
@@ -573,25 +596,45 @@ public class FinalLevel {
                     secondStartTime = System.currentTimeMillis();
                 }
                 else{
-                    g.setColor(Color.black);
-                    g.fillRect(0,0,getWidth(), getHeight());
-                    try {
-                        Font font = Font.createFont(Font.TRUETYPE_FONT, SplashScreen.class.getResourceAsStream("Assets/ZenDots-Regular.ttf"));
-                        g.setFont(font.deriveFont(Font.BOLD, 40f));
-                    } catch (Exception e) {
+                    while(!rightName){
+                        String name = JOptionPane.showInputDialog(frame, "Enter your username. It may not include a space.");
+                        if(name == null){
+                            break;
+                        }
+                        rightName = processUsername(name);
+                        if(rightName){
+                            try{
+                                Leaderboard.addPerson(name, numOfNights);
+                                FileWriter temp = new FileWriter("leaderboard.txt", true);
+                                PrintWriter writer = new PrintWriter(temp);
+                                writer.println(name + " " + numOfNights);
+                                writer.close();
+                            }
+                            catch (IOException e){}
+                            repaint();
+                        }
                     }
-                    g.setColor(Color.white);
-                    g.drawString("Your shelter was not durable enough", (getWidth() - g.getFontMetrics().stringWidth("Your shelter was not durable enough")) / 2, 150);
-                    g.drawString("to survive the night. You survived", (getWidth() - g.getFontMetrics().stringWidth("to survive the night. This means")) / 2, 200);
-                    g.drawString(numOfNights + " nights in the game. Restart", (getWidth() - g.getFontMetrics().stringWidth(numOfNights + " nights in the game. Restart")) / 2, 250);
-                    g.drawString("or go to the menu to play again.", (getWidth() - g.getFontMetrics().stringWidth("or go to the menu to play again.")) / 2, 300);
-                    g.setColor(new Color(60, 120, 220));
-                    g.fillRect(300,350,getWidth()/2, 100);
-                    g.fillRect(300,470,getWidth()/2, 100);
-                    g.setColor(color1);
-                    g.drawString("Restart Level", (getWidth() - g.getFontMetrics().stringWidth("Restart Level")) / 2, 415);
-                    g.setColor(color2);
-                    g.drawString("Main Menu", (getWidth() - g.getFontMetrics().stringWidth("Main Menu")) / 2, 535);
+                    if(rightName){
+                        g.setColor(Color.black);
+                        g.fillRect(0,0,getWidth(), getHeight());
+                        try {
+                            Font font = Font.createFont(Font.TRUETYPE_FONT, SplashScreen.class.getResourceAsStream("Assets/ZenDots-Regular.ttf"));
+                            g.setFont(font.deriveFont(Font.BOLD, 40f));
+                        } catch (Exception e) {
+                        }
+                        g.setColor(Color.white);
+                        g.drawString("Your shelter was not durable enough", (getWidth() - g.getFontMetrics().stringWidth("Your shelter was not durable enough")) / 2, 150);
+                        g.drawString("to survive the night. You survived", (getWidth() - g.getFontMetrics().stringWidth("to survive the night. This means")) / 2, 200);
+                        g.drawString(numOfNights + " nights in the game. Restart", (getWidth() - g.getFontMetrics().stringWidth(numOfNights + " nights in the game. Restart")) / 2, 250);
+                        g.drawString("or go to the menu to play again.", (getWidth() - g.getFontMetrics().stringWidth("or go to the menu to play again.")) / 2, 300);
+                        g.setColor(new Color(60, 120, 220));
+                        g.fillRect(300,350,getWidth()/2, 100);
+                        g.fillRect(300,470,getWidth()/2, 100);
+                        g.setColor(color1);
+                        g.drawString("Restart Level", (getWidth() - g.getFontMetrics().stringWidth("Restart Level")) / 2, 415);
+                        g.setColor(color2);
+                        g.drawString("Main Menu", (getWidth() - g.getFontMetrics().stringWidth("Main Menu")) / 2, 535);
+                    }
                 }
             }
             else if(screen == 7){//building screen
@@ -721,5 +764,15 @@ public class FinalLevel {
             materials.add(new Material(x,y,randomMaterial()));
         }
     }
-
+    private boolean processUsername(String name){
+        boolean pass = true;
+        for(int i = 0; i<name.length(); i++){
+            if(name.charAt(i) == ' ') pass = false;
+        }
+        if(name.length() == 0) pass = false;
+        if(!pass){
+            JOptionPane.showMessageDialog(frame, "Invalid username. Try again.");
+        }
+        return pass;
+    }
 }

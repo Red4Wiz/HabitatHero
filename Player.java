@@ -27,7 +27,9 @@ import java.util.ArrayList;
     final int MAX_WEIGHT = 10; //Max weight of their bag
     /** The current weight of the bag */
     private int bagWeight = 0;
+    /** Width of the bag. */
     private int width;
+    /** Height of the bag. */
     private int height;
 
     /**
@@ -35,12 +37,17 @@ import java.util.ArrayList;
      * @param x X-coordinate of person
      * @param y Y-coordinate of person
      */
-    public Player(int x, int y) {
+    public Player(int x, int y, int s) {
         this.x = x;
         this.y = y;
-        speed = 10;
+        speed = s;
         bag = new ArrayList<>();
     }
+
+     /**
+      * Returning the speed of the player.
+      * @return Speed of player
+      */
 
     public int getSpeed(){
         return speed;

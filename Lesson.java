@@ -17,18 +17,18 @@ import java.io.IOException;
  */
 public class Lesson {
     /** Frame which is being drawn on */
-    JFrame frame = new JFrame("Main Menu");
+    private JFrame frame = new JFrame("Main Menu");
     /** Drawing of the main menu */
-    Drawing drawing = new Drawing();
+    private Drawing drawing = new Drawing();
     /** Mouse listener for mouse activities on this frame.*/
-    MouseHandler mouseListener = new MouseHandler();
+    private MouseHandler mouseListener = new MouseHandler();
     /** Variable to know which screen should be drawn */
-    int choice = 0;
+    private int choice = 0;
     /** Regular home button */
-    Image homeBtn = null;
+    private Image homeBtn = null;
     /** White version of the home button used when the mouse is hovering over it */
-    String whiteBtnPath = "/Assets/homeButtonW.png";
-    String blackBtnPath = "/Assets/homeButton.png";
+    private String whiteBtnPath = "/Assets/homeButtonW.png";
+    private String blackBtnPath = "/Assets/homeButton.png";
     public Lesson(){
         //Loading the home button
         try {
@@ -461,7 +461,7 @@ public class Lesson {
 
                 //Lesson
                 g.drawString("The bag can only hold a set", 3*getWidth()/4 - 50 - (g.getFontMetrics().stringWidth("The bag can only hold a set"))/2, 290);
-                g.drawString("a set number of materials.", 3*getWidth()/4 - 50 - (g.getFontMetrics().stringWidth("a set number of materials."))/2, 340);
+                g.drawString("number of materials.", 3*getWidth()/4 - 50 - (g.getFontMetrics().stringWidth("number of materials."))/2, 340);
                 g.drawString("Your bag has a max weight", 3*getWidth()/4 - 50 - (g.getFontMetrics().stringWidth("Your bag has a max weight"))/2, 390);
                 g.drawString("of 25, with wood being", 3*getWidth()/4 - 50 - (g.getFontMetrics().stringWidth("of 25, with wood being"))/2, 440);
                 g.drawString("the lightest material and", 3*getWidth()/4 - 50 - (g.getFontMetrics().stringWidth("the lightest material and"))/2, 490);

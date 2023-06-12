@@ -14,13 +14,19 @@ import java.io.IOException;
  * Class to represent a material in our game (wood, brick, metal, or concrete)
  */
 public class Material {
-    private int x; // x-coordinate of material position
-    private int y; // y-coordinate of material position
-    //Width and height of the material
+    /** X-coordinate of material*/
+    private int x;
+    /** Y-coordinate of material*/
+    private int y;
+    /** Width of the material.*/
     private int width;
+    /** Height of the material.*/
     private int height;
+    /** Type of the material.*/
     private String type;
+    /** Strength of the material.*/
     private int strength;
+    /** Weight of the material.*/
     private int weight;
 
     /**

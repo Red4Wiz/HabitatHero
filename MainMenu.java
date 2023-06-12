@@ -16,13 +16,13 @@ import java.awt.event.MouseMotionListener;
  */
 public class MainMenu{
     /** Frame which is being drawn on */
-    JFrame frame = new JFrame("Main Menu");
+    private JFrame frame = new JFrame("Main Menu");
     /** Drawing of the main menu */
-    Drawing drawing = new Drawing();
+    private Drawing drawing = new Drawing();
     /** Mouse listener for mouse activities on this frame.*/
-    MouseHandler mouseListener = new MouseHandler();
+    private MouseHandler mouseListener = new MouseHandler();
     /** Colour variables to change the colour of a label when the mouse is hovering over it. */
-    Color label1 = Color.white, label2 = Color.white, label3 = Color.white, label4 = Color.white;
+    private Color label1 = Color.white, label2 = Color.white, label3 = Color.white, label4 = Color.white;
 
     /**
      * {@link MainMenu} Constructor

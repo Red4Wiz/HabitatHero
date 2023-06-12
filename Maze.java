@@ -20,9 +20,9 @@ import java.util.ArrayList;
  */
 public class Maze {
     /** Drawing object used to draw graphics */
-    Drawing draw = new Drawing();
+    private Drawing draw = new Drawing();
     /** JFrame used for the maze level */
-    JFrame frame = new JFrame("Habitat Hero");
+    private JFrame frame = new JFrame("Habitat Hero");
     /** Screen number to check the screen to be displayed within maze */
     private int screen = 0;
     /** Player object */
@@ -41,13 +41,15 @@ public class Maze {
     /** The size ratio of each cell within the window */
     private int cellSize;
     /** MouseHandler object for mose actions */
-    MouseHandler mouseListener = new MouseHandler();
+    private MouseHandler mouseListener = new MouseHandler();
     /** Image for the home button on top right */
-    Image homeBtn = null;
+    private Image homeBtn = null;
     /** Hovering version of the home button */
-    String whiteBtnPath = "/Assets/homeButtonW.png";
-    String blackBtnPath = "/Assets/homeButton.png";
+    private String whiteBtnPath = "/Assets/homeButtonW.png";
+    private String blackBtnPath = "/Assets/homeButton.png";
+    /** Direction the player is facing.*/
     private String direction = "front";
+    /** The player should be drawn or not.*/
     private boolean playerImg = false;
 
     /**
@@ -147,8 +149,38 @@ public class Maze {
 
             if((e.getKeyChar()+"").toLowerCase().equals("p")  && screen == 1){ //User attempts to pick something up
                 for(int i = 0; i < materials.size(); i++){ //Checking if they are near a material
-                    if(player.pick(materials.get(i), 50)){ //Picking up
-                        materials.remove(i);
+                    if(player.withinRange(materials.get(i), 50)){ //Picking up
+                        String message;
+                        if(materials.size() == 3){
+                            message = "What should be your first step when faced with shelter insecurity?\n" +
+                                    "A. Panic and give up\n" +
+                                    "B. Search for temporary shelter\n" +
+                                    "C. Commit theft to survive";
+                        }
+                        else if(materials.size() == 2){
+                            message = "Which is NOT an example of someone you should get in touch with for support?\n" +
+                                    "A. Neighbourhood non-profits\n" +
+                                    "B. Local Shelters\n" +
+                                    "C. Your local bakery";
+                        }
+                        else{
+                            message = "What is a key in order to build towards a stable habitat?\n" +
+                                    "A. Negative mindset\n" +
+                                    "B. Positive mindset\n" +
+                                    "C. Selfishness ";
+                        }
+                        boolean isAnswerCorrect = false;
+                        while (!isAnswerCorrect) {
+                            String answer = JOptionPane.showInputDialog(frame, message);
+                            if (answer == null) {
+                                break;
+                            }
+                            isAnswerCorrect = processUserAnswer(answer);
+                        }
+                        if(isAnswerCorrect) {
+                            player.pick(materials.get(i), 50);
+                            materials.remove(i);
+                        }
                         break;
                     }
 
@@ -159,7 +191,7 @@ public class Maze {
             if((e.getKeyChar()+"").toLowerCase().equals("b") && screen == 1){ //User attempts to build
                 //Checking that the user is in the build area
                 if(player.getX() >= 450 && player.getX() <= 700 && player.getY() >= 400 && player.getY() <= 550 && materials.isEmpty()){
-                    b = new Building(525,425);
+                    b = new Building(500,400);
                     maze[mazeHeight-2][mazeWidth-1] = ' ';
                     maze[mazeHeight-3][mazeWidth-1] = ' ';
                 }
@@ -180,7 +212,7 @@ public class Maze {
                 screen = 1;
                 draw.repaint();
                 //Generating the materials and the player
-                player = new Player(60, 350);
+                player = new Player(60, 350, 10);
                 materials.add(new Material(1060,390, "wood"));
                 materials.add(new Material(40,690, "wood"));
                 materials.add(new Material(740,150,"metal"));
@@ -290,12 +322,6 @@ public class Maze {
 
                 }
 
-                try {
-                    player.draw(g, direction, playerImg, 0);
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-
                 //Drawing the materials
                 for(Material m : materials){
                     try {
@@ -305,12 +331,23 @@ public class Maze {
                     }
 
                 }
+                //Drawing the middle circle (where the house should be built)
+                g.setColor(Color.red);
+                g.drawOval(getWidth()/2 - 120, getHeight()/2 - 30, 200, 200);
+                //Drawing the house (if built)
                 if(b!= null){
                     try {
                         b.draw(g, 150,150);
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
+                }
+
+                //Drawing the person
+                try {
+                    player.draw(g, direction, playerImg, 0);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
                 }
 
                 g.setColor(new Color(163, 235, 240));
@@ -324,8 +361,8 @@ public class Maze {
                 //Maze instructions
                 g.setColor(new Color(255, 229, 153));
                 g.setColor(new Color(0,0,0));
-                g.drawString("In order to leave the maze, you must first build a house in the middle square block.", (getWidth() - g.getFontMetrics().stringWidth("In order to leave the maze, you must first build a house in the middle square block.")) / 2, 25);
-                g.drawString(" Find and pick up materials and return to the middle square to build.", (getWidth() - g.getFontMetrics().stringWidth("Find and pick up materials and return to the middle square to build.")) / 2, 55);
+                g.drawString("In order to leave the maze, you must first build a house in the middle square circle.", (getWidth() - g.getFontMetrics().stringWidth("In order to leave the maze, you must first build a house in the middle square circle.")) / 2, 25);
+                g.drawString(" Find and pick up materials and return to the middle circle to build.", (getWidth() - g.getFontMetrics().stringWidth("Find and pick up materials and return to the middle circle to build.")) / 2, 55);
                 g.drawString(" After you have built, the exit will open and you may leave!", (getWidth() - g.getFontMetrics().stringWidth("After you have built, the exit will open and you may leave!")) / 2, 85);
 
                 //once the user builds
@@ -365,6 +402,53 @@ public class Maze {
                 g.drawString("time for the real test. Time to see if you can", (getWidth() - g.getFontMetrics().stringWidth("time for the real test. Time to see if you can")) / 2, 450);
                 g.drawString("survive every night, and become the Habitat Hero!", (getWidth() - g.getFontMetrics().stringWidth("survive every night, and become the Habitat Hero!")) / 2, 490);
                 g.drawString("Press <enter> to move on", (getWidth() - g.getFontMetrics().stringWidth("Press <enter> to move on")) / 2, 620);
+            }
+        }
+    }
+
+    /**
+     * Processes user's answers to the pop up questions and checks whether it is correct or not
+     * @param answer Answer the user inputted
+     * @return Whether the answer is correct or not
+     */
+    private boolean processUserAnswer(String answer) {
+        if(materials.size() == 3){
+            if (answer.trim().equalsIgnoreCase("b")) {
+                return true;
+            }
+            else if(answer.trim().equalsIgnoreCase("a") || answer.trim().equalsIgnoreCase("c")){
+                JOptionPane.showMessageDialog(frame, "The answer was wrong! Try again.");
+                return false;
+            }
+            else {
+                JOptionPane.showMessageDialog(frame, "Invalid answer. Please enter 'A', 'B' or 'C'.");
+                return false;
+            }
+        }
+        else if(materials.size() == 2){
+            if (answer.trim().equalsIgnoreCase("c")) {
+                return true;
+            }
+            else if(answer.trim().equalsIgnoreCase("b") || answer.trim().equalsIgnoreCase("a")){
+                JOptionPane.showMessageDialog(frame, "The answer was wrong! Try again.");
+                return false;
+            }
+            else {
+                JOptionPane.showMessageDialog(frame, "Invalid answer. Please enter 'A', 'B' or 'C'.");
+                return false;
+            }
+        }
+        else{
+            if (answer.trim().equalsIgnoreCase("b")) {
+                return true;
+            }
+            else if(answer.trim().equalsIgnoreCase("a") || answer.trim().equalsIgnoreCase("c")){
+                JOptionPane.showMessageDialog(frame, "The answer was wrong! Try again.");
+                return false;
+            }
+            else {
+                JOptionPane.showMessageDialog(frame, "Invalid answer. Please enter 'A', 'B' or 'C'.");
+                return false;
             }
         }
     }

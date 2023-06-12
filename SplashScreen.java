@@ -24,9 +24,9 @@ import javax.imageio.ImageIO;
 public class SplashScreen {
 
     /** Drawing object used to display graphics */
-    Drawing draw = new Drawing();
+    private Drawing draw = new Drawing();
     /** Frame for the splash screen */
-    JFrame frame = new JFrame("Habitat Hero");
+    private JFrame frame = new JFrame("Habitat Hero");
     /** The first underline rectangble below the game title*/
     private int rect1 = 0;
     /** The second underline rectangble below the game title */

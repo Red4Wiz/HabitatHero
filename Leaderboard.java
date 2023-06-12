@@ -17,18 +17,18 @@ import java.util.Scanner;
  */
 public class Leaderboard {
     /** Frame which is being drawn on */
-    JFrame frame = new JFrame("Main Menu");
+    private JFrame frame = new JFrame("Main Menu");
     /** Drawing of the main menu */
-    Drawing drawing = new Drawing();
+    private Drawing drawing = new Drawing();
     /** Mouse listener for mouse activities on this frame.*/
-    MouseHandler mouseListener = new MouseHandler();
+    private MouseHandler mouseListener = new MouseHandler();
     /** Arraylists to store names and scores. */
-    ArrayList<String> names = new ArrayList<String>();
-    ArrayList<Integer> scores = new ArrayList<Integer>();
+    private static ArrayList<String> names = new ArrayList<String>();
+    private static ArrayList<Integer> scores = new ArrayList<Integer>();
     /** Image of the home button */
-    Image homeBtn = null;
-    String whiteBtnPath = "/Assets/homeButtonW.png";
-    String blackBtnPath = "/Assets/homeButton.png";
+    private Image homeBtn = null;
+    private String whiteBtnPath = "/Assets/homeButtonW.png";
+    private String blackBtnPath = "/Assets/homeButton.png";
 
     /**
      * {@link Leaderboard} Constructor
@@ -57,7 +57,7 @@ public class Leaderboard {
      */
     public void readData(){
         try {
-            Scanner reader = new Scanner(new File("leaderboard.txt"));
+            Scanner reader = new Scanner(Leaderboard.class.getResource("leaderboard.txt").openStream());
             while(reader.hasNext()){
                 String name = reader.next(); //username
                 int score = reader.nextInt(); //score
@@ -89,6 +89,10 @@ public class Leaderboard {
             }
             if(!swapped) break; //no swap has occurred - arraylist is sorted
         }
+    }
+    public static void addPerson(String n, int p){
+        names.add(n);
+        scores.add(p);
     }
 
     /**
