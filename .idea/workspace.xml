@@ -10,19 +10,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f67cbe41-7115-4a49-bcfb-a7fbee185f53" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/HabitatHero.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/MacrohardJune9th.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/MacrohardJune9th1.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/HabitatHero_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/HabitatHero_jar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ExitScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/ExitScreen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FinalLevel.java" beforeDir="false" afterPath="$PROJECT_DIR$/FinalLevel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HabitatHero.jar" beforeDir="false" afterPath="$PROJECT_DIR$/HabitatHero.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Javadoc/Building.html" beforeDir="false" afterPath="$PROJECT_DIR$/Javadoc/Building.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Javadoc/ExitScreen.html" beforeDir="false" afterPath="$PROJECT_DIR$/Javadoc/ExitScreen.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Javadoc/FinalLevel.html" beforeDir="false" afterPath="$PROJECT_DIR$/Javadoc/FinalLevel.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Javadoc/Game.html" beforeDir="false" afterPath="$PROJECT_DIR$/Javadoc/Game.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Javadoc/Leaderboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/Javadoc/Leaderboard.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Javadoc/Lesson.html" beforeDir="false" afterPath="$PROJECT_DIR$/Javadoc/Lesson.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Javadoc/LevelsScreen.html" beforeDir="false" afterPath="$PROJECT_DIR$/Javadoc/LevelsScreen.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Javadoc/MainMenu.html" beforeDir="false" afterPath="$PROJECT_DIR$/Javadoc/MainMenu.html" afterDir="false" />
@@ -43,47 +39,44 @@
       <change beforePath="$PROJECT_DIR$/Javadoc/index-files/index-8.html" beforeDir="false" afterPath="$PROJECT_DIR$/Javadoc/index-files/index-8.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Javadoc/index-files/index-9.html" beforeDir="false" afterPath="$PROJECT_DIR$/Javadoc/index-files/index-9.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Javadoc/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/Javadoc/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Javadoc/member-search-index.js" beforeDir="false" afterPath="$PROJECT_DIR$/Javadoc/member-search-index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Javadoc/overview-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/Javadoc/overview-tree.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Javadoc/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/Javadoc/package-summary.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Javadoc/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/Javadoc/package-tree.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Javadoc/search.html" beforeDir="false" afterPath="$PROJECT_DIR$/Javadoc/search.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Javadoc/type-search-index.js" beforeDir="false" afterPath="$PROJECT_DIR$/Javadoc/type-search-index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Leaderboard.java" beforeDir="false" afterPath="$PROJECT_DIR$/Leaderboard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Lesson.java" beforeDir="false" afterPath="$PROJECT_DIR$/Lesson.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LevelsScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/LevelsScreen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/META-INF/MANIFEST.MF" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MacrohardJune9th.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/MainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/MainMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Material.java" beforeDir="false" afterPath="$PROJECT_DIR$/Material.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Maze.java" beforeDir="false" afterPath="$PROJECT_DIR$/Maze.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SplashScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/SplashScreen.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/leaderboard.txt" beforeDir="false" afterPath="$PROJECT_DIR$/leaderboard.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/HabitatHero_jar/HabitatHero.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/HabitatHero_jar/HabitatHero.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/HabitatHero/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/HabitatHero/.idea/artifacts/HabitatHero_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HabitatHero/.idea/artifacts/HabitatHero_jar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/HabitatHero/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HabitatHero/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/HabitatHero/ExitScreen.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HabitatHero/ExitScreen.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/HabitatHero/FinalLevel$Drawing.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HabitatHero/FinalLevel$Drawing.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/HabitatHero/FinalLevel$KeyHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HabitatHero/FinalLevel$KeyHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/HabitatHero/FinalLevel$MouseHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HabitatHero/FinalLevel$MouseHandler.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/HabitatHero/FinalLevel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HabitatHero/FinalLevel.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/HabitatHero/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HabitatHero/Game.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/HabitatHero/Leaderboard$Drawing.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HabitatHero/Leaderboard$Drawing.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/HabitatHero/Leaderboard$MouseHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HabitatHero/Leaderboard$MouseHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/HabitatHero/Leaderboard.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HabitatHero/Leaderboard.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/HabitatHero/Lesson.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HabitatHero/Lesson.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/HabitatHero/LevelsScreen.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HabitatHero/LevelsScreen.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/HabitatHero/MacrohardJune9th.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/HabitatHero/MainMenu.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HabitatHero/MainMenu.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/HabitatHero/Material.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HabitatHero/Material.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/HabitatHero/Maze$Drawing.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HabitatHero/Maze$Drawing.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/HabitatHero/Javadoc/Building.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HabitatHero/Javadoc/Building.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/HabitatHero/Javadoc/ExitScreen.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HabitatHero/Javadoc/ExitScreen.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/HabitatHero/Javadoc/FinalLevel.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HabitatHero/Javadoc/FinalLevel.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/HabitatHero/Javadoc/Game.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HabitatHero/Javadoc/Game.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/HabitatHero/Javadoc/Leaderboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HabitatHero/Javadoc/Leaderboard.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/HabitatHero/Javadoc/Lesson.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HabitatHero/Javadoc/Lesson.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/HabitatHero/Javadoc/LevelsScreen.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HabitatHero/Javadoc/LevelsScreen.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/HabitatHero/Javadoc/MainMenu.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HabitatHero/Javadoc/MainMenu.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/HabitatHero/Javadoc/Material.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HabitatHero/Javadoc/Material.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/HabitatHero/Javadoc/Maze.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HabitatHero/Javadoc/Maze.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/HabitatHero/Javadoc/SplashScreen.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HabitatHero/Javadoc/SplashScreen.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/HabitatHero/Javadoc/allclasses-index.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HabitatHero/Javadoc/allclasses-index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/HabitatHero/Javadoc/allpackages-index.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HabitatHero/Javadoc/allpackages-index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/HabitatHero/Javadoc/help-doc.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HabitatHero/Javadoc/help-doc.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/HabitatHero/Javadoc/index-files/index-1.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HabitatHero/Javadoc/index-files/index-1.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/HabitatHero/Javadoc/index-files/index-10.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HabitatHero/Javadoc/index-files/index-10.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/HabitatHero/Javadoc/index-files/index-2.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HabitatHero/Javadoc/index-files/index-2.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/HabitatHero/Javadoc/index-files/index-3.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HabitatHero/Javadoc/index-files/index-3.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/HabitatHero/Javadoc/index-files/index-4.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HabitatHero/Javadoc/index-files/index-4.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/HabitatHero/Javadoc/index-files/index-5.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HabitatHero/Javadoc/index-files/index-5.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/HabitatHero/Javadoc/index-files/index-6.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HabitatHero/Javadoc/index-files/index-6.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/HabitatHero/Javadoc/index-files/index-7.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HabitatHero/Javadoc/index-files/index-7.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/HabitatHero/Javadoc/index-files/index-8.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HabitatHero/Javadoc/index-files/index-8.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/HabitatHero/Javadoc/index-files/index-9.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HabitatHero/Javadoc/index-files/index-9.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/HabitatHero/Javadoc/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HabitatHero/Javadoc/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/HabitatHero/Javadoc/overview-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HabitatHero/Javadoc/overview-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/HabitatHero/Javadoc/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HabitatHero/Javadoc/package-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/HabitatHero/Javadoc/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HabitatHero/Javadoc/package-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/HabitatHero/Javadoc/search.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HabitatHero/Javadoc/search.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/HabitatHero/Maze$KeyHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HabitatHero/Maze$KeyHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/HabitatHero/Maze$MouseHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HabitatHero/Maze$MouseHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/HabitatHero/Maze.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HabitatHero/Maze.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/HabitatHero/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HabitatHero/Player.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/HabitatHero/SplashScreen.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HabitatHero/SplashScreen.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/HabitatHero/leaderboard.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HabitatHero/leaderboard.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
