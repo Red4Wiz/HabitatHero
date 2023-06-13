@@ -10,10 +10,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f67cbe41-7115-4a49-bcfb-a7fbee185f53" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/out/production/HabitatHero/HabitatHero.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FinalLevel.java" beforeDir="false" afterPath="$PROJECT_DIR$/FinalLevel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/HabitatHero.jar" beforeDir="false" afterPath="$PROJECT_DIR$/HabitatHero.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Javadoc/Building.html" beforeDir="false" afterPath="$PROJECT_DIR$/Javadoc/Building.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Javadoc/ExitScreen.html" beforeDir="false" afterPath="$PROJECT_DIR$/Javadoc/ExitScreen.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Javadoc/FinalLevel.html" beforeDir="false" afterPath="$PROJECT_DIR$/Javadoc/FinalLevel.html" afterDir="false" />
@@ -43,10 +42,14 @@
       <change beforePath="$PROJECT_DIR$/Javadoc/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/Javadoc/package-summary.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Javadoc/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/Javadoc/package-tree.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Javadoc/search.html" beforeDir="false" afterPath="$PROJECT_DIR$/Javadoc/search.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Leaderboard.java" beforeDir="false" afterPath="$PROJECT_DIR$/Leaderboard.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Maze.java" beforeDir="false" afterPath="$PROJECT_DIR$/Maze.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/leaderboard.txt" beforeDir="false" afterPath="$PROJECT_DIR$/leaderboard.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/HabitatHero/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HabitatHero/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/HabitatHero/FinalLevel$Drawing.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HabitatHero/FinalLevel$Drawing.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/HabitatHero/FinalLevel$KeyHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HabitatHero/FinalLevel$KeyHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/HabitatHero/FinalLevel$MouseHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HabitatHero/FinalLevel$MouseHandler.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/HabitatHero/FinalLevel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HabitatHero/FinalLevel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/HabitatHero/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HabitatHero/Game.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/HabitatHero/Javadoc/Building.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HabitatHero/Javadoc/Building.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/HabitatHero/Javadoc/ExitScreen.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HabitatHero/Javadoc/ExitScreen.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/HabitatHero/Javadoc/FinalLevel.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HabitatHero/Javadoc/FinalLevel.html" afterDir="false" />
@@ -76,6 +79,9 @@
       <change beforePath="$PROJECT_DIR$/out/production/HabitatHero/Javadoc/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HabitatHero/Javadoc/package-summary.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/HabitatHero/Javadoc/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HabitatHero/Javadoc/package-tree.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/HabitatHero/Javadoc/search.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HabitatHero/Javadoc/search.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/HabitatHero/Leaderboard$Drawing.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HabitatHero/Leaderboard$Drawing.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/HabitatHero/Leaderboard$MouseHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HabitatHero/Leaderboard$MouseHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/HabitatHero/Leaderboard.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HabitatHero/Leaderboard.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/HabitatHero/Maze$KeyHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HabitatHero/Maze$KeyHandler.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/HabitatHero/leaderboard.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/HabitatHero/leaderboard.txt" afterDir="false" />
     </list>
@@ -95,17 +101,17 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "last_opened_file_path": "/Users/pouyakarimi/Desktop/PouyaSailesh_June13th",
-    "project.structure.last.edited": "Artifacts",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/pouyakarimi/Desktop/PouyaSailesh_June13th&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="Game" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Game" />

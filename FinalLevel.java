@@ -101,7 +101,7 @@ public class FinalLevel {
         frame.add(drawing);
         frame.setVisible(true);
 
-        player = new Player(600, 450, 3);
+        player = new Player(600, 450, 1);
 
         //start of program
         startTime = System.currentTimeMillis();
@@ -170,6 +170,9 @@ public class FinalLevel {
                             direction = "back";
                             playerImage = !playerImage;
                         }
+                        else{
+                            moveUp = false;
+                        }
                         break;
                     case "s":
                         if (playerY < 750) {
@@ -177,6 +180,9 @@ public class FinalLevel {
                           //  player.moveDown();
                             direction = "front";
                             playerImage = !playerImage;
+                        }
+                        else{
+                            moveDown = false;
                         }
                         break;
                     case "a":
@@ -186,6 +192,9 @@ public class FinalLevel {
                             direction = "left";
                             playerImage = !playerImage;
                         }
+                        else{
+                            moveLeft = false;
+                        }
                         break;
 
                     case "d":
@@ -194,6 +203,9 @@ public class FinalLevel {
                           //  player.moveRight();
                             direction = "right";
                             playerImage = !playerImage;
+                        }
+                        else{
+                            moveRight = false;
                         }
                         break;
                 }
@@ -604,7 +616,7 @@ public class FinalLevel {
                         rightName = processUsername(name);
                         if(rightName){
                             try{
-                                Leaderboard.addPerson(name, numOfNights);
+                                Leaderboard.readData();
                                 FileWriter temp = new FileWriter("leaderboard.txt", true);
                                 PrintWriter writer = new PrintWriter(temp);
                                 writer.println(name + " " + numOfNights);

@@ -55,7 +55,7 @@ public class Leaderboard {
     /**
      * Reading all the information from the .txt file.
      */
-    public void readData(){
+    public static void readData(){
         try {
             Scanner reader = new Scanner(Leaderboard.class.getResource("leaderboard.txt").openStream());
             while(reader.hasNext()){
@@ -89,10 +89,6 @@ public class Leaderboard {
             }
             if(!swapped) break; //no swap has occurred - arraylist is sorted
         }
-    }
-    public static void addPerson(String n, int p){
-        names.add(n);
-        scores.add(p);
     }
 
     /**
